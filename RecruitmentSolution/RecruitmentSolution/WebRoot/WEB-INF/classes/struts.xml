@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="recruitment" extends="struts-default">
+		<global-results>
+			<result name="Exception">/common/exception.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="Exception"
+				exception="java.lang.RuntimeException"></exception-mapping>
+		</global-exception-mappings>
+
+		<action name="js" class="js">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="list">jobSeekerlist.jsp</result>
+		</action>
+
+		<action name="searchJs" class="js" method="searchUserbyJsId">
+			<result name="load">/jobSeekerById.jsp</result>
+		</action>
+
+		<action name="jsLogin" class="js" method="isLogin">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="login">/jsLogin.jsp</result>
+		</action>
+
+		<action name="updateJs" class="js" method="updateJs">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="update">/updateJs.jsp</result>
+		</action>
+
+		<action name="deleteJs" class="js" method="delete">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="delete">/deleteJs.jsp</result>
+		</action>
+
+		<action name="emp" class="emp">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="list">/employerlist.jsp</result>
+		</action>
+
+		<action name="searchEmp" class="emp" method="loadUserbyEmpId">
+			<result name="load">/employerById.jsp</result>
+		</action>
+
+		<action name="empLogin" class="emp" method="isLogin">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="login">/empLogin.jsp</result>
+		</action>
+
+		<action name="empDelete" class="emp" method="delete">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="delete">/empDelete.jsp</result>
+		</action>
+
+		<action name="updateEmp" class="emp" method="updateEmp">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="delete">/updateEmp.jsp</result>
+		</action>
+
+		<action name="adminLogin" class="admin" method="isLogin">
+			<result name="success">/admin.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="login">/adminLogin.jsp</result>
+		</action>
+		
+		<action name="cv" class="cv">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="addCV">/addCV.jsp</result>
+		</action>
+		
+		<action name="updateCV" class="cv" method="update">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="cvUpdate">/updateCV.jsp</result>
+		</action>
+		
+		<action name="deleteCV" class="cv" method="delete">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="deleteCV">/deleteCV.jsp</result>
+		</action>
+		
+		<action name="area" class="area">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="addArea">/addArea.jsp</result>
+			<result name="list">/listArea.jsp</result>
+		</action>
+		
+		<action name="deleteArea" class="area" method="delete">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="deleteArea">/addArea.jsp</result>
+		</action>
+		
+		<action name="updateArea" class="area" method="update">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="updateArea">/updateArea.jsp</result>
+		</action>
+		
+		<action name="searchArea" class="area" method="loadById">
+			<result name="load">/searchAreaById.jsp</result>
+		</action>
+		
+		<action name="jc" class="jc">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="add">addJobCategory.jsp</result>
+		</action>
+		
+		<action name="job" class="job">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="add">/addJob.jsp</result>
+		</action>
+		
+		<action name="updateJob" class="job" method="updateJob">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="update">/updateJob.jsp</result>
+		</action>
+		
+
+	</package>
+
+</struts>
+	

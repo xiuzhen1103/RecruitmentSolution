@@ -1,0 +1,63 @@
+body,div,span,object,frame,h1,h2,h3,h4,h5,h6,p,blockquote,a,code,em,img,q,small,strong,dd,dl,dt,li,ol,ul,fieldset,form,label,,menu{margin:0;padding:0}
+body{font-size:14px;font-family:Tahoma,Verdana,STHeiTi,simsun,sans-serif}
+a img, :link img, :visited img{border:0}
+
+li
+{
+display:inline;
+}
+
+#form1 table {
+ color: #000000;
+ font-size:16px;
+ width: 400px;
+ background-color: #EFF3F7;
+ border: 1px solid #6386d6
+}
+#form1 th {
+ font-size: 16px;
+ color: #ffffff;
+ background-color: #6386d6;
+}
+#form1 th,td {
+ padding: 3px;
+}
+#reg {
+ width: 600px;
+ left: 32%;
+ position: absolute;
+}
+#form1 tfoot td {
+ background-color: #6386d6;
+ text-align: center;
+}
+.formstyle {
+ font-size: 13px;
+ border: 1px solid #6386d6;
+}
+#header{
+   width:100%;
+   height:60px;
+   background-color:#6386d6;
+   box-shadow: 0px 4px 2px #CCFFFF
+}
+
+#header>h1{
+   width:1024px;
+   margin:0px auto;
+   color: white;
+}
+#header>h2{
+   width:1024px;
+   margin:0px auto;
+   color: white;
+}
+
+<!--navigation-->
+li{ list-style:none;margin:0;padding:0; }
+.menu_20124162{width:780px;height:30px;  repeat-x; margin:0;}
+.menu_20124162 ul{ width:780px;float:absolute; display:inline;}
+.menu_20124162 ul li{ width:76px;float:absolute;display:inline; margin:0 1px;}
+.menu_20124162 ul li a{width:76px;height:26px;float:absolute; font-size:13px; text-align:center;margin:2px 0;line-height:26px; color:black; font-style:italic; text-decoration:none;}
+.menu_20124162 ul li a:hover{background:#89c1ff; }
+

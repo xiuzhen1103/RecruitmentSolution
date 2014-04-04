@@ -96,8 +96,7 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
           
 
 <a href="addCV.jsp">Upload CV</a> <br/>
-<a href="pe!list?pe.jobSeeker.jsId=<s:property value='#session.jobSeeker.jsId'/>">View Past Experience</a> <br/>
-<%-- Add Skill: <a href="addJsSkill.jsp" target="_bank">Add Skill</a> <br/>--%>
+<a href="ir!listMySend">View Interview History</a> <br/>
 <a href="javascript:void(0)" onclick="openWin('jsSkill!add.action','add',500,200,0)">Update Skill</a> <br/>
 <a href="updateJsPassword.jsp" target="_bank">Update Password</a> <br/>
 <a href="cv!list.action" target="_bank">List CV</a> <br/>

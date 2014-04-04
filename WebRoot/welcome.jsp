@@ -8,64 +8,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-		<title>Welcome</title>
-		<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		<script type="text/javascript"
-			src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
-	
-	
-<script type="text/javascript">
-	function getCountry(countryId) {
-		
-			if (countryId == "")
-				return;
-			var url = "listCountry.action?area.areaId=" + countryId;
-			$.ajax({
-				type : 'POST',
-				url : url,
-				success : function(data) {
-				var countys =  data.split(",");//1_a  1_2d
-				var countySelect = document.getElementById("countyId");
-				countySelect.options.length=0;
-				for(var i=0;i<countys.length-1;i++){
-					var inner = countys[i].split("_");
-					var varItem = new Option(inner[1],inner[0]); 
-								countySelect.options.add(varItem); 
-					
-				}
-				}
-			});
-		}
-		
-		function getDistrict(districtId) {
-		
-			if (districtId == "")
-				return;
-			var url = "listDistrict.action?area.areaId=" + districtId;
-			$.ajax({
-				type : 'POST',
-				url : url,
-				success : function(data) {
-				var districts =  data.split(",");//1_a  1_2d
-				var districtSelect = document.getElementById("districtId");
-				districtSelect.options.length=0;
-				for(var i=0;i<districts.length-1;i++){
-					var inner = districts[i].split("_");
-					var varItem = new Option(inner[1],inner[0]); 
-								districtSelect.options.add(varItem); 
-					
-				}
-				}
-			});
-		}
-	
-	</script>
-
+	<title>Welcome</title>
+	<link type="text/css" href="<%=basePath%>style/style.css" rel="StyleSheet" />
+	<link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/area.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
 </head>
 
 <body>
@@ -91,10 +41,11 @@ or
     
  <br /><b>Display All Jobs:</b>   <br /><br/>
  
- <form method="post" action="job!first.action" class="formstyle">
+ <form method="post" action="job!first.action" class="formstyle" style="padding: 5px 3px;">
 
-<select id="areaId" name="job.countryId.areaId" onchange="getCountry(this.value);" style="display: inline;">
-<option value="">Please Choose Country</option>
+&nbsp;Country:
+<select id="areaId" name="job.countryId.areaId" onchange="getCountry(this);" style="width:180px">
+<option></option>
 <s:iterator value="listCountrys" id="areas">
 <option value="<s:property value="#areas.areaId" />">
 <s:property value="#areas.areaName" />
@@ -102,56 +53,75 @@ or
 </s:iterator>
 </select>
 
-<select id="countyId" name="job.countyId.areaId" onchange="getDistrict(this.value);" style="display: inline;">
-<option value="">Please Choose County</option>
+&nbsp;City:
+<select id="countyId" name="job.countyId.areaId" onchange="getDistrict(this);" style="width:180px">
+<option></option>
 </select>
 
-<select id="districtId" name="job.districtId.areaId" style="display: inline;">
-<option value="">
-Please Choose District
-</option>
+&nbsp;District:
+<select id="districtId" name="job.districtId.areaId" style="width:180px">
+<option></option>
 </select>
-  Enter Job Title:<input type="text" name="job.title"/>
+  Job Title:<input type="text" name="job.title"/>
+  
+  <div style="height:2px;margin: 1px 0;">&nbsp;</div>
+  &nbsp;Job Category:
+  <select id="categoryId" onchange="getSubSkillCategory(this);" name="job.jobCategory.skillCategoryId" style="width:180px">
+      <option></option>
+      <s:iterator value="listMainSkillCategorys" id="s">
+        <option value="<s:property value="#s.skillCategoryId" />">
+       <s:property value="#s.name" />
+    </option>
+    </s:iterator>
+  </select>
+  &nbsp;Job:
+  <select id="skillCategoryId" onchange="getSkill2(this)" name="job.skillCategory.skillCategoryId" style="width:180px">
+    <option></option>
+  </select>
+  &nbsp;Job Skill:
+  <select multiple id="skillId" name="job.checkboxes" style="width:180px">
+    <option></option>
+  </select>
 
-<input type="submit" value="submit"/>
+<button type="submit" class="btn btn-primary">Submit</button>
  </form>
  
   		<br/>
   			
  	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
  	 	 <tr>
-		      <td width="5%" height="37" align="center"><b>Job Id</b></td>
-		       <td width="10%" height="37" align="center"><b>Job Title</b></td>
-		      <td width="10%" height="37" align="center"><b>Job Description</b></td>
-		      <td width="15%" height="37" align="center"><b>Start Date</b></td>
-		      <td width="20%" height="37" align="center"><b>Address</b></td>
-		      <td width="10%" height="37" align="center"><b>Phone</b></td>
-		      <td width="5%" height="37" align="center"><b>Number of Position</b></td>
+ 	 		  <td width="10%" height="37" align="center"><b>Job Id</b></td>
+		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
 		      <td width="20%" height="37" align="center"><b>Requirement</b></td>
+		      <td width="10%" height="37" align="center"><b>Category</b></td>
+		      <td width="8%" height="37" align="center"><b>Skill Category</b></td>
+		      <td width="10%" height="37" align="center"><b>Skill</b></td>
 		      <td width="5%" height="37" align="center"><b>Salary</b></td>
+		      <td width="5%" height="37" align="center"><b>Number of Position</b></td>
 		      <td width="5%" height="37" align="center"><b>Employer</b></td>
-		      <td width="5%" height="37" align="center"><b>Country</b></td>
-		      <td width="5%" height="37" align="center"><b>County</b></td>
-		      <td width="5%" height="37" align="center"><b>District</b></td>
-		      <td width="5%" height="37" align="center"><b>Apply</b></td>
+		      <td width="15%" height="37" align="center"><b>Start Date</b></td>
           </tr>
  	
           <s:iterator value="jobs" id="j">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
 		  <td align="center" ><s:property value="#j.jobId" /></td>
-		  <td align="center" ><s:property value="#j.title" /></td>
-		  <td align="center" ><s:property value="#j.jobDesc" /></td>
-		  <td align="center" ><s:property value="#j.startDate" /></td>
-		  <td align="center" ><s:property value="#j.address" /></td>
-    	  <td align="center" ><s:property value="#j.phone" /></td>
-    	  <td align="center" ><s:property value="#j.numPosition" /></td>
+		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
     	  <td align="center" ><s:property value="#j.requirement" /></td>
+    	  <td align="center" >
+            <s:property value="#j.jobCategory.name" />
+          </td>
+    	  <td align="center" >
+            <s:property value="#j.skillCategory.name" />
+          </td>
+    	  <td align="center" >
+            <s:iterator value="#j.jobSkills" var="js" status="st">
+                ${js.skill.name}<s:if test="!#st.last">,</s:if>
+            </s:iterator>
+          </td>
     	  <td align="center" ><s:property value="#j.salary" /></td>
+    	  <td align="center" ><s:property value="#j.numPosition" /></td>
     	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
-    	  <td align="center" ><s:property value="#j.countryId.areaName" /></td> 
-    	 <td align="center" ><s:property value="#j.countyId.areaName" /></td>
-    	 <td align="center" ><s:property value="#j.districtId.areaName" /></td>  
-    	  <td><a href="apply!applyJob"/>Apply</a></td>
+		  <td align="center" ><s:property value="#j.startDate" /></td>
         </tr>
      </s:iterator>
     </table>

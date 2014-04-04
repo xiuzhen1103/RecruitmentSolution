@@ -24,6 +24,8 @@ public interface JobSeekerManager {
 	
 	public JobSeeker loadByJsId(JobSeeker js) throws Exception;
 	
+	public JobSeeker loadByJsId(Integer jsId) throws Exception;
+	
 	public JobSeeker login(JobSeeker js) throws Exception;
 	
 	public boolean deleteJobSeeker(JobSeeker js) throws Exception;

@@ -49,15 +49,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	 	 <tr>
  	 	 	  <td width="15%" height="37" align="center"><b>Cover Letter</b></td>
 		   </tr>
+
   	 <s:iterator value="cs" id="c">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
 	          <td align="center"><s:property value="#c.coverLetter"/></td>
 		  <td align="center"><a href="downLoadCV.action?filename=<s:property value='#c.cvTitle' />"><s:property value='#c.cvTitle' /> </a></td></td>
-          <td align="center"><a href="ir!preSend?ir.job.jobId=${job.jobId}&ir.js.jsId=${js.jsId}&ir.cv.cvId=${c.cvId}">Send Interview Letter</a></td>
 		 <!-- <td align="center" > <a href="downLoadCV.action?filename=<s:property value='#c.cvTitle' />">group journal.docx</a></td>-->
 		  </tr>
+
     </s:iterator>
-    </table>
   </s:form>
+  		
+
   </body>
 </html>

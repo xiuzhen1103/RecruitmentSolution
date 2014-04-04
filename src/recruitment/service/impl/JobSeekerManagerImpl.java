@@ -44,8 +44,8 @@ public class JobSeekerManagerImpl implements JobSeekerManager {
 
 
 	@Override
-	public JobSeeker loadByJsId(Integer js) throws Exception{
-		return jobSeekerDao.loadByJsId(js);
+	public JobSeeker loadByJsId(JobSeeker js) throws Exception{
+		return jobSeekerDao.loadByJsId(js.getJsId());
 	}
 
 	@Override
@@ -86,11 +86,13 @@ public class JobSeekerManagerImpl implements JobSeekerManager {
 			throws Exception {
 		return jobSeekerDao.updatePassword(js.getJsId(), currentPassword, js.getPassword(), js.getPassword2());
 	}
-
+/*
 	@Override
-	public JobSeeker loadByJsId(JobSeeker js) throws Exception {
-		return jobSeekerDao.loadByJsId(js.getJsId());
-	}	
+	public List<JobSeeker> getJobsByCategory(JobSeeker js) throws Exception {
+		// TODO Auto-generated method stub
+		return jobSeekerDao.getJsByJobCategory(js);
+	}
+*/	
 
 
 

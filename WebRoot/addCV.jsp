@@ -47,6 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td><input type="file" name="upload" class="formstyle">
        </td>
         </tr>
+
     <tfoot>
        <tr>
           <td colspan="2">

@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <td width="5%" height="37" align="center"><b>Company Name</b></td>
 		      <td width="5%" height="37" align="center"><b>County</b></td>
 		      <td width="5%" height="37" align="center"><b>JobCatory</b></td>
-		      <td width="5%" height="37" align="center"><b>JobSkill</b></td>
+
           </tr>
  	
           <s:iterator value="jobs" id="j">
@@ -61,12 +61,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	  <td align="center" ><s:property value="#j.requirement" /></td>
     	  <td align="center" ><s:property value="#j.salary" /></td>
     	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
+    	 <!-- <td align="center" ><s:property value="#j.area.area" /></td>-->
     	  <td align="center" ><s:property value="#j.jobCategory.name" /></td>
-    	  <td align="center" >
-            <s:iterator value="#j.jobSkills" var="js" status="st">
-                <s:property value="#js.skill.name" /><s:if test="!#st.last">,</s:if>
-            </s:iterator>
-          </td>
         </tr>
      </s:iterator>
     </table>

@@ -49,10 +49,10 @@ public class JobAction extends ActionSupport {
 	private List<SkillCategory> listMainSkillCategorys;
 	private List<SkillCategory> listSubSkillCategorys;
 	private List<Skill> listSkill;
-	private Skill skill;
 	private SkillManager skillManager;
 //	/private List<SkillCategory> listSubSkillCategory;
-	
+
+
 	public JobManager getJm() {
 		return jm;
 	}
@@ -85,11 +85,6 @@ public class JobAction extends ActionSupport {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	public String detail() throws Exception {
-	    job = jm.findById(job);
-	    return "detail";
-	}
 
 	public String execute() throws Exception {
 		jm.add(job);
@@ -99,6 +94,8 @@ public class JobAction extends ActionSupport {
 	public String registerJob() throws Exception {
 		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
+		System.out.println(listCountrys.size() + ">>>>>>>>>>>>>>>>>>>");
+		//this.listJobCategorys = jobCategoryManager.getJobCategory(jobCategory);
 		return "registerJob";
 	}
 
@@ -113,14 +110,12 @@ public class JobAction extends ActionSupport {
 	}
 
 	public String list() throws Exception {
-	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
 		this.jobs = jm.getJobs(this.job);
 		return "list";
 	}
 
 	public String first() throws Exception {
-	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
 		this.jobs = jm.getJobs(this.job);
 		return "first";
@@ -351,6 +346,7 @@ public class JobAction extends ActionSupport {
 	public String listSubSkillCategorys() throws Exception {
 		this.listSubSkillCategorys = skillCategoryManager.getSubSkillCategory(skillCategory);
 		StringBuffer sb = new StringBuffer();
+		sb.append("0").append("_").append("Please Choose Sub Category").append(",");
 		for(SkillCategory subskillCategory : listSubSkillCategorys) {
 			sb.append(subskillCategory.getSkillCategoryId()).append("_").append(subskillCategory.getName()).append(","); 
 		}
@@ -359,25 +355,14 @@ public class JobAction extends ActionSupport {
 	}
 	
 	public String listSkills() throws Exception {
-	    this.listSkill = skillManager.getSkillsBySc(skillCategory);
-	    StringBuffer sb = new StringBuffer();
-	    for(Skill skill : listSkill) {
-	        String  temp = "<input type=\"checkbox\" name=\"job.checkboxes\" value=\""+skill.getSkillId()+"\"/> " + skill.getName();
-	        sb.append(temp); 
-	    }
-	    ServletActionContext.getResponse().getWriter().print(sb.toString());
-	    return null;
-	}
-	
-	public String listSkills2() throws Exception {
 		this.listSkill = skillManager.getSkillsBySc(skillCategory);
 		StringBuffer sb = new StringBuffer();
+		//sb.append("0").append("_").append("Please Select Skills").append(",");
 		for(Skill skill : listSkill) {
-            sb.append(skill.getSkillId() + "_" + skill.getName()).append(","); 
+			String  temp = "<input type=\"checkbox\" name=\"job.checkboxes\" value=\""+skill.getSkillId()+"\"/> " + skill.getName();
+			sb.append(temp); 
 		}
-		if (sb.toString().endsWith(",")) {
-		    sb.deleteCharAt(sb.length() - 1);
-		}
+		System.out.println(sb.toString());
 		ServletActionContext.getResponse().getWriter().print(sb.toString());
 		return null;
 	}
@@ -397,13 +382,7 @@ public class JobAction extends ActionSupport {
 	public void setSkillManager(SkillManager skillManager) {
 		this.skillManager = skillManager;
 	}
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
+	
+	
 
 }

@@ -106,7 +106,6 @@ Hello <s:property value="#session.employer.username"/><br/>
     
     <a href="job!registerJob.action">Add Job</a> <br/>
     <a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">View posted Job</a> <br/>
-    <a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">View send Interview Letter</a> <br/>
     <a href="updateEmpPassword.jsp" target="_bank">Update password</a> <br/>
     
     </form>

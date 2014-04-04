@@ -9,17 +9,103 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<head>
 		<base href="<%=basePath%>">
+		<script type="text/javascript"
+			src="<%=basePath%>js/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
+		<link href="<%=basePath%>style/style.css" type="text/css"
+			rel="StyleSheet" />
+		<link href="<%=basePath%>style/bootstrap.min.css" type="text/css"
+			rel="StyleSheet" />
+		<link href="<%=basePath%>style/bootstrap-theme.min.css"
+			type="text/css" rel="StyleSheet" />
 		<title>JobSeeker Register</title>
-		<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
-		<link href="<%=basePath%>style/style.css" type="text/css" rel="StyleSheet" />
-        <link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
-        <script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
-        <script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
-        <script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
-    	<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
-    	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
-        <script type="text/javascript" src="<%=basePath%>js/area.js"></script>
-        <script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<script type="text/javascript"
+			src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
+
+		<script type="text/javascript">
+	function getCountry(countryId) {
+			if (countryId == "")
+				return;
+			var url = "listCountry.action?area.areaId=" + countryId;
+			$.ajax({
+				type : 'POST',
+				url : url,
+				success : function(data) {
+				alert(data);
+				var countys =  data.split(",");//1_a  1_2d
+				var countySelect = document.getElementById("countyId");
+				countySelect.options.length=0;
+				for(var i=0;i<countys.length-1;i++){
+					var inner = countys[i].split("_");
+					var varItem = new Option(inner[1],inner[0]); 
+								countySelect.options.add(varItem); 
+					
+				}
+				}
+			});
+		}
+		
+		function getDistrict(districtId) {
+			if (districtId == "")
+				return;
+			var url = "listDistrict.action?area.areaId=" + districtId;
+			$.ajax({
+				type : 'POST',
+				url : url,
+				success : function(data) {
+				var districts =  data.split(",");//1_a  1_2d
+				var districtSelect = document.getElementById("districtId");
+				districtSelect.options.length=0;
+				for(var i=0;i<districts.length-1;i++){
+					var inner = districts[i].split("_");
+					var varItem = new Option(inner[1],inner[0]); 
+								districtSelect.options.add(varItem); 	
+				}
+				}
+			});
+		}
+
+		function getSubSkillCategory(skillCategoryId) {
+			if (skillCategoryId == "")
+				return;
+			var url = "listSubSkills.action?skillCategory.skillCategoryId=" + skillCategoryId;
+			$.ajax({
+				type : 'POST',
+				url : url,
+				success : function(data) {
+				var scs =  data.split(",");//1_a  1_2d
+				var scSelect = document.getElementById("skillCategoryId");
+				scSelect.options.length=0;
+				for(var i=0;i<scs.length-1;i++){
+					var inner = scs[i].split("_");
+					var varItem = new Option(inner[1],inner[0]); 
+						scSelect.options.add(varItem); 
+				}
+				}
+			});
+		}
+		function getSkill(skillId) {
+			if (skillId == "")
+				return;
+			var url = "listSkills.action?skillCategory.skillCategoryId=" + skillId;
+			$.ajax({
+				type : 'POST',
+				url : url,
+				success : function(data) {
+				//alert(data);
+				var skills =  data.split(",");//1_a  1_2d
+				var select = document.getElementById("skillId");
+				select.innerHTML=data;
+
+				}
+			});
+		}
+	
+	</script>
 	</head>
 
 	<body>
@@ -146,8 +232,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>
 
 									<select id="areaId" name="job.countryId.areaId"
-										onchange="getCountry(this);" style="width:180px">
-										<option value=""></option>
+										onchange="getCountry(this.value);" style="display: block;">
+										<option value="">
+											Please Choose Country
+										</option>
 										<s:iterator value="listCountrys" id="areas">
 											<option value="<s:property value="#areas.areaId" />">
 												<s:property value="#areas.areaName" />
@@ -156,13 +244,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</select>
 
 									<select id="countyId" name="job.countyId.areaId"
-										onchange="getDistrict(this);" style="width:180px">
-										<option value=""></option>
+										onchange="getDistrict(this.value);" style="display: block;">
+										<option value="">
+											Please Choose County
+										</option>
 
 									</select>
 
-									<select id="districtId" name="job.districtId.areaId" style="width:180px">
-										<option value=""></option>
+									<select id="districtId" name="job.districtId.areaId" style="display: block;">
+										<option value="">
+											Please Choose District
+										</option>
 									</select>
 									<font color="#F9481C">*</font>
 								</td>
@@ -171,8 +263,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<tr>
         <td> <span class="style1" >Job Category:</span></td>
 		<td>
-			<select id="categoryId" name="job.jobCategory.skillCategoryId" onchange="getSubSkillCategory(this);" style="width:180px">
-			<option value=""></option>
+			<select onchange="getSubSkillCategory(this.value);" style="display: block;">
+			<option value="">Please Choose Main Category</option>
 			  <s:iterator value="listMainSkillCategorys" id="s">
 				<option value="<s:property value="#s.skillCategoryId" />">
 			   <s:property value="#s.name" />
@@ -185,11 +277,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 		 <td> <span class="style1">Job:</span></td>
 		<td>
-			<select id="skillCategoryId" name="job.skillCategory.skillCategoryId" onchange="getSkill(this)" style="width:180px">
-				<option value=""></option>
+	
+			<select multiple id="skillCategoryId" name="job.checkboxes" onchange="getSkill(this.value)"; style="display: block;">
+				<option value="">
+					Please Choose Sub Job Category
+			</option>
 			</select>
-        </td>
-		</tr>
+			</tr>
 	
 		
 		<td><span class="style1">Skills:</span>

@@ -1,6 +1,4 @@
 package recruitment.action;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -119,7 +117,7 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven{
 	    
 	    mailInfo.setUserName("27248466");
 		mailInfo.setFromAddress("27248466@qq.com");
-		mailInfo.setPassword("zhen1606...");
+		mailInfo.setPassword("");
 		
 		mailInfo.setToAddress(js.getEmail());
 		mailInfo.setSubject("Welcome to register with Recruitment Solution software");   
@@ -200,6 +198,11 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven{
 		}
 			message = "update failed";
 		return "fail";
+	}
+	
+	public String detail() throws Exception{
+	    js = um.loadByJsId(js);
+	    return "detail";
 	}
 
 	public String delete() throws Exception{
@@ -290,7 +293,6 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven{
 	public String listSubSkillCategory() throws Exception {
 		this.listSubSkillCategory = skillCategoryManager.getSubSkillCategory(sc);
 		StringBuffer sb = new StringBuffer();
-		sb.append("0").append("_").append("Please Choose Sub Category").append(",");
 		for(SkillCategory subskillCategory : listSubSkillCategory) {
 			sb.append(subskillCategory.getSkillCategoryId()).append("_").append(subskillCategory.getName()).append(","); 
 		}

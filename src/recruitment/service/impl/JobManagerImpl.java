@@ -1,14 +1,12 @@
 package recruitment.service.impl;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Component;
-
 import recruitment.dao.JobDao;
 import recruitment.model.CV;
 import recruitment.model.Job;
 import recruitment.model.JobSeeker;
+
 import recruitment.service.JobManager;
 @Component("jobManager")
 public class JobManagerImpl implements JobManager {
@@ -39,11 +37,6 @@ public class JobManagerImpl implements JobManager {
 	}
 
 	@Override
-    public Job findById(Job job) throws Exception {
-        return jobDao.getByJobId(job.getJobId());
-    }
-
-    @Override
 	public Job loadById(Job job) throws Exception {
 		return jobDao.loadByJobId(job.getJobId());
 	}

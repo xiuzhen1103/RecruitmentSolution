@@ -71,7 +71,7 @@ public class EmployerAction extends ActionSupport implements ModelDriven {
 	    
 	    mailInfo.setUserName("27248466");
 		mailInfo.setFromAddress("27248466@qq.com");
-		mailInfo.setPassword("");
+		mailInfo.setPassword("zhen1606...");
 		
 		mailInfo.setToAddress(emp.getEmail());
 		mailInfo.setSubject("Welcome to register with Recruitment Solution software");   

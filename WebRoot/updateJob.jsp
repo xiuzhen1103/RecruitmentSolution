@@ -33,7 +33,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	EmpId:<input type="text" name="job.employer.empId"><br>
     	Area Id:<input type="text" name="job.area.areaId"><br>
     	JobCategory Id: <input type="text" name="job.jobCategory.jobCaId"><br>
-    	
     	<input type="submit" value="submit"/>
     </form>
   </body>

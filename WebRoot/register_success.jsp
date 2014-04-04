@@ -17,7 +17,7 @@ function closewindow(){
 function clock(){
 	i = i -1;
 	if(document.getElementById("info")){
-		document.getElementById("info").innerHTML = "This window will be closed in "+i+"seconds";
+		document.getElementById("info").innerHTML = "本窗口将在"+i+"秒后自动关闭";
 	}
 	if(i > 0)
 		setTimeout("clock();",1000);
@@ -32,7 +32,7 @@ clock();
 <body>
 <center>
 	添加记录成功！<p>
-	<div id="info">This window will be closed in 3 seconds</div>
+	<div id="info">本窗口将在3秒后自动关闭</div>
 	<input type="button" value="关闭窗口" onclick="closewindow();">
 </center>
 </body>

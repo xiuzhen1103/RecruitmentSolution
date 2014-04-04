@@ -46,10 +46,10 @@ or
 		  <h2>Employer Login</h2>
 		  <p class="clearfix">
 		<label for="email">Email:</label>
-		<input type="text" name="emp.email" tabindex="1" value="b@gmail.com" id="email" class="input-text">
+		<input type="text" name="emp.email" tabindex="1" value="" id="email" class="input-text">
 		</p><p class="clearfix">
 		<label for="password">Password:</label>
-		<input type="password" id="password" name="emp.password" value="b" class="input-text" tabindex="2" />
+		<input type="password" id="password" name="emp.password" value="" class="input-text" tabindex="2" />
 </p>
 <p class="right">
 <label for="autoLogin"><input type="checkbox" name="autoLogin" id="autoLogin" value="true" tabindex="4" class="input-checkbox" />Remember Password</label>

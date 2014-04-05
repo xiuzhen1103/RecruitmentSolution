@@ -9,23 +9,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
+    <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
     <title>Display All Skill Category</title>
   </head>
- 
   <body>
   <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
 <a href="admin!logout.action">Logout</a>
 </p> 
-    <b>Display All Skill Category:</b>  
-     <div align="center">
-   <a href="userManager/addSkillCategory.jsp">Add Skill Category </a> 
+     <div align="center" id="header">
+     <h1><i>Recruitment Solution</i></h1>
+  <div class="menu_20124162">
+	<ul>
+    	<li><a href="admin.jsp">Home</a></li>
+        <li><a href="">About Us</a></li>
+        <li><a href="">Contact Us</a></li>
+    </ul>
 </div>
+</div>
+<br />
+<div align="center">
+   <a href="addSkillCategory.jsp">Add Skill Category </a> 
+   </div>
 
   <s:form method="post" action="sc!list.action">  
-  		<s:textfield label="Please enter Skill category Id" name="skillCategory.skillCategoryId"></s:textfield>
+  		
   		<s:textfield label="Please enter Skill category name" name="skillCategory.name"></s:textfield>
   		<s:textfield label="Please enter level" name="skillCategory.level"></s:textfield>
   		<s:submit label="submit"/>
@@ -46,6 +54,8 @@ Hello <s:property value="#session.admin.username"/><br/>
 		  <td align="center" ><s:property value="#s.skillCategoryId" /></td>
 		  <td align="center" ><s:property value="#s.name" /></td>
 		  <td align="center" ><s:property value="#s.level" /></td>
+		  
+
 		  <td align="center" ><s:property value="#s.parentSkillCategory.name" /></td>
 		  <td><a href="sc!load?skillCategory.skillCategoryId=<s:property value="#s.skillCategoryId" />">Update</a></td>
 		  <td><a href="sc!delete?skillCategory.skillCategoryId=<s:property value="#s.skillCategoryId" />">Delete</a></td>

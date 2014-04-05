@@ -9,7 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
     <title>Update Employer</title>
     
@@ -19,11 +18,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
  
   <body>
+   <p align="right">
+Hello <s:property value="#session.admin.username"/><br/>
+<a href="admin!logout.action">Logout</a>
+</p> 
   <div align="center" id="header">
   <h1><i>Recruitment Solution</i></h1>
   <div class="menu_20124162">
 	<ul>
-    	<li><a href="userManager/admin.jsp">Home</a></li>
+    	<li><a href="admin.jsp">Home</a></li>
         <li><a href="">About Us</a></li>
         <li><a href="">Contact Us</a></li>
     </ul>
@@ -31,14 +34,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
     <b>Display All Employer:<b/>  
     <s:form method="post" action="/userManager/emp!list.action">  
-  		<s:textfield label="Please Enter Employer Id" name="emp.empId"></s:textfield>
   		<s:textfield label="Please Enter Company name" name="emp.companyName"></s:textfield>
   		<s:textfield label="Please Enter Email" name="emp.email"></s:textfield>
   		<s:textfield label="Please Enter contact Name" name="emp.contactName"></s:textfield>
   		<s:submit label="submit"/>	
    </s:form>
-   
- <br> <br />
+
  	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
  	 	 <tr>
 		      <td width="5%" height="37" align="center"><b>Employer Id</b></td>
@@ -72,7 +73,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
      </s:iterator>
     </table>
-    
-    <s:debug></s:debug>
+ 
   </body>
 </html>

@@ -91,8 +91,8 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
 		}
 		
 		if(null!=js&&js.getJsId()!=null&&js.getJsId()!=0){
-			hql.append(" and js.jsId like :jsId" );
-			map.put("jsId",+ js.getJsId());
+			hql.append(" and js.jsId = :jsId" );
+			map.put("jsId", js.getJsId());
 		}
 		if(null!= js &&null!=js.getEmail()&&!"".equals(js.getEmail())) {
 			hql.append(" and LOWER(js.email) like LOWER(:email) ");
@@ -115,22 +115,7 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
 		return query.list();
 	}
 
-	/*
-	@SuppressWarnings("unchecked")
-	public List<JobSeeker> getJsByJobCategory(JobSeeker js) throws DataAccessException{
-		StringBuffer in = new StringBuffer();
-		Employer emp = (Employer) ServletActionContext.getRequest().getSession().getAttribute("employer");
-		Integer empId =emp.getEmpId();
-		List<Job> jobs =  (List<Job>) hibernateTemplate.find("from Job j where j.employer.empId =" + empId);
-		for(Job j : jobs) {
-			in.append(String.valueOf(j.getJobCategory().getJobCaId())).append(","); 
-		}
-		String ids = in.substring(0,in.length()-1);
-		System.out.println(ids.toString());
-		return (List<JobSeeker>) hibernateTemplate.find("from JobSeeker js where js.jobCategory.jobCaId in(" + ids + ")");
-	}
 
-*/
 	public JobSeeker loadByEmail(JobSeeker js) throws DataAccessException {
 		StringBuffer hql = new StringBuffer();
 		hql.append( " from JobSeeker ");
@@ -143,7 +128,8 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
 
 	@Override
 	public JobSeeker loadByJsId(Integer jsId) throws DataAccessException{
-		return (JobSeeker) this.hibernateTemplate.load(JobSeeker.class, jsId);
+		List<JobSeeker> jss = this.hibernateTemplate.find("from JobSeeker where jsId = ?", jsId);
+		return jss.isEmpty() ? null : jss.get(0);
 	}
 
 	@Override

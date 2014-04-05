@@ -80,15 +80,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </td>
         </tr>
         <tr>
-          <td><span class="style1">Area Id:</span></td>
-          <td><input type="text" name="job.area.areaId" value="<s:property value='job.area.areaId'/>" class="formstyle" >
-          <font color="#F9481C">*</font></td>
-        </tr>
-        <tr>
-          <td><span class="style1">JobCategory Id:</span></td>
-          <td><input type="text" name="job.jobCategory.jobCaId" value="<s:property value='job.jobCategory.jobCaId'/>" class="formstyle" >
-          <font color="#F9481C">*</font></td>
-        </tr>
+			<td>
+		<span class="style1">Area:</span>
+								</td>
+								<td>
+
+			<select id="areaId" name="job.countryId.areaId"
+				onchange="getCountry(this);" style="width:180px">
+				<option value=""></option>
+						<s:iterator value="listCountrys" id="areas">
+						<option value="<s:property value="#areas.areaId" />">
+						<s:property value="#areas.areaName" />
+						</option>
+					</s:iterator>
+									</select>
+
+									<select id="countyId" name="job.countyId.areaId"
+										onchange="getDistrict(this);" style="width:180px">
+										<option value=""></option>
+
+									</select>
+
+									<select id="districtId" name="job.districtId.areaId" style="width:180px">
+										<option value=""></option>
+									</select>
+									<font color="#F9481C">*</font>
+								</td>
+							</tr>
+							
+							<tr>
+        <td> <span class="style1" >Job Category:</span></td>
+		<td>
+			<select id="categoryId" name="job.jobCategory.skillCategoryId" onchange="getSubSkillCategory(this);" style="width:180px">
+			<option value=""></option>
+			  <s:iterator value="listMainSkillCategorys" id="s">
+				<option value="<s:property value="#s.skillCategoryId" />">
+			   <s:property value="#s.name" />
+			</option>
+			</s:iterator>
+			</select>
+		</td>
+		</tr>
+		
+		<tr>
+		 <td> <span class="style1">Job:</span></td>
+		<td>
+			<select id="skillCategoryId" name="job.skillCategory.skillCategoryId" onchange="getSkill(this)" style="width:180px">
+				<option value=""></option>
+			</select>
+        </td>
+		</tr>
+	<tr>
+	
+		<td><span class="style1">Skills:</span>
+		<td>
+		<span id="skillId"> </span>
+		</td>
+		</td>
+	</tr>
         
           <tfoot>
        <tr>

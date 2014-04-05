@@ -1,6 +1,7 @@
 package recruitment.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -73,6 +74,16 @@ public class JobDaoImpl implements JobDao {
 		} else {
 			hql.append(" where 1 = 1 ");
 		}
+		
+		if (null != job.getJobCategory() && null != job.getJobCategory().getSkillCategoryId() && job.getJobCategory().getSkillCategoryId() > 0) {
+		    hql.append(" and j.jobCategory.skillCategoryId = :jobCategoryId");
+		    map.put("jobCategoryId", job.getJobCategory().getSkillCategoryId());
+		}
+		
+		if (null != job.getSkillCategory() && null != job.getSkillCategory().getSkillCategoryId() && job.getSkillCategory().getSkillCategoryId() > 0) {
+		    hql.append(" and j.skillCategory.skillCategoryId = :skillCategoryId");
+            map.put("skillCategoryId", job.getSkillCategory().getSkillCategoryId());
+		}
 
 		if(null!=job && job.getJobId()!=null && job.getJobId()!=0)  {
 			hql.append(" and j.jobId = :jobId");
@@ -88,24 +99,18 @@ public class JobDaoImpl implements JobDao {
 			hql.append(" and LOWER(j.title) like LOWER(:title) ");
 			map.put("title","%"+ job.getTitle()+"%");
 		}
-		/*
-		if(null!=job &&null!=job.getJobCategory()&&!"".equals(job.getJobCategory().getName())) {
-			hql.append(" and LOWER(j.jobCategory.name) like LOWER(:name) " );
-			map.put("name","%"+ job.getJobCategory().getName()+"%");
-		}
-		*/
 		
-		if(null!=job &&null!=job.getCountryId()&& job.getCountryId().getAreaId()!=null) {
+		if(null!=job &&null!=job.getCountryId()&& job.getCountryId().getAreaId()!=null && job.getCountryId().getAreaId() > 0) {
 			hql.append(" and j.countryId.areaId = :countryId " );
 			map.put("countryId",+ job.getCountryId().getAreaId());
 		}
 		
-		if(null!=job &&null!=job.getCountyId()&& null!=job.getCountyId().getAreaId() && job.getCountyId().getAreaId()!=null) {
+		if(null!=job &&null!=job.getCountyId()&& null!=job.getCountyId().getAreaId() && job.getCountyId().getAreaId()!=null && job.getCountyId().getAreaId() > 0) {
 			hql.append(" and j.countyId.areaId = :countyId " );
 			map.put("countyId",+ job.getCountyId().getAreaId());
 		}
 		
-		if(null!=job &&null!=job.getDistrictId()&& null!=job.getDistrictId().getAreaId() && job.getDistrictId().getAreaId()!=null) {
+		if(null!=job &&null!=job.getDistrictId()&& null!=job.getDistrictId().getAreaId() && job.getDistrictId().getAreaId()!=null && job.getDistrictId().getAreaId()>0) {
 			hql.append(" and j.districtId.areaId = :districtId" );
 			map.put("districtId",+ job.getDistrictId().getAreaId());
 		}
@@ -191,8 +196,17 @@ public class JobDaoImpl implements JobDao {
 		}
 		return query.list();
 	}
-
+	
 	@Override
+    public Job getByJobId(Integer jobId) throws DataAccessException {
+        List<Job> jobs = this.getHibernateTemplate().find("from Job j where j.jobId = ?", jobId);
+        if (null != jobs && jobs.size() > 0) {
+            return jobs.get(0);
+        }
+        return null;
+    }
+	
+    @Override
 	public Job loadByJobId(Integer jobId) throws DataAccessException {
 		return (Job) this.hibernateTemplate.load(Job.class, jobId);
 	}
@@ -206,7 +220,7 @@ public class JobDaoImpl implements JobDao {
 		//JobCategory jc  = (JobCategory) this.hibernateTemplate.load(JobCategory.class, radioList);
 		//job.setJobCategory(jc);
 		
-		for(int i=1; i < checkboxList.length;i++) {
+		for(int i=0; i < checkboxList.length;i++) {
 			JobSkill  jobSkill= new JobSkill();
 			Skill skill =  (Skill) this.hibernateTemplate.load(Skill.class, checkboxList[i]);
 			jobSkill.setSkill(skill);
@@ -259,9 +273,13 @@ public class JobDaoImpl implements JobDao {
 		for(ApplyJob a : applyJobs) {
 			in.append(String.valueOf(a.getJobseeker().getJsId())).append(",");
 		}
-		String ids = in.substring(0,in.length()-1);
-		System.out.println(ids.toString());
-		return (List<JobSeeker>) hibernateTemplate.find("from JobSeeker js where js.jsId in(" + ids + ")");
+		if (in.length() > 0) {
+		    in.deleteCharAt(in.length()-1);
+		} else {
+		    return new ArrayList<JobSeeker>();
+		}
+		
+		return (List<JobSeeker>) hibernateTemplate.find("from JobSeeker js where js.jsId in(" + in.toString() + ")");
 	}
 	
 	@SuppressWarnings("unchecked")

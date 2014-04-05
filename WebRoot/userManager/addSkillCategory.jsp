@@ -49,11 +49,17 @@ Hello <s:property value="#session.admin.username"/><br/>
           <td><input name="skillCategory.name" type="text"  class="formstyle">
           <font color="#F9481C">*</font></td>
         </tr>
+
         <tr>
           <td><span class="style1">Level:</span></td>
-          <td><input name="skillCategory.level" type="text"  class="formstyle">
+          <td>
+          <select name="skillCategory.level">
+  			<option value="0">Job Category</option>
+ 			<option value="1">Job</option>
+		</select>
           <font color="#F9481C">*</font></td>
         </tr>
+        
          <tr>
           <td><span class="style1">Parent Id:</span></td>
           <td><input name="skillCategory.parentSkillCategory.skillCategoryId" type="text" class="formstyle">
@@ -64,8 +70,9 @@ Hello <s:property value="#session.admin.username"/><br/>
  <tfoot>
         <tr>
           <td colspan="2">
-              <input name="submit" type="submit" value="Submit"></li>
-              <input name="reset" type="reset" value="Reset" ></li>
+         	 <input name="back" type="button"  onclick="history.back()" value="Back" >
+              <input name="reset" type="reset" value="Reset" >
+              <input name="submit" type="submit" value="Submit">
           </td>
         </tr>
         </tfoot>

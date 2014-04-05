@@ -14,13 +14,14 @@
 		</global-exception-mappings>
 		
 		<action name="job1" class="job" method="logged">
-			<result name="logged">/welcome.jsp</result>
+			<result name="logged" type="redirectAction">job!first</result>
 		</action>
 
 		<action name="js" class="js">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="load">/preUpdateJs.jsp</result>
+			<result name="detail">/jsDetail.jsp</result>
 			<result name="get">/jsProfile.jsp</result>
 			<result name="list">listJobSeeker.jsp</result>
 			<result name="logout" type="chain">job1</result>
@@ -45,7 +46,7 @@
 		<action name="jsCheckEmail" class="js" method="checkEmailExist"/>
 		
 		<action name="job1" class="job" method="logout">
-			<result name="logout">/welcome.jsp</result>
+			<result name="logout" type="redirectAction">job!first</result>
 		</action>
 		
 		<action name="jsLogout" class="js" method="logout">
@@ -74,7 +75,7 @@
 		<action name="emp" class="emp">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="list">/listEmployer.jsp</result>
+			<result name="list">/userManager/listEmployer.jsp</result>
 			<result name="load">/preUpdateEmp.jsp</result>
 			<result name="get">/empProfile.jsp</result>
 			<result name="logout" type="chain">job1</result>
@@ -82,6 +83,14 @@
 		
 		<action name="empCheckUsername" class="emp" method="checkUsernameExist"/>
 		<action name="empCheckEmail" class="emp" method="checkEmailExist"/>
+
+		<action name="ir" class="ir">
+			<result name="preSend">/sendInterviewRecord.jsp</result>
+			<result name="send" type="redirectAction">ir!listSend</result>
+			<result name="preUpdate">/updateInterviewRecord.jsp</result>
+			<result name="listSend">/listInterviewRecord.jsp</result>
+			<result name="listMySend">/listMyInterviewRecord.jsp</result>
+		</action>
 
 		<action name="searchEmp" class="emp" method="loadById">
 			<result name="load">/searchEmpById.jsp</result>
@@ -194,6 +203,7 @@
 			<result name="listAppliedJs">listAppliedJs.jsp</result>
 			<result name="first">/welcome.jsp</result>
 			<result name="logged">/jsLogged.jsp</result>
+			<result name="detail">/jobDetail.jsp</result>
 			<result name="delete">/deleteJob.jsp</result>
 			<result name="update">/preUpdate.jsp</result>
 			<result name="load">/preUpdateJob.jsp</result>
@@ -214,8 +224,8 @@
 		<action name="listSubSkill" class="js" method="listSubSkillCategory">
 		</action>
 		
-		<action name="listSkills" class="job" method="listSkills">
-		</action>
+		<action name="listSkills" class="job" method="listSkills"/>
+		<action name="listSkills2" class="job" method="listSkills2"/>
 		<action name="listSubSkills" class="job" method="listSubSkillCategorys">
 		</action>
 		<action name="listSkillCategorys" class="job" method="listSkillCategorys">
@@ -241,31 +251,12 @@
 			<result name="delete">/deleteJob.jsp</result>
 		</action>
 		
-		<action name="pe" class="pe">
-			<result name="success">/success.jsp</result>
-			<result name="fail">/fail.jsp</result>
-			<result name="add">/addPExperience.jsp</result>
-			<result name="list">/listPastExperience.jsp</result>
-		</action>
-		
-		<action name="updatePexp" class="pe" method="update">
-			<result name="success">/success.jsp</result>
-			<result name="fail">/fail.jsp</result>
-			<result name="update">/updatePexp.jsp</result>
-		</action>
-
-	<action name="deletePexp" class="pe" method="delete">
-			<result name="success">/success.jsp</result>
-			<result name="fail">/fail.jsp</result>
-			<result name="updatePexp">/deletePexp.jsp</result>
-		</action>
-		
 		<action name="sc" class="sc">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="add">/addSkillCategory.jsp</result>
 			<result name="list">/userManager/listSkillCategory.jsp</result>
-			<result name="load">/preUpdateSc.jsp</result>
+			<result name="load">/userManager/preUpdateSc.jsp</result>
 		</action>
 		
 		<action name="updateSc" class="sc" method="update">
@@ -279,7 +270,7 @@
 			<result name="fail">/fail.jsp</result>
 			<result name="add">/addSkill.jsp</result>
 			<result name="list">/userManager/listSkill.jsp</result>
-			<result name="load">/preUpdateSkill.jsp</result>
+			<result name="load">/userManager/preUpdateSkill.jsp</result>
 		</action>
 		
 		<action name="updateSk" class="sk" method="update">
@@ -289,7 +280,7 @@
 		</action>
 		
 		<action name="apply" class="apply">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">job!logged</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="login">/loginJs.jsp</result>
 			<result name="selectCV">/addApplyJob.jsp</result>

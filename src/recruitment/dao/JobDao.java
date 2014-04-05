@@ -1,6 +1,5 @@
 package recruitment.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -12,7 +11,8 @@ import recruitment.model.Job;
 import recruitment.model.JobSeeker;
 
 public interface JobDao {
-	public Job loadByJobId(Integer jobId) throws DataAccessException;
+    public Job loadByJobId(Integer jobId) throws DataAccessException;
+	public Job getByJobId(Integer jobId) throws DataAccessException;
 	public List<Job> loadByTitle(String title) throws DataAccessException;
 	public boolean deleteJob(Integer jobId) throws DataAccessException;
 	public void save(Job job) throws DataAccessException;

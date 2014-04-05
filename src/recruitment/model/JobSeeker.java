@@ -24,6 +24,7 @@ public class JobSeeker {
 	private String email;
 	private String phone;
 	private Integer expectedSalary=0;
+	private Integer status = 0;
 	private Integer radioList;
 	private Integer[] checkboxes;
 	//private Skill skill;
@@ -91,7 +92,13 @@ public class JobSeeker {
 		this.expectedSalary = expectedSalary;
 	}
 	
-	@Transient
+	public Integer getStatus() {
+        return status;
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    @Transient
 	public Integer getRadioList() {
 		return radioList;
 	}

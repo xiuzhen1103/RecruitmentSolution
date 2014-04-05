@@ -9,7 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
     <title>Display all Skill </title>
   </head>
@@ -23,7 +22,7 @@ Hello <s:property value="#session.admin.username"/><br/>
   <h1><i>Recruitment Solution</i></h1>
   <div class="menu_20124162">
 	<ul>
-    	<li><a href="userManager/admin.jsp">Home</a></li>
+    	<li><a href="admin.jsp">Home</a></li>
         <li><a href="">About Us</a></li>
         <li><a href="">Contact Us</a></li>
     </ul>
@@ -31,7 +30,7 @@ Hello <s:property value="#session.admin.username"/><br/>
 </div>
     <b>Display all Skill </b>  
      <div align="center">
-   <a href="userManager/addSkill.jsp">Add Skill category </a> 
+   <a href="addSkill.jsp">Add Skill category </a> 
 </div>
 
   <s:form method="post" action="sk!list.action">  

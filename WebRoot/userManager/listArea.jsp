@@ -39,7 +39,7 @@ Hello <s:property value="#session.admin.username"/><br/>
 </div>
 
   <s:form method="post" action="area!list.action">  
-  		<s:textfield label="Please Enter Area Id" name="area.areaId"></s:textfield>
+
   		<s:textfield label="Please Enter Area Name" name="area.areaName"></s:textfield>
   		
   		<s:submit label="submit"/>

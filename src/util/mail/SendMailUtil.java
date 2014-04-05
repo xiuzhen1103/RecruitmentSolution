@@ -4,27 +4,6 @@ import java.util.ResourceBundle;
 
 public class SendMailUtil {
 
-
-//	
-//	public static void sendMail(String userName,String sendToEamil,String password){
-//	     MailSenderInfo mailInfo = new MailSenderInfo();   
-//	     mailInfo.setMailServerHost("smtp.qq.com");   
-//	     mailInfo.setMailServerPort("25");   
-//	     mailInfo.setValidate(true); 
-//	     
-//	     //read config
-//	     mailInfo.setUserName(rb.getString("yourEmailAccount"));
-//	     mailInfo.setFromAddress(rb.getString("yourEmailAddress"));   
-//	     mailInfo.setPassword(rb.getString("yourEmailPassword"));
-//	     
-//
-//    	 mailInfo.setToAddress(sendToEamil);   
-//         mailInfo.setSubject("密码重置");   
-//         mailInfo.setContent("用户名为["+userName+"]，你的密码已经修改为:"+password+",请你重新登录");   
-//         SimpleMailSender sms = new SimpleMailSender();  
-//         sms.sendTextMail(mailInfo);//发送文体格式   
-//	}
-	
 	public static void main(String[] args){
 	     MailSenderInfo mailInfo = new MailSenderInfo();   
 	     mailInfo.setMailServerHost("smtp.qq.com");   

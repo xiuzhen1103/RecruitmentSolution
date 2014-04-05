@@ -56,7 +56,7 @@ public class AreaDaoImpl implements AreaDao {
 	public List<Area> listCountrys(Area area) throws DataAccessException {
 		StringBuffer hql = new StringBuffer();
 		Map<String,Object> map = new HashMap<String,Object>();
-		hql.append( " from Area a where 1=1 and level =0");
+		hql.append( " from Area a where 1=1 and level =0 and areaId <> 0 ");
 		if(null!=area && area.getAreaId()!=null && area.getAreaId()!=0)  {
 			hql.append(" and a.areaId = :areaId");
 			map.put("areaId",+ area.getAreaId());

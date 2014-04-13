@@ -9,13 +9,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 	<title>Welcome</title>
-	<link type="text/css" href="<%=basePath%>style/style.css" rel="StyleSheet" />
+	<link href="<%=basePath%>style/bootstrap.min.css" type="text/css"
+			rel="StyleSheet" />
+	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+	<link href="<%=basePath%>style/myBootstrap_css.css" type="text/css" rel="StyleSheet" />
 	<link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/area.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
+	
 </head>
 
 <body>
@@ -27,19 +31,20 @@ or
 <a href="js!registerJs.action">Jobseeker Register</a>
 </p> 
 <div align="center" id="header">
-<h1><i>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!first.action">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
+<h1>Recruitment Solution</h1>
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!first.action">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+</div>
+  </div>
+</div>	
 
-    </ul>
-</div>
-<br />
-</div>
     
- <br /><b>Display All Jobs:</b>   <br /><br/>
+<h3><span class="label label-info">Display All Jobs:</span></h3>   
  
  <form method="post" action="job!first.action" class="formstyle" style="padding: 5px 3px;">
 
@@ -83,16 +88,15 @@ or
     <option></option>
   </select>
 
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-sm btn-primary">Submit</button>
  </form>
  
-  		<br/>
-  			
- 	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
+  	
+ 	  <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
  	 	 <tr>
-		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
-		      <td width="20%" height="37" align="center"><b>Requirement</b></td>
-		      <td width="10%" height="37" align="center"><b>Category</b></td>
+		      <td  class="info" width="10%" height="37" align="center"><b>Job Title</b></td>
+		      <td  class="info"  width="20%" height="37" align="center"><b>Requirement</b></td>
+		      <td  class="info" width="10%" height="37" align="center"><b>Category</b></td>
 		      <td width="8%" height="37" align="center"><b>Skill Category</b></td>
 		      <td width="10%" height="37" align="center"><b>Skill</b></td>
 		      <td width="5%" height="37" align="center"><b>Salary</b></td>

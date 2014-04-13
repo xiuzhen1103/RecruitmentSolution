@@ -41,10 +41,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
  
   <body>
-    <b>Display All Skill </b>  
+  <p align="right">
+Hello <s:property value="#session.jobSeeker.username"/><br/>
+<a href="js!get?jsId=<s:property value="#session.jobSeeker.jsId"/> ">Profile</a> 
+<a href="js!logout.action">Logout</a>
+</p> 
+<div align="center" id="header">
+<h1><i>Recruitment Solution</i></h1>
+<div class="menu_20124162">
+	<ul>
+    	<li><a href="job!logged.action">Home</a></li>
+        <li><a href="">About Us</a></li>
+        <li><a href="">Contact Us</a></li>
+
+    </ul>
+</div>
+</div>
+<br/><br/>
+    <h2>Display All Skill </h2>  
      <div align="center">
 
-  <a href="jsSkill!add.action">Update Skill</a> <br/>
+  <a href="jsSkill!add.action"><img src="images/edit.jpg" alt="update" height="20" width="35" ></a> <br/>
+  <br />
 </div>
 
    <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
@@ -58,12 +76,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
 		  <td align="center" ><s:property value="#s.jobSeekerSkillId" /></td>
 		  <td align="center" ><s:property value="#s.skill.name" /></td>
-		<!--  <td><button <s:property value="#s.jobSeekerSkillId" /> onchange="deleteSkill(this.value)">delete</button></td>-->
-		  <td><a href="jsSkill!delete?id=<s:property value="#s.jobSeekerSkillId" />">Delete</a></td>
+		<!--<td><button <s:property value="#s.jobSeekerSkillId" /> onchange="deleteSkill(this.value)">delete</button></td>-->
+		 <!--  <td>Delete</a></td>-->
+		 <td><a href="jsSkill!delete?id=<s:property value="#s.jobSeekerSkillId" />"><img src="images/delete.jpg" alt="delete" height="20" width="15" ></a></td> 
 		  </tr>
 		    </s:iterator>
 </table>
     
-    <s:debug></s:debug>
+
   </body>
 </html>

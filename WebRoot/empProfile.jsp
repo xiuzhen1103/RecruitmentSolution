@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 	<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-    <title> Employer profile</title>
+    <title> Employer Profile</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -40,10 +40,10 @@ Hello <s:property value="#session.employer.username"/><br/>
 </div>
 <br/>
   <div id="reg">
-  <b>Employer profile </b>
+  <b>Employer Profile </b>
    <form method="post" action="updateEmp" id="form1">
    <input type="hidden" name="emp.empId" value="<s:property value='emp.empId'/>"><br>
-   <table width="450" id="form1" height="313" border="0" align="left" cellpadding="0" cellspacing="0">
+   <table width="480" id="form1" height="413" border="0" align="left" cellpadding="0" cellspacing="0">
         <tr>
           <th colspan="2">Update Employer</th>
         </tr>
@@ -103,12 +103,12 @@ Hello <s:property value="#session.employer.username"/><br/>
           
    		
 
-    
+<font style="font-size: 17px;" > 
     <a href="job!registerJob.action">Add Job</a> <br/>
-    <a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">View posted Job</a> <br/>
-    <a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">View send Interview Letter</a> <br/>
-    <a href="updateEmpPassword.jsp" target="_bank">Update password</a> <br/>
-    
+    <a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">View Posted Job</a> <br/>
+    <a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">View Send Interview Letter</a> <br/>
+    <a href="updateEmpPassword.jsp" target="_bank">Update Password</a> <br/>
+</font>
     </form>
     </div>
   </body>

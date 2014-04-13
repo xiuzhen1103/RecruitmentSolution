@@ -10,6 +10,8 @@ public interface InterviewRecordManager {
 
     InterviewRecord loadById(Integer InterviewId) throws DataAccessException;
 
+    InterviewRecord loadByJobAndJsAndEmp(Integer jobId, Integer jsId, Integer empId) throws DataAccessException;
+
     void addIR(InterviewRecord interviewRecord) throws DataAccessException;
 
     List<InterviewRecord> loadIRs(InterviewRecord ir) throws DataAccessException;

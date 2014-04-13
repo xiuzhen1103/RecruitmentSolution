@@ -30,7 +30,19 @@ public class InterviewRecordDaoImpl implements InterviewRecordDao {
     @SuppressWarnings("unchecked")
     public InterviewRecord loadById(Integer InterviewId) throws DataAccessException {
         List<InterviewRecord> irs = (List<InterviewRecord>) this.hibernateTemplate.find(
-                "from InterviewRecord ir where ir.interviewId = ?", InterviewId);
+                "from InterviewRecord ir join fetch ir.job where ir.interviewId = ?", InterviewId);
+        if (null != irs && irs.size() > 0) {
+            return irs.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public InterviewRecord loadByJobAndJsAndEmp(Integer jobId, Integer jsId, Integer empId) {
+        List<InterviewRecord> irs = (List<InterviewRecord>) this.hibernateTemplate.find(
+                "from InterviewRecord ir where ir.job.jobId = ? and ir.js.jsId = ? and ir.em.empId = ?",
+                new Integer[]{jobId, jsId, empId});
         if (null != irs && irs.size() > 0) {
             return irs.get(0);
         }
@@ -40,7 +52,6 @@ public class InterviewRecordDaoImpl implements InterviewRecordDao {
     @Override
     public void save(InterviewRecord interviewRecord) throws DataAccessException {
         this.hibernateTemplate.save(interviewRecord);
-        this.hibernateTemplate.flush();
     }
 
     @Override

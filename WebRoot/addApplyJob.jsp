@@ -38,16 +38,23 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
  	 	 <tr>
 		      <td colspan="2" width="5%" height="37" align="center"><b>Apply Job</b></td>
 		</tr>
+        <s:if test="cvsList.size > 0">
     	 <s:iterator value="cvsList" id="cs">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" ">
 	      <td><input type="radio" name="applyJob.radioList" value="<s:property value="#cs.cvId" />" /></td>
 		  <td align="center" ><s:property value="#cs.cvTitle" /></td>
         </tr>
-     </s:iterator>
+         </s:iterator>
+        </s:if>
+        <s:else>
+            <tr bgcolor="#EFF3F7" class="TableBody1" ">
+                <td colspan="2" align="center">No CV, <a href="addCV.jsp">go to create one</a></td>
+            </tr>
+        </s:else>
      </table>
-    	
+    	<s:if test="cvsList.size > 0">
     	<input type="submit" value="submit"/>
+        </s:if>
     </form>
   </body>
-  <s:debug></s:debug> 
 </html>

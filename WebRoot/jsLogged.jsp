@@ -8,17 +8,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
- <link type="text/css" href="<%=basePath%>style/style.css" rel="StyleSheet" />
-	<link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
-	<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/area.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
-	
+ <base href="<%=basePath%>">
+<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
 <title>Welcome</title>
+<link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/area.js"></script>
 
-	
 </head>
 <body>
 <p align="right">
@@ -38,12 +36,10 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
 </div>
 </div>
 
-    <b>Display All Jobs:</b>
- <br> <br />
+    <h2>Display All Jobs:</h2>
+
  <form method="post" action="job!logged.action">  
- 
- 
-  &nbsp;Country:
+&nbsp;Country:
 <select id="areaId" name="job.countryId.areaId" onchange="getCountry(this);" style="width:180px">
 <option></option>
 <s:iterator value="listCountrys" id="areas">
@@ -62,32 +58,13 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
 <select id="districtId" name="job.districtId.areaId" style="width:180px">
 <option></option>
 </select>
-  Job Title:<input type="text" name="job.title"/>
-  
-  <div style="height:2px;margin: 1px 0;">&nbsp;</div>
-  &nbsp;Job Category:
-  <select id="categoryId" onchange="getSubSkillCategory(this);" name="job.jobCategory.skillCategoryId" style="width:180px">
-      <option></option>
-      <s:iterator value="listMainSkillCategorys" id="s">
-        <option value="<s:property value="#s.skillCategoryId" />">
-       <s:property value="#s.name" />
-    </option>
-    </s:iterator>
-  </select>
-  &nbsp;Job:
-  <select id="skillCategoryId" onchange="getSkill2(this)" name="job.skillCategory.skillCategoryId" style="width:180px">
-    <option></option>
-  </select>
-  &nbsp;Job Skill:
-  <select multiple id="skillId" name="job.checkboxes" style="width:180px">
-    <option></option>
-  </select>
 
-<button type="submit" class="btn btn-primary">Submit</button>
+  Enter Job Title:<input type="text" name="job.title"/>
+<input type="submit" value="submit"/>
  </form>
- 
   			
- 	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
+  			<br />
+ 	 <table style="width:100%;margin-top: 8px;" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
  	 	 <tr>
 		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
 		      <td width="20%" height="37" align="center"><b>Requirement</b></td>
@@ -100,27 +77,55 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
 		      <td width="15%" height="37" align="center"><b>Start Date</b></td>
           </tr>
  	
+          <tr bgcolor="#ddd"><td colspan="9"><b>Best Match</b></td></tr>
           <s:iterator value="jobs" id="j">
+          <s:if test="#j.isBestMatch">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
-		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
-    	  <td align="center" ><s:property value="#j.requirement" /></td>
-    	  <td align="center" >
-            <s:property value="#j.jobCategory.name" />
-          </td>
-    	  <td align="center" >
-            <s:property value="#j.skillCategory.name" />
-          </td>
-    	  <td align="center" >
-            <s:iterator value="#j.jobSkills" var="js" status="st">
-                <s:property value="#js.skill.name" /><s:if test="!#st.last">,</s:if>
-            </s:iterator>
-          </td>
-    	  <td align="center" ><s:property value="#j.salary" /></td>
-    	  <td align="center" ><s:property value="#j.numPosition" /></td>
-    	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
-		  <td align="center" ><s:property value="#j.startDate" /></td>
-        </tr>
-     </s:iterator>
+    		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}&js.jsId=<s:property value="#session.jobSeeker.jsId"/>"><s:property value="#j.title" /></a></td>
+        	  <td align="center" ><s:property value="#j.requirement" /></td>
+        	  <td align="center" >
+                <s:property value="#j.jobCategory.name" />
+              </td>
+        	  <td align="center" >
+                <s:property value="#j.skillCategory.name" />
+              </td>
+        	  <td align="center" >
+                <s:iterator value="#j.jobSkills" var="js" status="st">
+                    <s:property value="#js.skill.name" /><s:if test="!#st.last">,</s:if>
+                </s:iterator>
+              </td>
+        	  <td align="center" ><s:property value="#j.salary" /></td>
+        	  <td align="center" ><s:property value="#j.numPosition" /></td>
+        	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
+    		  <td align="center" ><s:property value="#j.startDate" /></td>
+          </tr>
+          </s:if>
+          </s:iterator>
+ 	
+          <tr bgcolor="#ddd"><td colspan="9"><b>Possible Match</b></td></tr>
+          <s:iterator value="jobs" id="j">
+          <s:if test="!#j.isBestMatch">
+	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
+    		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}&js.jsId=<s:property value="#session.jobSeeker.jsId"/>"><s:property value="#j.title" /></a></td>
+        	  <td align="center" ><s:property value="#j.requirement" /></td>
+        	  <td align="center" >
+                <s:property value="#j.jobCategory.name" />
+              </td>
+        	  <td align="center" >
+                <s:property value="#j.skillCategory.name" />
+              </td>
+        	  <td align="center" >
+                <s:iterator value="#j.jobSkills" var="js" status="st">
+                    <s:property value="#js.skill.name" /><s:if test="!#st.last">,</s:if>
+                </s:iterator>
+              </td>
+        	  <td align="center" ><s:property value="#j.salary" /></td>
+        	  <td align="center" ><s:property value="#j.numPosition" /></td>
+        	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
+    		  <td align="center" ><s:property value="#j.startDate" /></td>
+          </tr>
+          </s:if>
+          </s:iterator>
     </table>
     
 

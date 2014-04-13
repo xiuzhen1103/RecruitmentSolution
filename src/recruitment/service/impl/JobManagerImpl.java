@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import recruitment.dao.JobDao;
@@ -39,12 +40,12 @@ public class JobManagerImpl implements JobManager {
 	}
 
 	@Override
-    public Job findById(Job job) throws Exception {
+    public Job findById(Job job) throws DataAccessException {
         return jobDao.getByJobId(job.getJobId());
     }
 
     @Override
-	public Job loadById(Job job) throws Exception {
+	public Job loadById(Job job) throws DataAccessException {
 		return jobDao.loadByJobId(job.getJobId());
 	}
 

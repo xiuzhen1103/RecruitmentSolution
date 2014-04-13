@@ -1,20 +1,19 @@
 package recruitment.action;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 import javax.annotation.Resource;
-import org.apache.struts2.ServletActionContext;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+
 import recruitment.model.ApplyJob;
 import recruitment.model.CV;
 import recruitment.model.Job;
-import recruitment.model.JobSeeker;
 import recruitment.service.ApplyJobManager;
 import recruitment.service.CVManager;
+
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 @Component("apply")
 @Scope("prototype")
@@ -56,7 +55,7 @@ public class ApplyJobAction extends ActionSupport{
 		//	return "login";
 	}
 	
-	public String selectCV() throws Exception {
+    public String selectCV() throws Exception {
 		this.cvsList =  cvManager.getCVByJsId(cv);
 		System.out.println(cvsList.size()+">>>>>>>>>>>>>>>>>>>"+this.jobId);
 		return "selectCV";

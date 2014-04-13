@@ -1,5 +1,6 @@
 package recruitment.dao.impl;
 
+import java.awt.print.Book;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,56 +70,46 @@ public class JobDaoImpl implements JobDao {
 		hql.append(" from Job j ");
 
 		if (null != job.getCheckboxes() && job.getCheckboxes().length > 0) {
-			hql.append(" join fetch j.jobSkills as jss where 1 = 1 and jss.skill.skillId in (:skillIds)");
+			hql.append(" join fetch j.jobSkills as jss where 1 = 1 and j.numPosition > 0 and jss.skill.skillId in (:skillIds)");
 			map.put("skillIds", job.getCheckboxes());
 		} else {
-			hql.append(" where 1 = 1 ");
+			hql.append(" where 1 = 1 and j.numPosition > 0");
 		}
-		
 		if (null != job.getJobCategory() && null != job.getJobCategory().getSkillCategoryId() && job.getJobCategory().getSkillCategoryId() > 0) {
 		    hql.append(" and j.jobCategory.skillCategoryId = :jobCategoryId");
 		    map.put("jobCategoryId", job.getJobCategory().getSkillCategoryId());
 		}
-		
 		if (null != job.getSkillCategory() && null != job.getSkillCategory().getSkillCategoryId() && job.getSkillCategory().getSkillCategoryId() > 0) {
 		    hql.append(" and j.skillCategory.skillCategoryId = :skillCategoryId");
             map.put("skillCategoryId", job.getSkillCategory().getSkillCategoryId());
 		}
-
 		if(null!=job && job.getJobId()!=null && job.getJobId()!=0)  {
 			hql.append(" and j.jobId = :jobId");
 			map.put("jobId",+ job.getJobId());
 		}
-
 		if(null!=job &&null!=job.getEmployer() && job.getEmployer().getEmpId()!=0)  {
 			hql.append(" and j.employer.empId =:empId");
 			map.put("empId",+ job.getEmployer().getEmpId());
 		}
-
 		if(null!= job &&null!=job.getTitle()&&!"".equals(job.getTitle())) {
 			hql.append(" and LOWER(j.title) like LOWER(:title) ");
 			map.put("title","%"+ job.getTitle()+"%");
 		}
-		
 		if(null!=job &&null!=job.getCountryId()&& job.getCountryId().getAreaId()!=null && job.getCountryId().getAreaId() > 0) {
 			hql.append(" and j.countryId.areaId = :countryId " );
 			map.put("countryId",+ job.getCountryId().getAreaId());
 		}
-		
 		if(null!=job &&null!=job.getCountyId()&& null!=job.getCountyId().getAreaId() && job.getCountyId().getAreaId()!=null && job.getCountyId().getAreaId() > 0) {
 			hql.append(" and j.countyId.areaId = :countyId " );
 			map.put("countyId",+ job.getCountyId().getAreaId());
 		}
-		
 		if(null!=job &&null!=job.getDistrictId()&& null!=job.getDistrictId().getAreaId() && job.getDistrictId().getAreaId()!=null && job.getDistrictId().getAreaId()>0) {
 			hql.append(" and j.districtId.areaId = :districtId" );
 			map.put("districtId",+ job.getDistrictId().getAreaId());
 		}
-		
 		if (null != job.getCheckboxes() && job.getCheckboxes().length > 0) {
 			hql.append(" group by j.jobId");
 		}
-		
 		Query query  = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (null != map && map.size() >= 1) {
 			Iterator<String> it = map.keySet().iterator();
@@ -141,15 +132,11 @@ public class JobDaoImpl implements JobDao {
 	}
 
 	
-	public List<Job> getJobsByCategory(final Job job) throws DataAccessException {
-		/*
-		Integer id = getJobSeeker().getJobCategory().getJobCaId();
-	*/
-		
+	public List<Job> getJobsByCategory(final Job job) throws DataAccessException {		
 		StringBuffer hql = new StringBuffer();
 		Map<String,Object> map = new HashMap<String,Object>();
 		//hql.append(" from Job j where j.jobCategory.jobCaId =" + id + " and 1=1 ");
-		hql.append(" from Job j where  1=1 ");
+		hql.append(" from Job j where  1=1 and j.numPosition > 0 ");
 		if(null!=job && job.getJobId()!=null && job.getJobId()!=0)  {
 			hql.append(" and j.jobId = :jobId");
 			map.put("jobId",+ job.getJobId());
@@ -164,12 +151,6 @@ public class JobDaoImpl implements JobDao {
 			hql.append(" and LOWER(j.title) like LOWER(:title) ");
 			map.put("title","%"+ job.getTitle()+"%");
 		}
-			/*
-		if(null!=job &&null!=job.getJobCategory()&&!"".equals(job.getJobCategory().getName())) {
-			hql.append(" and LOWER(j.jobCategory.name) like LOWER(:name) " );
-			map.put("name","%"+ job.getJobCategory().getName()+"%");
-		}
-		*/
 		if(null!=job &&null!=job.getCountryId()&& job.getCountryId().getAreaId()!=0) {
 			hql.append(" and j.countryId.areaId = :countryId " );
 			map.put("countryId",+ job.getCountryId().getAreaId());
@@ -214,12 +195,8 @@ public class JobDaoImpl implements JobDao {
 	@Override
 	public void save(Job job) throws DataAccessException {
 		Integer[] checkboxList = job.getCheckboxes();
-		//hibernateTemplate.save(job);
-		
 		Set<JobSkill> jobkills = new HashSet<JobSkill>(0);
-		//JobCategory jc  = (JobCategory) this.hibernateTemplate.load(JobCategory.class, radioList);
-		//job.setJobCategory(jc);
-		
+
 		for(int i=0; i < checkboxList.length;i++) {
 			JobSkill  jobSkill= new JobSkill();
 			Skill skill =  (Skill) this.hibernateTemplate.load(Skill.class, checkboxList[i]);

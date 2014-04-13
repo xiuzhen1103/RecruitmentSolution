@@ -31,6 +31,11 @@ public class InterviewRecordManagerImpl implements InterviewRecordManager {
     }
 
     @Override
+    public InterviewRecord loadByJobAndJsAndEmp(Integer jobId, Integer jsId, Integer empId) throws DataAccessException {
+        return interviewRecordDao.loadByJobAndJsAndEmp(jobId, jsId, empId);
+    }
+
+    @Override
     public void addIR(InterviewRecord interviewRecord) throws DataAccessException {
         interviewRecordDao.save(interviewRecord);
     }

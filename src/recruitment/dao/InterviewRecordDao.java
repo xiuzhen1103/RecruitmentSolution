@@ -9,6 +9,8 @@ import recruitment.model.InterviewRecord;
 public interface InterviewRecordDao {
 
     InterviewRecord loadById(Integer InterviewId) throws DataAccessException;
+    
+    InterviewRecord loadByJobAndJsAndEmp(Integer jobId, Integer jsId, Integer empId);
 
     void save(InterviewRecord interviewRecord) throws DataAccessException;
 

@@ -21,6 +21,7 @@ function getCountry(c) {
 		type : 'POST',
 		url : url,
 		success : function(data) {
+		
 			var countys = data.split(",");// 1_a 1_2d
 			var countySelect = document.getElementById("countyId");
 			countySelect.options.length = 0;
@@ -28,7 +29,7 @@ function getCountry(c) {
 				var inner = countys[i].split("_");
 				var varItem = new Option(inner[1], inner[0]);
 				countySelect.options.add(varItem);
-
+				
 			}
 		}
 	});
@@ -41,6 +42,7 @@ function getDistrict(d) {
 		type : 'POST',
 		url : url,
 		success : function(data) {
+	
 			var districts = data.split(",");// 1_a 1_2d
 			var districtSelect = document.getElementById("districtId");
 			districtSelect.options.length = 0;
@@ -48,6 +50,7 @@ function getDistrict(d) {
 				var inner = districts[i].split("_");
 				var varItem = new Option(inner[1], inner[0]);
 				districtSelect.options.add(varItem);
+				
 
 			}
 		}

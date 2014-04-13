@@ -47,9 +47,9 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
 <div id="reg">
  		<form method="post" action="updateJs" id="form1">
  		<input name="js.jsId" type="hidden" id="jsId" value="<s:property value='js.jsId'/>">
- 		<table width="450" id="form1" height="313" border="0" align="left" cellpadding="0" cellspacing="0">
+ 		<table width="480" id="form1" height="400" border="0" align="left" cellpadding="0" cellspacing="0">
         <tr>
-          <th colspan="2">Update JobSeeker</th>
+          <th colspan="2"></>Update JobSeeker</th>
         </tr>
 
         <tr>
@@ -94,13 +94,14 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
           </table>
           </form>
           
-
+<font style="font-size: 17px;">
 <a href="addCV.jsp">Upload CV</a> <br/>
 <a href="ir!listMySend">View Interview History</a> <br/>
 <a href="javascript:void(0)" onclick="openWin('jsSkill!add.action','add',500,200,0)">Update Skill</a> <br/>
 <a href="updateJsPassword.jsp" target="_bank">Update Password</a> <br/>
 <a href="cv!list.action" target="_bank">List CV</a> <br/>
 <a href="jsSkill!list.action" target="_bank">List Skill</a> <br/>
+</font>
 
 </div>
 </body>

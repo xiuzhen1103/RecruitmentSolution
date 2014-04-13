@@ -65,11 +65,16 @@ Hello <s:property value="#session.employer.username"/><br/>
           <td><textarea name="ir.memo" id="memo" style="width:200px;height:70px;"></textarea>
           </td>
         </tr>
+         <tr>
+          <td align="left"><span class="style1">&nbsp;</span></td>
+          <td><s:if test="tips != null"><font color="red">${tips}</font></s:if>
+          </td>
+        </tr>
 
        <tfoot>
         <tr>
           <td colspan="2">
-            <input name="back" type="button" onclick="history.back()" value="Back" ></li>
+            <input name="back" type="button" onclick="history.back()" value="Back" >
             <input name="submit" type="submit" value="Submit">
           </td>
         </tr>

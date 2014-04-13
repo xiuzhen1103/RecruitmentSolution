@@ -33,6 +33,9 @@ public class Job {
     private SkillCategory jobCategory;
     private SkillCategory skillCategory;
     private Set<JobSkill> jobSkills = new HashSet<JobSkill>(0);
+    
+    private Boolean isBestMatch;
+    private Boolean isApplied;
 
     @Id
     @GeneratedValue
@@ -195,4 +198,22 @@ public class Job {
         this.skillCategory = skillCategory;
     }
 
+    @Transient
+    public Boolean getIsBestMatch() {
+        return isBestMatch;
+    }
+
+    public void setIsBestMatch(Boolean isBestMatch) {
+        this.isBestMatch = isBestMatch;
+    }
+
+    @Transient
+    public Boolean getIsApplied() {
+        return isApplied;
+    }
+
+    public void setIsApplied(Boolean isApplied) {
+        this.isApplied = isApplied;
+    }
+    
 }

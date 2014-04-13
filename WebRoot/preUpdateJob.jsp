@@ -10,6 +10,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 	<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+    <link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
+    <script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/area.js"></script>
+    <script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
     <title> PreUpdate Job</title>
 
   </head>
@@ -80,33 +86,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </td>
         </tr>
         <tr>
+			<td><span class="style1">Area:</span></td>
 			<td>
-		<span class="style1">Area:</span>
-								</td>
-								<td>
+            <select id="areaId" name="job.countryId.areaId"
+                onchange="getCountry(this);" style="width:180px">
+                <option value=""></option>
+                <s:iterator value="listCountrys" id="areas">
+                    <option value="<s:property value="#areas.areaId" />">
+                        <s:property value="#areas.areaName" />
+                    </option>
+                </s:iterator>
+            </select>
 
-			<select id="areaId" name="job.countryId.areaId"
-				onchange="getCountry(this);" style="width:180px">
-				<option value=""></option>
-						<s:iterator value="listCountrys" id="areas">
-						<option value="<s:property value="#areas.areaId" />">
-						<s:property value="#areas.areaName" />
-						</option>
-					</s:iterator>
-									</select>
+            <select id="countyId" name="job.countyId.areaId"
+                onchange="getDistrict(this);" style="width:180px">
+                <option value=""></option>
 
-									<select id="countyId" name="job.countyId.areaId"
-										onchange="getDistrict(this);" style="width:180px">
-										<option value=""></option>
+            </select>
 
-									</select>
-
-									<select id="districtId" name="job.districtId.areaId" style="width:180px">
-										<option value=""></option>
-									</select>
-									<font color="#F9481C">*</font>
-								</td>
-							</tr>
+            <select id="districtId" name="job.districtId.areaId" style="width:180px">
+                <option value=""></option>
+            </select>
+            <font color="#F9481C">*</font>
+			</td>
+		</tr>
 							
 							<tr>
         <td> <span class="style1" >Job Category:</span></td>

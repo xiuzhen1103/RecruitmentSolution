@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td> <span class="style1" >Job Skill:</span></td>
 		<td>
 			<s:iterator value="#j.jobSkills" var="js" status="st">
-                ${js.skill.name}<s:if test="!#st.last">,</s:if>
+                <s:property value="#js.skill.name" /><s:if test="!#st.last">,</s:if>
             </s:iterator>
 		</td>
 		</tr>
@@ -156,9 +156,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="job!listAppliedJs?job.jobId=${j.jobId}" class="btn btn-sm btn-primary" role="button">Applied</a>
 						&nbsp;&nbsp;
                     </s:if>
-                    <s:else>
-						<a href="apply!selectCV?job.jobId=${j.jobId}" class="btn btn-sm btn-primary" role="button">Apply</a>
+                    <s:elseif test="#session.jobSeeker.jsId != null">
+                        <s:if test="!#j.isApplied">
+						  <a href="apply!selectCV?job.jobId=${j.jobId}" class="btn btn-sm btn-primary" role="button">Apply</a>
+                        </s:if>
+                        <s:else><button disabled="disabled" class="btn btn-sm btn-primary">Apply</button></s:else>
 						&nbsp;&nbsp;
+                    </s:elseif>
+                    <s:else>
+                        <a href="loginJs.jsp" class="btn btn-sm btn-primary" role="button">Apply</a>
                     </s:else>
                         <input name="back" type="button" class="btn btn-sm btn-default" onclick="history.back()" value="Back">
 					</td>

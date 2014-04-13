@@ -21,6 +21,7 @@ import recruitment.model.JobSeekerSkill;
 import recruitment.model.JobSkill;
 import recruitment.model.Skill;
 import recruitment.model.SkillCategory;
+import recruitment.service.ApplyJobManager;
 import recruitment.service.AreaManager;
 import recruitment.service.JobManager;
 import recruitment.service.SkillCategoryManager;
@@ -51,6 +52,7 @@ public class JobAction extends ActionSupport {
 	private List<Skill> listSkill;
 	private Skill skill;
 	private SkillManager skillManager;
+	private ApplyJobManager ajm;
 //	/private List<SkillCategory> listSubSkillCategory;
 	
 	public JobManager getJm() {
@@ -88,6 +90,9 @@ public class JobAction extends ActionSupport {
 	
 	public String detail() throws Exception {
 	    job = jm.findById(job);
+	    if (null != js && null != js.getJsId()) {
+	        job.setIsApplied(ajm.isJobAppliedByJs(job.getJobId(), js.getJsId()));
+	    }
 	    return "detail";
 	}
 
@@ -142,8 +147,9 @@ public class JobAction extends ActionSupport {
 	}
 
 	public String logged() throws Exception {
+	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
-		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		
 		// get job seeker skill
 		List<Integer> jobSeekerSkills = new ArrayList<Integer>();
 		JobSeeker jobSeeker = (JobSeeker)ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
@@ -161,6 +167,12 @@ public class JobAction extends ActionSupport {
 				return sortMap.get(b.getJobId()) - sortMap.get(a.getJobId());
 			}
 		});
+		
+		for (Job job : jobs) {
+		    if (sortMap.get(job.getJobId()) > 1000) {
+		        job.setIsBestMatch(Boolean.TRUE);
+		    }
+		}
 		
 		return "logged";
 	}
@@ -191,7 +203,7 @@ public class JobAction extends ActionSupport {
 				}
 			}
 			if (jSkillIds.size() == skillIds.size()) {
-				count ++;
+				count = count + 1000;
 			}
 			countMap.put(p.getKey(), count);
 		}
@@ -199,6 +211,8 @@ public class JobAction extends ActionSupport {
 	}
 
 	public String load() throws Exception {
+	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+	    this.listCountrys = am.listCountrys(area);
 		this.job = this.jm.loadById(job);
 		return "load";
 	}
@@ -404,6 +418,11 @@ public class JobAction extends ActionSupport {
 
     public void setSkill(Skill skill) {
         this.skill = skill;
+    }
+
+    @Resource(name="applyJobManager")
+    public void setAjm(ApplyJobManager ajm) {
+        this.ajm = ajm;
     }
 
 }

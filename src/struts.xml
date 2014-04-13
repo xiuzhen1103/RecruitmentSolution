@@ -90,6 +90,7 @@
 			<result name="preUpdate">/updateInterviewRecord.jsp</result>
 			<result name="listSend">/listInterviewRecord.jsp</result>
 			<result name="listMySend">/listMyInterviewRecord.jsp</result>
+			<result name="success" type="redirectAction">ir!listSend</result>
 		</action>
 
 		<action name="searchEmp" class="emp" method="loadById">

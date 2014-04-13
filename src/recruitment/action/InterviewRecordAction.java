@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 
 import recruitment.model.Employer;
 import recruitment.model.InterviewRecord;
+import recruitment.model.Job;
 import recruitment.model.JobSeeker;
 import recruitment.service.InterviewRecordManager;
+import recruitment.service.JobManager;
 import recruitment.service.JobSeekerManager;
 import util.mail.MailSenderInfo;
 import util.mail.SimpleMailSender;
@@ -24,33 +26,50 @@ import com.opensymphony.xwork2.ModelDriven;
 @Component("ir")
 @Scope("prototype")
 public class InterviewRecordAction extends ActionSupport implements ModelDriven<InterviewRecord> {
-	  private InterviewRecordManager irManager;
-    private static final long serialVersionUID = -6866693134281209692L;
-    private JobSeekerManager jsm;
-    private InterviewRecord ir = new InterviewRecord();
-    private List<InterviewRecord> irs = new ArrayList<InterviewRecord>();
-
-    public String toUpdate() {
-        ir = irManager.loadById(ir.getInterviewId());
-        return "toUpdate";
-    }
+    private static final long      serialVersionUID = -6866693134281209692L;
+    private InterviewRecordManager irManager;
+    private JobSeekerManager       jsm;
+    private JobManager             jm;
+    private InterviewRecord        ir               = new InterviewRecord();
+    private List<InterviewRecord>  irs              = new ArrayList<InterviewRecord>();
+    private String                 tips;
 
     public String preSend() {
         return "preSend";
     }
 
     public String send() throws DataAccessException, Exception {
+        if (isAlreadySend()) {
+            tips = "you had already send!";
+            return "preSend";
+        }
+
         ir.setEm(this.getEmployerFromSession());
         ir.setStatus(1);
-        
+
         irManager.addIR(ir);
-        
-        this.sendEmailToJobSeeker(irManager.loadById(ir.getInterviewId()));
-        
+
+        // number of position -1
+        Job job = jm.loadById(ir.getJob());
+        if (job.getNumPosition() > 0) {
+            job.setNumPosition(job.getNumPosition() - 1);
+            jm.update(job);
+        }
+
+        String subject = "[Interview Letter]Welcome to join our company";
+        String content = "I'm very glad to invite you attend our company interview at " + ir.getInterviewTime()
+                + ", my phone is " + ir.getPhone() + "\n Best Regards \n"   + ir.getEm().getCompanyName();
+        this.sendEmailToJobSeeker(irManager.loadById(ir.getInterviewId()), subject, content);
+
         return "send";
     }
 
-    private void sendEmailToJobSeeker(InterviewRecord ir) throws Exception {
+    private boolean isAlreadySend() {
+        return null != irManager.loadByJobAndJsAndEmp(ir.getJob().getJobId(), ir.getJs().getJsId(), this
+                .getEmployerFromSession().getEmpId());
+    }
+
+    private void sendEmailToJobSeeker(InterviewRecord ir, String subject, String content) throws Exception {
         MailSenderInfo mailInfo = new MailSenderInfo();
         mailInfo.setMailServerHost("smtp.qq.com");
         mailInfo.setMailServerPort("25");
@@ -59,15 +78,13 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
         mailInfo.setUserName("27248466");
         mailInfo.setFromAddress("27248466@qq.com");
         mailInfo.setPassword("zhen1606...");
-        
-       Integer jsId = ir.getJs().getJsId();
+
+        Integer jsId = ir.getJs().getJsId();
         JobSeeker js = jsm.loadByJsId(jsId);
-        System.out.println(js.getEmail());
         mailInfo.setToAddress(js.getEmail());
-        mailInfo.setSubject("[Interview Letter]Welcome to join our company");
-        mailInfo.setContent("I'm very glad to invite you attend our company interview at " + ir.getInterviewTime()
-                + ", my phone is " + ir.getPhone() + "\n Best Regards \n"   + ir.getEm().getCompanyName() );
-        
+        mailInfo.setSubject(subject);
+        mailInfo.setContent(content);
+
         SimpleMailSender sms = new SimpleMailSender();
 
         sms.sendTextMail(mailInfo);
@@ -90,17 +107,27 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
         return "preUpdate";
     }
 
-    public String update() {
+    public String update() throws Exception {
         int status = ir.getStatus();
         ir = irManager.loadById(ir.getInterviewId());
         if (status == 0 || status == 1) {
             ir.getJs().setStatus(0);
+            String subject = "Interview";
+            String content = "We have completed our interviews at this stage and I am afraid you have not been successful.Thank you for coming in to see us and I wish you the best in your job hunting. \n Best Regards \n"   + ir.getEm().getCompanyName();
+            this.sendEmailToJobSeeker(irManager.loadById(ir.getInterviewId()), subject, content);
+            
         } else if (status == 2) {
+        	 if(ir.getJob().getNumPosition() != 0) {
             ir.getJs().setStatus(1);
+            ir.getJob().setNumPosition(ir.getJob().getNumPosition()-1);
+            String subject = "[Offer Letter]Welcome to join our company";
+            String content = "I'm very glad to tell you, you have be one of our company.\n Best Regards \n"   + ir.getEm().getCompanyName();
+            this.sendEmailToJobSeeker(irManager.loadById(ir.getInterviewId()), subject, content);
+         }
         }
         ir.setStatus(status);
         irManager.update(ir);
-        return "preUpdate";
+        return "success";
     }
 
     private Employer getEmployerFromSession() {
@@ -141,16 +168,26 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
         this.irs = irs;
     }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public JobSeekerManager getJsm() {
+        return jsm;
+    }
 
-	public JobSeekerManager getJsm() {
-		return jsm;
-	}
-	@Resource(name="userManager")
-	public void setJsm(JobSeekerManager jsm) {
-		this.jsm = jsm;
-	}
+    @Resource(name = "userManager")
+    public void setJsm(JobSeekerManager jsm) {
+        this.jsm = jsm;
+    }
+
+    @Resource(name = "jobManager")
+    public void setJm(JobManager jm) {
+        this.jm = jm;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
 
 }

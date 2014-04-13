@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <span class="style1">Skill:</span>
                                 </td>
                                 <td>
-                                    <s:iterator value="#ir.job.jobSkills" var="js" status="st">
+                                    <s:iterator value="ir.job.jobSkills" var="js" status="st">
                                         ${js.skill.name}<s:if test="!#st.last">,</s:if>
                                     </s:iterator>
                                 </td>

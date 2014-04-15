@@ -12,45 +12,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <title>Display all jobSeeker</title>
     <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+    <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
   </head>
  
   <body>
   <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
-<a href="admin!logout.action">Logout</a>
+<a href="admin!logout">Logout</a>
 </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="userManager/admin.jsp">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
-</div>
-</div>
-    <b>Display all JobSeeker:<b/>  
- <br> <br />
- 
-   <s:form method="post" action="/userManager/js!list.action">  
+	<div class="banner" >
 
-  	 	<s:textfield label="Please enter jobseeker user name" name="js.username"></s:textfield>
-  	 	<s:textfield label="Please enter jobseeker email" name="js.email"></s:textfield>
-  	  	<s:submit label="submit"/>	
-   </s:form>
- 	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
+</div>
+
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+     <ol class="breadcrumb" >
+  <li><a href="userManager/admin.jsp">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report">Statistic</a></li>
+    <li><a href="#">About Us</a></li>
+</ol>
+</div>
+  </div>
+  </div>
+    <h3><span class="label label-info">Display All JobSeeker:</span></h3>   
+ 
+   <form method="post" action="js!listJsForAdmin.action" class="formstyle" style="padding: 5px 3px;">  
+
+		Please Enter Email: <input type="text" name="js.email"/>
+		Please Enter User Name: <input type="text" name="js.username"/>
+  	
+  	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+   </form>
+ 	 <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
  	 	 <tr>
-		      <td width="10%" height="37" align="center"><b>user name</B></td>
-              <td width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td width="20%" height="37" align="center"><b>email</b></td>
-		      <td width="15%" height="37" align="center"><b>phone</b></td>
-		      <td width="15%" height="37" align="center"><b>expected salary</b></td>
-              <td width="10%" height="37" align="center"><b>Employed</b></td>
-		      <td width="5%" height="37" align="center"><b>update</b></td>
-		      <td width="5%" height="37" align="center"><b>delete</b></td>
+		      <td class="info" width="10%" height="37" align="center"><b>User name</B></td>
+              <td class="info" width="15%" height="37" align="center"><b>Skill</b></td>
+		      <td class="info" width="10%" height="37" align="center"><b>Email</b></td>
+		      <td class="info" width="10%" height="37" align="center"><b>Phone</b></td>
+		      <td class="info" width="15%" height="37" align="center"><b>Expected salary</b></td>
+              <td class="info" width="5%" height="37" align="center"><b>Employed</b><a href="js!sortJs?sort=status"><img src="images/sort.png"  height="20" width="15" alt="sort by status" title="sort by status"></a></td>
+		      <td class="info" width="5%" height="37" align="center"><b>Delete</b></td>
           </tr>
       
           <s:iterator value="jobseekers" id="seekers">
@@ -65,17 +72,16 @@ Hello <s:property value="#session.admin.username"/><br/>
 	          <td align="center"><s:property value="#seekers.phone"/></td>
 	          <td align="center"><s:property value="#seekers.expectedSalary"/></td>
               <td align="center">
-                <s:if test="#seekers.status == 0">No</s:if>
-                <s:else>Yes</s:else>
+                <s:if test="#seekers.status == 0">No</s:if>  <s:else>Yes</s:else>
               </td>
-	           <td><a href="js!load?js.jsId=<s:property value="#seekers.jsId" />">update</a></td>
-    	 	  <td><a href="js!delete?js.jsId=<s:property value="#seekers.jsId" />">delete</a></td>
+
+    	 	  <td><a href="js!delete?js.jsId=<s:property value="#seekers.jsId" />"><img src="images/delete.png" title="delete" alt="delete" height="25" width="20" ></a></td>
 
         </tr>
          </s:iterator>
         
     </table>
-    
-    <s:debug></s:debug>
+    <div align="right"><a href="javascript:scroll(0,0)">Back To Top</a></div>
+
   </body>
 </html>

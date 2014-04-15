@@ -10,6 +10,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
   <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
   <script type="text/javascript" src="<%=basePath%>js/jsValidation.js"></script>
+   <base href="<%=basePath%>">
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
     <title>Update Employer Password</title>
     </head>
   <body>
@@ -17,27 +21,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Hello <s:property value="#session.jobSeeker.username"/><br/>
 <a href="js!get?jsId=<s:property value="#session.jobSeeker.jsId"/> ">Profile</a> 
 <a href="js!logout.action">Logout</a>
-</p> 
-<div align="center" id="header">
-<h1><i>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!logged.action">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
+</p>
+<div class="banner">
+</div> 
+<div align="center">
 
-    </ul>
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!logged.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
+  </div>
 </div>
-
-<br/><br/>
    <div id="reg">
-  <b>Update Password:</b> <br />
-    <form method="post" action="updateJsPassword" onsubmit="return validateForm();" id="form1" >
+
+    <form method="post" action="updateJsPassword" onsubmit="return validateForm();" >
     	<input type="hidden" name="js.jsId" value="<s:property value='#session.jobSeeker.jsId'/>">
-    	<table width="300" height="163" border="0" align="left" cellpadding="0" cellspacing="0">
+    	  <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
     	<tr>
-          <th colspan="2">Update Password</th>  <br />
+          <th class="info" colspan="2">Update Password</th>
         </tr>
          <tr>
           <td><span class="style1">Current Password:</span></td>
@@ -58,8 +64,10 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
  <tfoot>
        <tr>
           <td colspan="2">
-          <input name="back" type="button"  onclick="history.back()" value="Back" ></li>
-          <input name="submit" type="submit" value="Submit"></li>      
+   			<div align="center">
+         <input name="reset" type="button" class="btn btn-sm btn-default" value="Reset" >
+				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
+            </div> 
           </td>
         </tr>
         </tfoot>

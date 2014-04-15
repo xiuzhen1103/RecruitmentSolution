@@ -1,5 +1,5 @@
     package util.mail;  
-    import java.util.Properties;   
+    import java.util.Properties;
     public class MailSenderInfo {   
         private String mailServerHost;   
         private String mailServerPort = "25";   

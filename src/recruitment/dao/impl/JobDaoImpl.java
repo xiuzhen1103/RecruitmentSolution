@@ -1,8 +1,9 @@
 package recruitment.dao.impl;
 
-import java.awt.print.Book;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -33,6 +34,7 @@ import recruitment.model.Skill;
 @Component("jobDao")
 public class JobDaoImpl implements JobDao {
 	private HibernateTemplate hibernateTemplate; 
+	private Date currentTime = new Date();
 
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
@@ -60,6 +62,12 @@ public class JobDaoImpl implements JobDao {
 		}
 		return false;
 	}
+	
+	public List<Job> getJobsByDate(Job job) throws DataAccessException {
+		
+		return null;
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -67,7 +75,7 @@ public class JobDaoImpl implements JobDao {
 		StringBuffer hql = new StringBuffer();
 		Map<String,Object> map = new HashMap<String,Object>();
 
-		hql.append(" from Job j ");
+		hql.append("select distinct j from Job j ");
 
 		if (null != job.getCheckboxes() && job.getCheckboxes().length > 0) {
 			hql.append(" join fetch j.jobSkills as jss where 1 = 1 and j.numPosition > 0 and jss.skill.skillId in (:skillIds)");
@@ -107,9 +115,17 @@ public class JobDaoImpl implements JobDao {
 			hql.append(" and j.districtId.areaId = :districtId" );
 			map.put("districtId",+ job.getDistrictId().getAreaId());
 		}
-		if (null != job.getCheckboxes() && job.getCheckboxes().length > 0) {
-			hql.append(" group by j.jobId");
+	/*	
+		if(null!= job &&null!=job.getCreateTime()&&!"".equals(job.getCreateTime())) {
+			Date now = new Date();
+			//hql.append(" and j.createTime < :createTime ");
+			hql.append(" and j.createTime between :datenow and :createTime ");
+			map.put("createTime", job.getCreateTime()); 
+		map.put("datenow",now);
 		}
+		*/
+
+		
 		Query query  = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (null != map && map.size() >= 1) {
 			Iterator<String> it = map.keySet().iterator();
@@ -196,7 +212,7 @@ public class JobDaoImpl implements JobDao {
 	public void save(Job job) throws DataAccessException {
 		Integer[] checkboxList = job.getCheckboxes();
 		Set<JobSkill> jobkills = new HashSet<JobSkill>(0);
-
+		//job.setCreateTime(new Date());
 		for(int i=0; i < checkboxList.length;i++) {
 			JobSkill  jobSkill= new JobSkill();
 			Skill skill =  (Skill) this.hibernateTemplate.load(Skill.class, checkboxList[i]);
@@ -204,20 +220,20 @@ public class JobDaoImpl implements JobDao {
 			jobSkill.setJob(job);
 			jobkills.add(jobSkill);	
 		}
+		
 		job.setJobSkills(jobkills);
 		hibernateTemplate.save(job);
 		//this.hibernateTemplate.flush();
 	}
 
 	@Override
-	public boolean updateJob(Integer jobId, String jobDesc, String startDate,
+	public boolean updateJob(Integer jobId, String jobDesc,
 			String address, String phone, Integer numPosition, String requirement,
 			Integer salary, Employer employer, Area countryId, Area countyId, Area districtId
 		) throws DataAccessException {
 		Job job = (Job) this.hibernateTemplate.load(Job.class,jobId);
 		if(job!=null) {
 			job.setJobDesc(jobDesc);
-			job.setStartDate(startDate);
 			job.setAddress(address);
 			job.setPhone(phone);
 			job.setNumPosition(numPosition);
@@ -276,7 +292,17 @@ public class JobDaoImpl implements JobDao {
 		System.out.println(ids.toString());
 		
 		return (List<CV>) hibernateTemplate.find("from CV cv where cv.cvId in(" + ids + ")");
-		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Job> sortJobByParamAsc(String sort) throws DataAccessException {
+		return (List<Job>) this.hibernateTemplate.find("From Job j order by j."+ sort + " asc");
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Job> sortJobByParamDesc(String sort) throws DataAccessException {
+		return (List<Job>) this.hibernateTemplate.find("From Job j order by j."+ sort + " desc");
 	}
 	
 

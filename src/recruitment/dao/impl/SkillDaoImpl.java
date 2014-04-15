@@ -15,6 +15,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+
 import recruitment.dao.SkillDao;
 import recruitment.model.Skill;
 import recruitment.model.SkillCategory;
@@ -82,6 +83,7 @@ public class SkillDaoImpl implements SkillDao{
 			hql.append(" and LOWER(s.name) like LOWER(:name) ");
 			map.put("name","%"+ skill.getName()+"%");
 		}
+		hql.append(" Order by s.name asc ");
 		Query query  = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (null != map && map.size() >= 1) {
 			Iterator<String> it = map.keySet().iterator();

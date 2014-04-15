@@ -10,6 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <link href="<%=basePath%>style/login.css"  type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
 <title> Employer Login Page </title>
 </head>
 <body>
@@ -20,19 +23,25 @@ or
 <a href="addEmp.jsp">Employer Register</a> 
 <a href="js!registerJs.action">Jobseeker Register</a>
 </p> 
-<div align="center" id="header">
-<h1><i>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!first.action">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-
-    </ul>
-</div>
-<br/><br/>
+<div class="banner" >
 
 </div>
+
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!first.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report">Statistic</a></li>
+    <li><a href="aboutUs.jsp">About Us</a></li>
+</ol>
+</div>
+  </div>
+</div>	
+
+<div id="reg">
 <div id="opi" class="page-wrapper clearfix">
 <div class="full-page-holder">
 <div class="full-page">
@@ -46,13 +55,13 @@ or
 		  <h2>Employer Login</h2>
 		  <p class="clearfix">
 		<label for="email">Email:</label>
-		<input type="text" name="emp.email" tabindex="1" value="b@gmail.com" id="email" class="input-text">
+		<input type="text" name="emp.email" tabindex="1"  id="email" class="input-text" placeholder="Plase enter your email">
 		</p><p class="clearfix">
 		<label for="password">Password:</label>
-		<input type="password" id="password" name="emp.password" value="b" class="input-text" tabindex="2" />
+		<input type="password" id="password" name="emp.password"  class="input-text" placeholder="Plase enter your password" tabindex="2" />
 </p>
 <p class="right">
-<label for="autoLogin"><input type="checkbox" name="autoLogin" id="autoLogin" value="true" tabindex="4" class="input-checkbox" />Remember Password</label>
+
 </p>
 <p class="right">
 
@@ -64,6 +73,7 @@ or
 <div class="separator"></div>
 <p class="no-account">Haven't Register,Yet? <a href="addEmp.jsp" class="reg-now">Register</a></p>
 </form>
+</div>
 </div>
 </div>
 </div>

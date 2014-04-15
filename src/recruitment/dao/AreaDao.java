@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import recruitment.model.Area;
-import recruitment.model.JobSeeker;
 
 public interface AreaDao {
 	public Area loadByAreaId(Integer areaId) throws DataAccessException;

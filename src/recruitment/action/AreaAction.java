@@ -1,8 +1,11 @@
 package recruitment.action;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import recruitment.model.Area;
 import recruitment.service.AreaManager;
 

@@ -1,9 +1,12 @@
 package recruitment.action;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import recruitment.model.Employer;
 import recruitment.service.EmployerManager;
 import util.mail.MailSenderInfo;

@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import recruitment.model.JobSeeker;
-import recruitment.service.JobSeekerManager;
 import recruitment.service.impl.JobSeekerManagerImpl;
 
 

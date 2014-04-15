@@ -10,16 +10,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>Add jobSeeker Skill</title>
+    <title>Add JobSeeker Skill</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-  <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+
+    <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+    <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
    <meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -69,8 +70,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <b> Add Skill </b>
-    <form method="post" action="jsSkill.action">
+  <p align="right">
+Hello <s:property value="#session.jobSeeker.username"/><br/>
+<a href="js!get?jsId=<s:property value="#session.jobSeeker.jsId"/> ">Profile</a> 
+<a href="js!logout.action">Logout</a>
+</p>
+<div class="banner">
+</div> 
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!logged.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
+</div>
+  </div>
+</div>
+ <div id="reg">
+  <h3><span class="label label-info">Add Skills:</span></h3>  
+    <form method="post" action="jsSkill.action" id="form1">
 
     	 <span class="style1" >Job Category:</span>
 			<select onchange="getSubSkillCategory(this.value);" style="display: block;">
@@ -98,5 +120,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	<input type="submit" value="submit"/>
     </form>
+    </div>
   </body>
 </html>

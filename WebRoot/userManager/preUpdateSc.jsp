@@ -9,42 +9,78 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
 
+   <base href="<%=basePath%>">
     <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-    <title> Update Skill Category</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+    <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
   </head>
   
   <body>
-  <p align="right">
+   <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
-<a href="admin!logout.action">Logout</a>
+<a href="admin!logout">Logout</a>
 </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="admin.jsp">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
+	<div class="banner" >
+
+</div>
+
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="userManager/admin.jsp">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
 </div>
+</div>
+ 
+
+   <div id="reg">
+
+  <form method="post" action="updateSc" class="formstyle" >
+
+    	<table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
+        <tr>
+          <th colspan="2" class="info"><h3>Update Skill Category:</h3></th>
+        </tr>
+         <tr>
+          <td><span class="style1">Name:</span></td>
+          <td><input name="skillCategory.name" type="text"  class="formstyle"  value="<s:property value='skillCategory.name'/>">
+          <font color="#F9481C">*</font></td>
+        </tr>
+
+        <tr>
+          <td><span class="style1">Level:</span></td>
+          <td>
+          <input name="skillCategory.level" type="text" value="<s:property value='skillCategory.level'/>">
+          <font color="#F9481C">*</font></td>
+        </tr>
+        
+         <tr>
+          <td><span class="style1">Parent Id:</span></td>
+          <td><input name="skillCategory.parentSkillCategory.skillCategoryId" type="text"  class="formstyle" value="<s:property value='skillCategory.parentSkillCategory.skillCategoryId'/>">
+          <font color="#F9481C">*</font></td>
+        </tr>
+     <tfoot>
   
-  <b>Update Skill Category</b> <br>
-  <form method="post" action="updateSc">
-    	Skill categoryIdy Id:<input type="text" name="skillCategory.skillCategoryId" value="<s:property value='skillCategory.skillCategoryId'/>" readonly><br>
-    	Name:<input type="text" name="skillCategory.name" value="<s:property value='skillCategory.name'/>"><br>
-    	Level:<input type="text" name="skillCategory.level" value="<s:property value='skillCategory.level'/>"><br>
-    	Parent Id:<input type="text" name="skillCategory.parentSkillCategory.skillCategoryId" value="<s:property value='skillCategory.parentSkillCategory.skillCategoryId'/>"><br>
-    	<input name="back" type="button"  onclick="history.back()" value="Back" >
-    	<input type="submit" value="submit"/>
-    </form>
+       <tr>
+        <td colspan="2">
+   			<div align="center">
+         <input name="back" type="button" class="btn btn-sm btn-default"  onclick="history.back()" value="Back" >
+				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
+            </div> 
+          </td>
+        </tr>
+  
+   </tfoot>
+   </table>
+	</form>
+</div>
   </body>
 </html>

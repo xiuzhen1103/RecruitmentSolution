@@ -1,16 +1,14 @@
 package recruitment.service.impl;
 
-import java.sql.Blob;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import recruitment.dao.CVDao;
 import recruitment.model.CV;
-import recruitment.model.Job;
-import recruitment.model.JobSeeker;
 import recruitment.service.CVManager;
 @Component("cvManager")
 public class CVManagerImpl implements CVManager {
@@ -40,12 +38,16 @@ public class CVManagerImpl implements CVManager {
 				cv.getCoverLetter(), cv.getJobSeeker());
 	}
 	@Override
-	public List<CV> getCVByJsId(CV cv) throws Exception {
-		return cvDao.getCVbyJsId(cv);
+	public List<CV> getCVByJsId() throws Exception {
+		return cvDao.getCVbyJsId();
 	}
 	@Override
 	public CV loadByCVId(Integer cvId) throws Exception {
 		return cvDao.loadByCVId(cvId);
+	}
+	@Override
+	public List<CV> getOneCVDetail(Integer jsId) throws DataAccessException {
+		return cvDao.getOneCVDetail(jsId);
 	}
 
 }

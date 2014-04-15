@@ -18,6 +18,7 @@ import recruitment.service.SkillManager;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+
 @Component("jsskill")
 @Scope("prototype")
 public class JobSeekerSkillAction extends ActionSupport implements ModelDriven{

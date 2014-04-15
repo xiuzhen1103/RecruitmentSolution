@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import recruitment.model.Skill;
 import recruitment.model.SkillCategory;
-import recruitment.service.SkillCategoryManager;
 import recruitment.service.SkillManager;
 
 import com.opensymphony.xwork2.ActionSupport;

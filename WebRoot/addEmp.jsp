@@ -8,7 +8,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-  <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
   <meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -18,38 +17,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </style>
 		<script type="text/javascript" src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 	    <script type="text/javascript" src="<%=basePath%>js/jsValidation.js"></script>
-	
+	    <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+	<link href="<%=basePath%>style/style.css" type="text/css" rel="StyleSheet" />	
   </head>
   <body>
   
-  <p align="right">
-  <a href="loginEmp.jsp">Employer Login</a> 
-  <a href="loginJs.jsp">Jobseeker Login</a> 
-  or
-  <a href="addEmp.jsp">Employer Register</a> 
-  <a href="js!registerJs.action">Jobseeker Register</a>
+<p align="right">
+<a href="loginEmp.jsp">Employer Login</a> 
+<a href="loginJs.jsp">Jobseeker Login</a> 
+or
+<a href="addEmp.jsp">Employer Register</a> 
+<a href="js!registerJs.action">Jobseeker Register</a>
 </p> 
-<div align="center" id="header">
-<h1><i>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!first.action">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
+<div class="banner" ></div>
 
-    </ul>
+<div align="center">
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!first.action">Home</a></li>
+  <li class="active">News</li>
+ <li><a href="report" target="_blank" >Statistic</a></li>
+<li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
-<br/><br/>
-</div>
+  </div>
+</div>	
   <div id="reg">
   <div id="displayTip" class="displayNone"></div>  
     <form name="register" method="post" action="emp.action" id="form2" onsubmit="return emp_validateForm();">
-     <table width="500" height="463" border="0" align="left" cellpadding="0" cellspacing="0">
-        <tr><br/><br/>
-          <th colspan="2">Employer Register</th>
+     <div class="panel panel-primary">
+		<div class="panel-heading">
+          <h3 class="panel-title">Employer Register</h3>
+          </div>
+    		 <div class="panel-body">
+     <table width="500" height="403" >
+        <tr>
         </tr>
          <tr>
-          <td><span class="style1">Username:</span></td>
+          <td><span>Username:</span></td>
           <td><input name="emp.username" type="text" id="emp_username" class="formstyle">
           <font color="#F9481C">*</font>
           <font color="#F9481C" id="emp_username_hint"></font>
@@ -82,8 +90,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <tr>
 
          <td><span class="style1">Contact Name:</span></td>
-          <td><input name="emp.contactName" type="text" id="contactName" class="formstyle">
-   		  <font color="#F9481C">*</font></td>
+          <td><input name="emp.contactName" type="text" id="name" class="formstyle">
+   		  <font color="#F9481C" id="name_hint">*</font></td>
         </tr>
         <tr>
 
@@ -100,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
          <td><span class="style1">WebSite:</span></td>
           <td><input name="emp.webSite" type="text" id="webSite" class="formstyle">
-   		  <font color="#F9481C">*</font></td>
+   		  </td>
         </tr>
         <tr>
          <td><span class="style1">Company Size:</span></td>
@@ -116,15 +124,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tfoot>
         <tr>
           <td colspan="2">
-              <input name="submit" type="submit" value="Submit"></li>
-              <input name="reset" type="reset" value="Reset" ></li>
+    <div align="center">
+         <input name="back" type="reset" class="btn btn-sm btn-default" value="Reset">
+				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
+             </div>
           </td>
         </tr>
         </tfoot>
           </table>
+          </div>
+	</div>
 </form>
 </div>
 
 
   </body>
+  
 </html>

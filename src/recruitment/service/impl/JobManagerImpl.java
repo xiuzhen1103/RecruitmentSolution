@@ -51,7 +51,7 @@ public class JobManagerImpl implements JobManager {
 
 	@Override
 	public boolean update(Job job) throws Exception {
-		return jobDao.updateJob(job.getJobId(), job.getJobDesc(), job.getStartDate(), job.getAddress(),
+		return jobDao.updateJob(job.getJobId(), job.getJobDesc(), job.getAddress(),
 				job.getPhone(), job.getNumPosition(),
 				job.getRequirement(), job.getSalary(), job.getEmployer(), job.getCountryId(),
 				job.getCountyId(),job.getDistrictId());
@@ -77,6 +77,18 @@ public class JobManagerImpl implements JobManager {
 	public List<CV> listCVByJsId(Job job, JobSeeker js) throws Exception {
 		return jobDao.listCVByJsId(job.getJobId(), js.getJsId());
 	}
+
+	@Override
+	public List<Job> sortJobByAsc(String sort) throws Exception {
+		return jobDao.sortJobByParamAsc(sort);
+	}
+
+	@Override
+	public List<Job> sortJobByDesc(String sort) throws Exception {
+		return jobDao.sortJobByParamDesc(sort);
+	}
+
+
 
 	
 

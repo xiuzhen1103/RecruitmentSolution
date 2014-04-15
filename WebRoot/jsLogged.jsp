@@ -8,9 +8,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>Welcome</title>
  <base href="<%=basePath%>">
 <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-<title>Welcome</title>
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+
 <link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
@@ -20,25 +24,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 <p align="right">
-Hello <s:property value="#session.jobSeeker.username"/><br/>
+Hello <s:property value="#session.jobSeeker.username"/>
+<img src=<s:property value="#session.jobSeeker.image"/> title="profile_image" alt="profile_image" height="30" width="30" >
 <a href="js!get?jsId=<s:property value="#session.jobSeeker.jsId"/> ">Profile</a> 
 <a href="js!logout.action">Logout</a>
 </p> 
-<div align="center" id="header">
-<h1><i>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!logged.action">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
 
-    </ul>
+<div class="banner" >
+
 </div>
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!logged.action">Home</a></li>
+  <li class="active" >News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
+  </div>
+</div>
+<h3><span class="label label-info">Display All Jobs:</span></h3>
 
-    <h2>Display All Jobs:</h2>
 
- <form method="post" action="job!logged.action">  
+ <form method="post" action="job!logged.action" class="formstyle" style="padding: 5px 3px;">  
 &nbsp;Country:
 <select id="areaId" name="job.countryId.areaId" onchange="getCountry(this);" style="width:180px">
 <option></option>
@@ -64,8 +76,9 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
  </form>
   			
   			<br />
- 	 <table style="width:100%;margin-top: 8px;" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
- 	 	 <tr>
+ 	 <table class="table table-responsive table-striped table-bordered info" width="400" height="263" border="0" align="left"
+							cellpadding="10" cellspacing="10"  >
+ 	 	 <tr class="info">
 		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
 		      <td width="20%" height="37" align="center"><b>Requirement</b></td>
 		      <td width="10%" height="37" align="center"><b>Category</b></td>
@@ -74,7 +87,7 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
 		      <td width="5%" height="37" align="center"><b>Salary</b></td>
 		      <td width="5%" height="37" align="center"><b>Number of Position</b></td>
 		      <td width="5%" height="37" align="center"><b>Employer</b></td>
-		      <td width="15%" height="37" align="center"><b>Start Date</b></td>
+		      <td width="15%" height="37" align="center"><b>Create Time</b></td>
           </tr>
  	
           <tr bgcolor="#ddd"><td colspan="9"><b>Best Match</b></td></tr>
@@ -97,7 +110,7 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
         	  <td align="center" ><s:property value="#j.salary" /></td>
         	  <td align="center" ><s:property value="#j.numPosition" /></td>
         	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
-    		  <td align="center" ><s:property value="#j.startDate" /></td>
+    		  <td align="center" ><s:property value="#j.createTime" /></td>
           </tr>
           </s:if>
           </s:iterator>
@@ -122,7 +135,7 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
         	  <td align="center" ><s:property value="#j.salary" /></td>
         	  <td align="center" ><s:property value="#j.numPosition" /></td>
         	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
-    		  <td align="center" ><s:property value="#j.startDate" /></td>
+    		  <td align="center" ><s:property value="#j.createTime" /></td>
           </tr>
           </s:if>
           </s:iterator>

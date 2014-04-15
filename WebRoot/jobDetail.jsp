@@ -4,7 +4,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -23,27 +22,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </style>
 	</head>
 
-	<body>
-		<div align="center" id="header">
-			<h1>
-				<i>Recruitment Solution</i>
-			</h1>
-			<div class="menu_20124162">
-				<ul>
-					<li>
-						<a href="javascript:history.back()">Back</a>
-					</li>
-					<li>
-						<a href="">About Us</a>
-					</li>
-					<li>
-						<a href="">Contact Us</a>
-					</li>
 
-				</ul>
-			</div>
-		</div>
-		<br />
+	<body>
+	<div class="banner">
+</div>
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="javascript:history.back()">Back</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank" >Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
+</div>
+  </div>
+</div>	
+	
 		<div id="reg">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -69,14 +65,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</td>
 								<td>
 									${j.jobDesc}
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span class="style1">Start Date:</span>
-								</td>
-								<td>
-                                ${j.startDate }
 								</td>
 							</tr>
 							<tr>
@@ -125,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<span class="style1">Area:</span>
 								</td>
 								<td>
-                                ${j.countyId.areaName},${j.countyId.areaName},${j.districtId.areaName}
+                                 ${j.districtId.areaName},${j.countyId.areaName},${j.countryId.areaName}
 								</td>
 							</tr>
 		<tr>
@@ -158,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </s:if>
                     <s:elseif test="#session.jobSeeker.jsId != null">
                         <s:if test="!#j.isApplied">
-						  <a href="apply!selectCV?job.jobId=${j.jobId}" class="btn btn-sm btn-primary" role="button">Apply</a>
+						  <a href="apply!selectCV?jobId=${j.jobId}" class="btn btn-sm btn-primary" role="button">Apply</a>
                         </s:if>
                         <s:else><button disabled="disabled" class="btn btn-sm btn-primary">Apply</button></s:else>
 						&nbsp;&nbsp;

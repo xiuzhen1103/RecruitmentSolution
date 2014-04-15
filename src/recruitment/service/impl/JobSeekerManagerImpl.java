@@ -7,10 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import recruitment.dao.JobSeekerDao;
-import recruitment.model.Employer;
 import recruitment.model.Job;
 import recruitment.model.JobSeeker;
-import recruitment.model.JobSeekerSkill;
 import recruitment.service.JobSeekerManager;
 
 
@@ -90,11 +88,39 @@ public class JobSeekerManagerImpl implements JobSeekerManager {
 	@Override
 	public JobSeeker loadByJsId(JobSeeker js) throws Exception {
 		return jobSeekerDao.loadByJsId(js.getJsId());
-	}	
+	}
 
+    @Override
+    public Long countJobSeekerHasJob() {
+        return countJobSeekerIsHasJob(true);
+    }
 
+    @Override
+    public Long countJobSeekerDonotHasJob() {
+        return countJobSeekerIsHasJob(false);
+    }
+    
+    private Long countJobSeekerIsHasJob(boolean isHasJob) {
+        return jobSeekerDao.countJobSeekerIsHasJob(isHasJob);
+    }
 
+	@Override
+	public List<JobSeeker> getJobSeekersForAdmin(JobSeeker js) throws Exception {
+		return jobSeekerDao.getJobSeekersForAdmin(js);
+	}
 
+	@Override
+	public List<JobSeeker> sortJsByParamAsc(String sort) throws Exception {
+		return jobSeekerDao.sortJsByParamAsc(sort);
+	}
 
+	@Override
+	public List<JobSeeker> sortJsByParamDesc(String sort) throws Exception {
+		return jobSeekerDao.sortJsByParamDesc(sort);
+	}
+	
+	
+    
+    
 
 }

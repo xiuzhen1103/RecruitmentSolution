@@ -2,10 +2,7 @@ package recruitment.service;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
 import recruitment.model.Employer;
-import recruitment.model.JobSeeker;
 
 public interface EmployerManager {
 public abstract boolean checkEmpUsernameExists(Employer emp) throws Exception;

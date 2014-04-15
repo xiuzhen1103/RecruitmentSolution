@@ -10,13 +10,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 
   <head>
-    <base href="<%=basePath%>">
-    <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+<base href="<%=basePath%>">
+<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
     <title>Display all Jobs</title>
-    
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+
   </head>
  
   <body>
@@ -26,28 +26,26 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
 <a href="js!get?jsId=<s:property value="#session.jobSeeker.jsId"/> ">Profile</a> 
 <a href="js!logout.action">Logout</a>
 </p> 
-<div align="center" id="header">
-<h1><i>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!logged.action">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
+<div class="banner">
+</div> 
+<div align="center">
 
-    </ul>
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!logged.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
+  </div>
 </div>
-<br/><br/>
 
-    <b>Display My Interview Records:</b>  
- <br> <br />
-    <s:form method="post" action="ir!listMySend.action">
-  		<s:textfield label="Please Enter Job Title" name="ir.job.title"></s:textfield>
-  		<s:submit label="submit"/>
-  	</s:form>
+<h3><span class="label label-info">Display My Interview Records:</span></h3>   
 
- 	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
- 	 	 <tr>
+ 	 <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
+ 	 	 <tr class="info">
 		      <td width="5%" height="37" align="center"><b>IR Id</b></td>
 		      <td width="20%" height="37" align="center"><b>Job Title</b></td>
 		      <td width="10%" height="37" align="center"><b>Interviewee Phone</b></td>

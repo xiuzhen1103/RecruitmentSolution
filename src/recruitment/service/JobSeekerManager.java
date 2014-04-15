@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import recruitment.model.Employer;
 import recruitment.model.Job;
 import recruitment.model.JobSeeker;
-import recruitment.model.JobSeekerSkill;
 
 
 public interface JobSeekerManager {
@@ -38,5 +36,13 @@ public interface JobSeekerManager {
 	
 	//public List<JobSeeker> getJobsByCategory(JobSeeker js) throws Exception;
 	
+	Long countJobSeekerHasJob();
+
+	Long countJobSeekerDonotHasJob();
+	
+	public List<JobSeeker> getJobSeekersForAdmin(JobSeeker js) throws Exception;
+	
+	public List<JobSeeker> sortJsByParamAsc(String sort) throws Exception;
+	public List<JobSeeker> sortJsByParamDesc(String sort) throws Exception;
 
 }

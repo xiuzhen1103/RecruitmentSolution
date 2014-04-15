@@ -1,6 +1,5 @@
 package util.mail;
 
-import java.util.ResourceBundle;
 
 public class SendMailUtil {
 

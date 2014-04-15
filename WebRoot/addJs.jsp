@@ -17,9 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             .bred{border: 1px solid red;}
             .bgreen{border: 1px solid green;}
         </style>
+        <link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+		<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
 		<script type="text/javascript" src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 	    <script type="text/javascript" src="<%=basePath%>js/jsValidation.js"></script>
+	    
 		<script type="text/javascript">
+		
 
 		function getSubSkillCategory(skillCategoryId) {
 				if (skillCategoryId == "")
@@ -60,31 +64,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <p align="right">
+
+<p align="right">
 <a href="loginEmp.jsp">Employer Login</a> 
 <a href="loginJs.jsp">Jobseeker Login</a> 
 or
 <a href="addEmp.jsp">Employer Register</a> 
 <a href="js!registerJs.action">Jobseeker Register</a>
 </p> 
-<div align="center" id="header">
-<h1><i></>Recruitment Solution</i></h1>
-<div class="menu_20124162">
-	<ul>
-    	<li><a href="job!first.action">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
+<div class="banner" >
 
-    </ul>
 </div>
-<br/><br/>
+
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="job!first.action">Home</a></li>
+  <li class="active">News</li>
+ <li><a href="report" target="_blank" >Statistic</a></li>
+<li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
+</div>
+  </div>
+</div>	
+
   <div id="reg">
  <div id="displayTip" class="displayNone"></div>  
-    <form name="register" method="post" action="js.action" id="form2" onsubmit="return emp_validateForm();">
-    <table width="600" height="263" border="0" align="right" cellpadding="0" cellspacing="0">
-       <tr>
-          <th colspan="2">Jobseeker Register</th>
-        </tr>
+    <form name="register" method="post" action="js.action" id="form2" enctype="multipart/form-data" onsubmit="return job_validateForm();">
+      <div class="panel panel-primary">
+		<div class="panel-heading">
+          <h3 class="panel-title">Jobseeker Register</h3>
+          </div>
+    		 <div class="panel-body">
+      <table width="600" height="403" border="0" align="left" cellpadding="0" cellspacing="0">
+      
         <tr>
           <td><span class="style1">User Name£º</span></td>
           <td><input name="js.username" type="text" id="username" class="formstyle" need="true">
@@ -135,6 +150,14 @@ or
           <td><input name="js.expectedSalary" type="text" id="expectedSalary" class="formstyle">
          </td>
         </tr>
+        
+        <tr>
+          <td><span class="style1">Choose File:</span></td>
+          <td><input type="file" name="upload" class="formstyle">
+       </td>
+        </tr>
+        
+        
         <tr>
         <td> <span class="style1" >Job Category:</span></td>
 		<td>
@@ -175,8 +198,10 @@ or
     <tfoot>
         <tr>
           <td colspan="2">
-              <input name="submit" type="submit" id="submit" value="Submit">
-              <input name="reset" type="reset" value="Reset" >
+<div align="center">
+              <input name="back" type="reset" class="btn btn-sm btn-default" value="Reset">
+				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
+				</div>
           </td>
         </tr>
         <tr>
@@ -185,5 +210,7 @@ or
     	
     </form>
 </div>
+
   </body>
+  
 </html>

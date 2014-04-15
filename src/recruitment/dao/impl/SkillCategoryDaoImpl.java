@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,8 +15,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+
 import recruitment.dao.SkillCategoryDao;
-import recruitment.model.Area;
 import recruitment.model.SkillCategory;
 
 @Component("skillCategoryDao")
@@ -64,6 +65,8 @@ public class SkillCategoryDaoImpl implements SkillCategoryDao{
 			hql.append(" and LOWER(sc.name) like LOWER(:name) ");
 			map.put("name","%"+ sc.getName()+"%");
 		}
+		
+		hql.append(" Order by sc.name asc ");
 
 		Query query  = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		if (null != map && map.size() >= 1) {
@@ -129,6 +132,4 @@ public class SkillCategoryDaoImpl implements SkillCategoryDao{
 			return scs.getChildrenSkillJobCategory();
 	}
 	
-
-
 }

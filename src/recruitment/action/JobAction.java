@@ -53,8 +53,10 @@ public class JobAction extends ActionSupport {
 	private Skill skill;
 	private SkillManager skillManager;
 	private ApplyJobManager ajm;
-//	/private List<SkillCategory> listSubSkillCategory;
-	
+	private static int flag =0;
+	private List<Job> listJobSortByParam;
+	private String sort;
+
 	public JobManager getJm() {
 		return jm;
 	}
@@ -87,13 +89,13 @@ public class JobAction extends ActionSupport {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public String detail() throws Exception {
-	    job = jm.findById(job);
-	    if (null != js && null != js.getJsId()) {
-	        job.setIsApplied(ajm.isJobAppliedByJs(job.getJobId(), js.getJsId()));
-	    }
-	    return "detail";
+		job = jm.findById(job);
+		if (null != js && null != js.getJsId()) {
+			job.setIsApplied(ajm.isJobAppliedByJs(job.getJobId(), js.getJsId()));
+		}
+		return "detail";
 	}
 
 	public String execute() throws Exception {
@@ -118,14 +120,44 @@ public class JobAction extends ActionSupport {
 	}
 
 	public String list() throws Exception {
-	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
 		this.jobs = jm.getJobs(this.job);
 		return "list";
 	}
+	
+	public String sortJob() throws Exception {
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listCountrys = am.listCountrys(area);
+		if(flag%2==0) {
+			this.jobs = jm.sortJobByAsc(sort);
+			flag++;
+		}
+		else if(flag%2 != 0) {
+			this.jobs = jm.sortJobByDesc(sort);
+			flag++;
+		}
 
+		return "sortJob";
+	}
+	
+	public String sortJobForAdmin() throws Exception {
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listCountrys = am.listCountrys(area);
+		if(flag%2==0) {
+			this.jobs = jm.sortJobByAsc(sort);
+			flag++;
+		}
+		else if(flag%2 != 0) {
+			this.jobs = jm.sortJobByDesc(sort);
+			flag++;
+		}
+
+		return "sortJobForAdmin";
+	}
+	
 	public String first() throws Exception {
-	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
 		this.jobs = jm.getJobs(this.job);
 		return "first";
@@ -147,9 +179,9 @@ public class JobAction extends ActionSupport {
 	}
 
 	public String logged() throws Exception {
-	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
-		
+
 		// get job seeker skill
 		List<Integer> jobSeekerSkills = new ArrayList<Integer>();
 		JobSeeker jobSeeker = (JobSeeker)ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
@@ -158,7 +190,7 @@ public class JobAction extends ActionSupport {
 		}
 		this.job.setCheckboxes(jobSeekerSkills.toArray(new Integer[jobSeekerSkills.size()]));
 		this.jobs = jm.getJobs(this.job);
-		
+
 		// sort
 		final Map<Integer, Integer> sortMap = getJobSkillRate(jobs, jobSeekerSkills);
 		Collections.sort(jobs, new Comparator<Job>() {
@@ -167,16 +199,16 @@ public class JobAction extends ActionSupport {
 				return sortMap.get(b.getJobId()) - sortMap.get(a.getJobId());
 			}
 		});
-		
+
 		for (Job job : jobs) {
-		    if (sortMap.get(job.getJobId()) > 1000) {
-		        job.setIsBestMatch(Boolean.TRUE);
-		    }
+			if (sortMap.get(job.getJobId()) > 1000) {
+				job.setIsBestMatch(Boolean.TRUE);
+			}
 		}
-		
+
 		return "logged";
 	}
-	
+
 	private Map<Integer, List<Integer>> mapJobSkillIds(List<Job> jobs) {
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		for (Job job : jobs) {
@@ -188,7 +220,7 @@ public class JobAction extends ActionSupport {
 		}
 		return map;
 	}
-	
+
 	private Map<Integer, Integer> getJobSkillRate(List<Job> jobs, List<Integer> skillIds) {
 		Map<Integer, Integer> countMap = new HashMap<Integer, Integer>();
 		Map<Integer, List<Integer>> map =  mapJobSkillIds(jobs);
@@ -211,8 +243,8 @@ public class JobAction extends ActionSupport {
 	}
 
 	public String load() throws Exception {
-	    this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
-	    this.listCountrys = am.listCountrys(area);
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listCountrys = am.listCountrys(area);
 		this.job = this.jm.loadById(job);
 		return "load";
 	}
@@ -286,7 +318,7 @@ public class JobAction extends ActionSupport {
 	public void setListCountys(List<Area> listCountys) {
 		this.listCountys = listCountys;
 	}
-	
+
 	public List<Area> getListDistricts() {
 		return listDistricts;
 	}
@@ -327,7 +359,7 @@ public class JobAction extends ActionSupport {
 		ServletActionContext.getResponse().getWriter().print(sb.toString());
 		return null;
 	}
-	
+
 	public SkillCategoryManager getSkillCategoryManager() {
 		return skillCategoryManager;
 	}
@@ -335,8 +367,6 @@ public class JobAction extends ActionSupport {
 	public void setSkillCategoryManager(SkillCategoryManager skillCategoryManager) {
 		this.skillCategoryManager = skillCategoryManager;
 	}
-
-
 
 	public List<SkillCategory> getListMainSkillCategorys() {
 		return listMainSkillCategorys;
@@ -361,7 +391,7 @@ public class JobAction extends ActionSupport {
 	public void setSkillCategory(SkillCategory skillCategory) {
 		this.skillCategory = skillCategory;
 	}
-	
+
 	public String listSubSkillCategorys() throws Exception {
 		this.listSubSkillCategorys = skillCategoryManager.getSubSkillCategory(skillCategory);
 		StringBuffer sb = new StringBuffer();
@@ -371,26 +401,26 @@ public class JobAction extends ActionSupport {
 		ServletActionContext.getResponse().getWriter().print(sb.toString());
 		return null;
 	}
-	
+
 	public String listSkills() throws Exception {
-	    this.listSkill = skillManager.getSkillsBySc(skillCategory);
-	    StringBuffer sb = new StringBuffer();
-	    for(Skill skill : listSkill) {
-	        String  temp = "<input type=\"checkbox\" name=\"job.checkboxes\" value=\""+skill.getSkillId()+"\"/> " + skill.getName();
-	        sb.append(temp); 
-	    }
-	    ServletActionContext.getResponse().getWriter().print(sb.toString());
-	    return null;
+		this.listSkill = skillManager.getSkillsBySc(skillCategory);
+		StringBuffer sb = new StringBuffer();
+		for(Skill skill : listSkill) {
+			String  temp = "<input type=\"checkbox\" name=\"job.checkboxes\" value=\""+skill.getSkillId()+"\"/> " + skill.getName();
+			sb.append(temp); 
+		}
+		ServletActionContext.getResponse().getWriter().print(sb.toString());
+		return null;
 	}
-	
+
 	public String listSkills2() throws Exception {
 		this.listSkill = skillManager.getSkillsBySc(skillCategory);
 		StringBuffer sb = new StringBuffer();
 		for(Skill skill : listSkill) {
-            sb.append(skill.getSkillId() + "_" + skill.getName()).append(","); 
+			sb.append(skill.getSkillId() + "_" + skill.getName()).append(","); 
 		}
 		if (sb.toString().endsWith(",")) {
-		    sb.deleteCharAt(sb.length() - 1);
+			sb.deleteCharAt(sb.length() - 1);
 		}
 		ServletActionContext.getResponse().getWriter().print(sb.toString());
 		return null;
@@ -412,17 +442,56 @@ public class JobAction extends ActionSupport {
 		this.skillManager = skillManager;
 	}
 
-    public Skill getSkill() {
-        return skill;
-    }
+	public Skill getSkill() {
+		return skill;
+	}
 
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
 
-    @Resource(name="applyJobManager")
-    public void setAjm(ApplyJobManager ajm) {
-        this.ajm = ajm;
-    }
+	@Resource(name="applyJobManager")
+	public void setAjm(ApplyJobManager ajm) {
+		this.ajm = ajm;
+	}
+
+	public ApplyJobManager getAjm() {
+		return ajm;
+	}
+
+	
+
+	public static int getFlag() {
+		return flag;
+	}
+
+	public static void setFlag(int flag) {
+		JobAction.flag = flag;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public List<Job> getListJobSortByParam() {
+		return listJobSortByParam;
+	}
+
+	public void setListJobSortByParam(List<Job> listJobSortByParam) {
+		this.listJobSortByParam = listJobSortByParam;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+
+	
+	
+	
 
 }

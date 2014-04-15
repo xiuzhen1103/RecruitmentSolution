@@ -13,17 +13,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
 		<link href="<%=basePath%>style/style.css" type="text/css" rel="StyleSheet" />
         <link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
+         <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
         <script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+       
         <script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
         <script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
     	<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
     	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
         <script type="text/javascript" src="<%=basePath%>js/area.js"></script>
         <script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
+        
 	</head>
 
 	<body>
-		<p align="right">
+	<p align="right">
 			Hello
 			<s:property value="#session.employer.username" />
 			<br />
@@ -32,31 +35,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a href="emp!logout.action">Logout</a>
 			<br />
 		</p>
-		<div align="center" id="header">
-			<h1>
-				<i>Recruitment Solution</i>
-			</h1>
-			<div class="menu_20124162">
-				<ul>
-					<li>
-						<a href="empLog.action">Home</a>
-					</li>
-					<li>
-						<a href="">About Us</a>
-					</li>
-					<li>
-						<a href="">Contact Us</a>
-					</li>
+	<div class="banner" >
 
-				</ul>
-			</div>
-		</div>
-		<br />
+</div>
+
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="empLog.action">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+  <li><a href="report">Statistic</a></li>
+</ol>
+</div>
+  </div>
+</div>	
 		<div id="reg">
-			<form name="register" method="post" action="job.action">
+			<form name="register" method="post" action="job.action" id="form2" onsubmit="return ">
 				<input type="hidden" name="job.employer.empId"
 					value="<s:property value='#session.employer.empId'/>" readonly>
-				<br>
+				
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -64,15 +65,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</h3>
 					</div>
 					<div class="panel-body">
-						<table width="400" height="263" border="0" align="left"
+		<table width="400" height="263" border="0" align="left"
 							cellpadding="0" cellspacing="0">
 							<tr>
 								<td>
 									<span class="style1">Job Title:</span>
 								</td>
 								<td>
-									<input type="text" name="job.title" class="formstyle">
+									<input type="text" name="job.title" id="name" class="formstyle">
 									<font color="#F9481C">*</font>
+									<font color="#F9481C" id="name_hint"></font>
 								</td>
 							</tr>
 							<tr>
@@ -80,21 +82,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<span class="style1">Job Description:</span>
 								</td>
 								<td>
-									<input type="text" name="job.jobDesc" class="formstyle">
+									<input type="text" name="job.jobDesc" id="desc" class="formstyle">
 									<font color="#F9481C">*</font>
+									<font color="#F9481C" id="desc_hint"></font>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<span class="style1">Start Date:</span>
-								</td>
-								<td>
-									<input name="job.startDate"
-										onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-										class="formstyle">
-									<font color="#F9481C">*</font>
-								</td>
-							</tr>
+							
 							<tr>
 								<td>
 									<span class="style1">Address:</span>
@@ -126,8 +119,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<span class="style1">Requirement:</span>
 								</td>
 								<td>
-									<input type="text" name="job.requirement" class="formstyle">
+									<input type="text" name="job.requirement" id="name" class="formstyle">
 									<font color="#F9481C">*</font>
+									<font color="#F9481C" id="name_hint"></font>
 								</td>
 							</tr>
 							<tr>

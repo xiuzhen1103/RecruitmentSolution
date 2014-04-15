@@ -9,56 +9,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-    <title>Display all Skill </title>
+  <base href="<%=basePath%>">
+       <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+    <title>Display All Skill </title>
   </head>
  
   <body>
-  <p align="right">
+	 <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
-<a href="admin!logout.action">Logout</a>
+<a href="admin!logout">Logout</a>
 </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="admin.jsp">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
+	<div class="banner" >
+
 </div>
+
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="userManager/admin.jsp">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report">Statistic</a></li>
+    <li><a href="#">About Us</a></li>
+</ol>
 </div>
-    <b>Display all Skill </b>  
-     <div align="center">
+  </div>
+  </div>
+<div align="center">
    <a href="addSkill.jsp">Add Skill category </a> 
 </div>
 
-  <s:form method="post" action="sk!list.action">  
-  		<s:textfield label="Please enter Skill Id" name="skill.skillId"></s:textfield>
-  		<s:textfield label="Please enter skill name" name="skill.name"></s:textfield>
-  		<s:submit label="submit"/>
-  			</s:form>
+  <form method="post" action="sk!list.action" class="formstyle" style="padding: 5px 3px;"> 
+   	Please Enter Skill Name: <input type="text" name="skill.name"/> 
+  	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+  </form>
  
- 	 <table width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
+ 	  <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
  	 	 <tr>
-		      <td width="5%" height="37" align="center"><b>skill Id</b></td>
-		      <td width="10%" height="37" align="center"><b>name</b></td>
-		      <td width="10%" height="37" align="center"><b>skill category id</b></td>
- 			  <td width="10%" height="37" align="center"><b>update</b></td>
- 			  <td width="10%" height="37" align="center"><b>delete</b></td>
+		      <td class="info" width="5%" height="37" align="center"><b>Skill Id</b></td>
+		      <td class="info" width="10%" height="37" align="center"><b>name</b></td>
+		      <td class="info" width="10%" height="37" align="center"><b>Skill Category</b></td>
+ 			  <td class="info" width="5%" height="37" align="center"><b>Update</b></td>
+ 			  <td class="info" width="5%" height="37" align="center"><b>Delete</b></td>
           </tr>
- 	
           <s:iterator value="skills" id="s">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
 		  <td align="center" ><s:property value="#s.skillId" /></td>
 		  <td align="center" ><s:property value="#s.name" /></td>
-		  <td align="center" ><s:property value="#s.skillCategory.skillCategoryId" /></td>
-		  <td><a href="sk!load?skill.skillId=<s:property value="#s.skillId" />">update</a></td>
-		  <td><a href="sk!delete?skill.skillId=<s:property value="#s.skillId" />">delete</a></td>
+		  <td align="center" ><s:property value="#s.skillCategory.name" /></td>
+		  <td><a href="sk!load?skill.skillId=<s:property value="#s.skillId" />"><img src="images/edit.png" title="edit" alt="edit" height="20" width="30" ></a></td>
+		  <td><a href="sk!delete?skill.skillId=<s:property value="#s.skillId" />"><img src="images/delete.png" title="delete" alt="delete" height="25" width="20" ></a></td>
         </tr>
      </s:iterator>
     </table>
     
-    <s:debug></s:debug>
+<div align="right"><a href="javascript:scroll(0,0)">Back To Top</a></div>
   </body>
 </html>

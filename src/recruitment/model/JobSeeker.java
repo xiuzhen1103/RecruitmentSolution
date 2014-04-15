@@ -29,6 +29,7 @@ public class JobSeeker {
 	private Integer[] checkboxes;
 	//private Skill skill;
 	private Set<JobSeekerSkill> jobSeekerSkill = new HashSet<JobSeekerSkill>(0);
+	private String image;
 	
 
 	public  JobSeeker() { 
@@ -140,5 +141,13 @@ public class JobSeeker {
 				+ expectedSalary + ", radioList=" + radioList + ", checkboxes="
 				+ Arrays.toString(checkboxes) + "]";
 	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

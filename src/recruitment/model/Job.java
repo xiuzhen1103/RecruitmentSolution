@@ -1,5 +1,6 @@
 package recruitment.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,6 @@ public class Job {
     private Integer jobId = 0;
     private String title;
     private String jobDesc;
-    private String startDate;
     private String address;
     private String phone;
     private Integer numPosition = 0;
@@ -33,7 +33,7 @@ public class Job {
     private SkillCategory jobCategory;
     private SkillCategory skillCategory;
     private Set<JobSkill> jobSkills = new HashSet<JobSkill>(0);
-    
+    private Date createTime = new Date();
     private Boolean isBestMatch;
     private Boolean isApplied;
 
@@ -152,14 +152,6 @@ public class Job {
         this.radioList = radioList;
     }
 
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "job")
     public Set<JobSkill> getJobSkills() {
         return jobSkills;
@@ -215,5 +207,14 @@ public class Job {
     public void setIsApplied(Boolean isApplied) {
         this.isApplied = isApplied;
     }
-    
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+
 }

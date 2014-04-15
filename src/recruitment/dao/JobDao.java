@@ -24,10 +24,11 @@ public interface JobDao {
 	public List<CV> listCVByJsId(Integer jobId, Integer jsId)
 			throws DataAccessException;
 
-	 public boolean updateJob(Integer jobId, String jobDesc, String startDate,
+	 public boolean updateJob(Integer jobId, String jobDesc, 
 			String address, String phone, Integer numPosition,
 			String requirement, Integer salary, Employer employer,
 			Area countryId, Area countyId, Area districtId
 			) throws DataAccessException;
-
+	 public List<Job> sortJobByParamAsc(String sort) throws DataAccessException;
+	 public List<Job> sortJobByParamDesc(String sort) throws DataAccessException;
 }

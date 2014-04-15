@@ -24,37 +24,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 
 	<body>
-		<div align="center" id="header">
-			<h1>
-				<i>Recruitment Solution</i>
-			</h1>
-			<div class="menu_20124162">
-				<ul>
-					<li>
-						<a href="javascript:history.back()">Back</a>
-					</li>
-					<li>
-						<a href="">About Us</a>
-					</li>
-					<li>
-						<a href="">Contact Us</a>
-					</li>
+	<div class="banner">
+</div>
+<div align="center">
 
-				</ul>
-			</div>
-		</div>
-		<br />
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="javascript:history.back()">Back</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank" >Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
+</div>
+  </div>
+</div>	
 		<div id="reg">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							Job Skiller Detail
+							Job Seeker Detail
 						</h3>
 					</div>
 					<div class="panel-body">
                         <s:set var="js" value="jobskiller"/>
 						<table width="400" height="263" border="0" align="left"
 							cellpadding="0" cellspacing="0">
+							
+							<tr>
+								<td>
+									<span class="style1">Profile Image:</span>
+								</td>
+								<td>
+								
+								<img src=${js.image} title="profile_image" alt="profile_image" height="80" width="80" >
+									
+								</td>
+							</tr>
+							
 							<tr>
 								<td>
 									<span class="style1">User name:</span>
@@ -103,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<s:iterator var="jsk" value="js.jobSeekerSkill" status="st">
                                         ${jsk.skill.name}<s:if test="!#st.last">,</s:if>
                                     </s:iterator>
-								</td>
+                   				</td>
 							</tr>
 							<tr>
 								<td>
@@ -122,6 +129,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     ${js.address}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <span class="style1">CV:</span>
+                                </td>
+                                <td>
+                                
+                                  <s:iterator value="cvs" id="c" var="oneCv" status="st">
+       						<s:if test="#st.last">
+        					
+        							  <a href="downLoadCV.action?filename= ${oneCv.cvTitle}" > ${oneCv.cvTitle}</a>
+ 							</s:if>
+ 							 </s:iterator> 
+
+
+                                </td>
+                            </tr>
+                             
 			<tfoot>
 				<tr height="60">
 					<td colspan="2" align="center">

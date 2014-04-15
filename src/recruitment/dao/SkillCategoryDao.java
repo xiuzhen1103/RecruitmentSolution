@@ -1,6 +1,8 @@
 package recruitment.dao;
 import java.util.List;
+
 import org.springframework.dao.DataAccessException;
+
 import recruitment.model.SkillCategory;
 
 public interface SkillCategoryDao {

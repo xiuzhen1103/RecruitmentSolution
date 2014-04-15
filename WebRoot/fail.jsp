@@ -16,14 +16,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	 <link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+		<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+		<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
   </head>
+ <body>
   
-  <body>
-   Error Page! <br>
-    <s:property value="message"/>
-    <s:debug></s:debug>
+  
+
+<div class="banner" >
+
+</div>
+
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="#">Failed page</a></li>
+</ol>
+</div>
+  </div>
+</div>	
+  <div align="center">
+  <img src="images/error.png" height="6 0" width="60">
+  
+  <h3> <font color="#F9481C">Error Page!</font> </h3><br>
+    <s:property value="message"/> <br />
+  Click here to go back to previous page. <input name="back" type="button" class="btn btn-sm btn-primary" onclick="history.back()" value="Back">
+</div>
+
+ 
+
   </body>
 </html>

@@ -12,38 +12,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
         <link href="<%=basePath%>style/style.css" type="text/css" rel="StyleSheet" />
         <script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+          <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
     </head>
 
     <body>
-        <p align="right">
-            Hello
-            <s:property value="#session.employer.username" />
-            <br />
-            <a
-                href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
-            <a href="emp!logout.action">Logout</a>
-            <br />
-        </p>
-        <div align="center" id="header">
-            <h1>
-                <i>Recruitment Solution</i>
-            </h1>
-            <div class="menu_20124162">
-                <ul>
-                    <li>
-                        <a href="empLog.action">Home</a>
-                    </li>
-                    <li>
-                        <a href="">About Us</a>
-                    </li>
-                    <li>
-                        <a href="">Contact Us</a>
-                    </li>
+   <p align="right">
+  Hello <s:property value="#session.employer.username"/><br/>
+  <a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
+  <a href="emp!logout.action">Logout</a> <br/>
+  </p> 
+  <div class="banner"></div>
+<div class='navbar navbar-inverse' align="center">
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="empLog.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
+</div>
+  </div>
 
-                </ul>
-            </div>
-        </div>
-        <br />
         <div id="reg">
             <form name="updateInterview" method="post" action="ir!update">
                 <input type="hidden" name="ir.interviewId" value="${ir.interviewId}"/>
@@ -130,6 +121,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         
                                     </td>
                                 </tr>
+                                 <tr>
+        		  <td align="left"><span class="style1">&nbsp;</span></td>
+         		 <td><s:if test="tips != null"><font color="red">${tips}</font></s:if>
+        		  </td>
+       		 </tr>
                             </tfoot>
                         </table>
                     </div>

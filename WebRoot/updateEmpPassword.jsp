@@ -10,6 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
   <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
   <script type="text/javascript" src="<%=basePath%>js/empValidation.js"></script>
+  <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
     <title>Update Employer Password</title>
   <body>
   <p align="right">
@@ -17,22 +20,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
   <a href="emp!logout.action">Logout</a> <br/>
   </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="empLog.action">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
+  <div class="banner"></div>
+<div class='navbar navbar-inverse' align="center">
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="empLog.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
   </div>
-  <br/>
+
    <div id="reg">
 
     <form method="post" action="updateEmpPassword" onsubmit="return validateForm();" id="form1" >
     	<input type="hidden" name="emp.empId" value="<s:property value='#session.employer.empId'/>">
-    	<table width="300" height="163" border="0" align="left" cellpadding="0" cellspacing="0">
+     <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
     	<tr>
           <th colspan="2">Update Password</th>
         </tr>
@@ -55,8 +59,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <tfoot>
        <tr>
           <td colspan="2">
-          <input name="back" type="button"  onclick="history.back()" value="Back" ></li>
-          <input name="submit" type="submit" value="Submit"></li>      
+   			<div align="center">
+         <input name="reset" type="reset" class="btn btn-sm btn-default" value="Reset" >
+				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
+            </div> 
           </td>
         </tr>
         </tfoot>

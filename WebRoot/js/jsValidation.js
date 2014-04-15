@@ -56,6 +56,30 @@ $(function(){
 			$('#name_hint').html("");
 		}
 	});
+	
+	$('#desc').blur(function(){
+		var desc = $('#desc').val();
+		if (desc==null || desc==""){
+			$('#desc').addClass('bred');
+			$('#desc_hint').html("<span class='formtips onSuccess'>" + "name invalid "+  "</span>");
+		} else {
+			$('#desc').addClass('bgreen');
+			$('#desc_hint').html("");
+		}
+	});
+	
+	$('#date').blur(function(){
+		var date = $('#title').val();
+		if (date==null || date==""){
+			$('#date').addClass('bred');
+			$('#date_hint').html("<span class='formtips onSuccess'>" + "title invalid "+  "</span>");
+		} else {
+			$('#date').addClass('bgreen');
+			$('#date_hint').html("");
+		}
+	});
+	
+	
 	$('#email').blur(function(){
 		var email = $('#email').val();
 		if (!isEmail(email)){
@@ -166,7 +190,6 @@ function checkEmpEmail() {
 }
 
 function validateForm() {
-	
 	$('input[need="true"]').each(function(i, dom){
 		var val = $(dom).val();
 		if (null == val || '' == val) {
@@ -198,6 +221,37 @@ function validateForm() {
 
 }
 
+function job_validateForm() {
+	$('input[need="true"]').each(function(i, dom){
+		var val = $(dom).val();
+		if (null == val || '' == val) {
+			$(dom).addClass('bred');
+		} else {
+			$(dom).addClass('bgreen');
+		}
+	});
+	
+	var category = $('#category').val();
+	if (null == category || '' == category) {
+		$('#category_hint').html("<span class='formtips onSuccess'>please select job category</span>");
+		return false;
+	}
+
+	var skillCategory = $('#skillCategoryId').val();
+	if (null == skillCategory || '' == skillCategory) {
+		$('#job_hint').html("<span class='formtips onSuccess'>please select job</span>");
+		return false;
+	}
+
+	var skills = $('#skillId').find("input[type='checkbox']:checked");
+	if (skills.length < 1){
+		$('#skill_hint').html("<span class='formtips onSuccess'>please select skills</span>");
+		return false;
+	}
+
+}
+
+
 function emp_validateForm() {
 	$('input[need="true"]').each(function(i, dom){
 		var val = $(dom).val();
@@ -209,6 +263,7 @@ function emp_validateForm() {
 	});
 	return checkEmpUsername() && checkEmpEmail();
 }
+
 
 
 

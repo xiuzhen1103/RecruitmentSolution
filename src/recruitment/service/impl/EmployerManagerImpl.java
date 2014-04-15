@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import recruitment.dao.EmployerDao;
 import recruitment.model.Employer;
-import recruitment.model.JobSeeker;
 import recruitment.service.EmployerManager;
 
 

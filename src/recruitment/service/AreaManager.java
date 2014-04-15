@@ -3,7 +3,6 @@ package recruitment.service;
 import java.util.List;
 
 import recruitment.model.Area;
-import recruitment.model.JobSeeker;
 
 public interface AreaManager {
 	public void add(Area area) throws Exception;

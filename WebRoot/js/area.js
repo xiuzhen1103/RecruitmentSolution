@@ -29,7 +29,6 @@ function getCountry(c) {
 				var inner = countys[i].split("_");
 				var varItem = new Option(inner[1], inner[0]);
 				countySelect.options.add(varItem);
-				
 			}
 		}
 	});

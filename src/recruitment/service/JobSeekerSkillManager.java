@@ -2,8 +2,6 @@ package recruitment.service;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
-
 import recruitment.model.JobSeekerSkill;
 
 public interface JobSeekerSkillManager {

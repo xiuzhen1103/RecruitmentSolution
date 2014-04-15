@@ -1,7 +1,9 @@
 package recruitment.dao.impl;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+
 import recruitment.dao.CVDao;
 import recruitment.model.CV;
 import recruitment.model.JobSeeker;
@@ -63,12 +66,27 @@ public class CVDaoImpl implements CVDao {
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<CV> getCVbyJsId(CV cv) throws DataAccessException {
+	public List<CV> getCVbyJsId() throws DataAccessException {
 		JobSeeker js = (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
 		Integer id = js.getJsId();
 		StringBuffer hql = new StringBuffer();
 		hql.append( " from CV ");
 		hql.append(" where jsId =  "+  id);
+		List<CV>  list = null;
+		try{
+			list = 	(List<CV>)this.hibernateTemplate.find(hql.toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CV> getOneCVDetail(Integer jsId) throws DataAccessException {
+		StringBuffer hql = new StringBuffer();
+		hql.append( " from CV ");
+		hql.append(" where jsId =  "+  jsId);
 		List<CV>  list = null;
 		try{
 			list = 	(List<CV>)this.hibernateTemplate.find(hql.toString());

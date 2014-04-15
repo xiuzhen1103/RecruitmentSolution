@@ -20,9 +20,10 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ApplyJobAction extends ActionSupport{
 	private ApplyJob applyJob  = new ApplyJob();
 	private ApplyJobManager am;
-	private Job job = new Job();
+	private Job job= new Job();
 	private int jobId;
 	private CV cv;
+	
 	private List<CV> cvsList ;
 	private CVManager cvManager;
 	
@@ -38,26 +39,14 @@ public class ApplyJobAction extends ActionSupport{
 	
 
 	public String execute() throws Exception {
-		//JobSeeker jobSeeker = (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
 		job.setJobId(this.jobId);
-		//applyJob = new ApplyJob();
-		//Integer cvId = applyJob.getRadioList();
-		//cv  = (CV) this.hibernateTemplate.load(CV.class, cvId);
-		//applyJob.setCv(cv); 
-		
-		//applyJob.setJobseeker(jobSeeker);
 		applyJob.setJob(job);
-		//applyJob.setCvs(cv.getCvId());
 		am.add(applyJob);
 		return "success";
-		//}
-	//	else  
-		//	return "login";
 	}
 	
     public String selectCV() throws Exception {
-		this.cvsList =  cvManager.getCVByJsId(cv);
-		System.out.println(cvsList.size()+">>>>>>>>>>>>>>>>>>>"+this.jobId);
+		this.cvsList =  cvManager.getCVByJsId();
 		return "selectCV";
 	}
 	
@@ -92,7 +81,6 @@ public class ApplyJobAction extends ActionSupport{
 	public void setJob(Job job) {
 		this.job = job;
 	}
-
 
 	public CV getCv() {
 		return cv;

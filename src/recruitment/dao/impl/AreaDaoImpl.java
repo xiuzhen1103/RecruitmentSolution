@@ -18,8 +18,6 @@ import org.springframework.stereotype.Component;
 
 import recruitment.dao.AreaDao;
 import recruitment.model.Area;
-import recruitment.model.Employer;
-import recruitment.model.JobSeeker;
 
 @Component("areaDao")
 public class AreaDaoImpl implements AreaDao {
@@ -88,6 +86,8 @@ public class AreaDaoImpl implements AreaDao {
 			hql.append(" and LOWER(a.areaName) like LOWER(:areaName) ");
 			map.put("areaName","%"+ area.getAreaName()+"%");
 		}
+		hql.append(" Order by a.areaName asc ");
+		
 			Query query  = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
 			if (null != map && map.size() >= 1) {
 				Iterator<String> it = map.keySet().iterator();
@@ -96,6 +96,7 @@ public class AreaDaoImpl implements AreaDao {
 					query.setParameter(key, map.get(key));
 				}
 			}
+			
 			return query.list();
 		}
 	

@@ -16,31 +16,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/area.js"></script>
     <script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
+    
+    <link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+  <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
     <title> PreUpdate Job</title>
 
   </head>
   <body>
-   <p align="right">
+  <p align="right">
   Hello <s:property value="#session.employer.username"/><br/>
   <a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
   <a href="emp!logout.action">Logout</a> <br/>
   </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="empLog.action">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
+  <div class="banner"></div>
+<div class='navbar navbar-inverse' align="center">
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="empLog.action">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+</ol>
 </div>
   </div>
-<br/>
 
 <div id="reg">
     <form method="post" action="updateJob" id="form1">
-    	<input type="hidden" name="job.employer.empId" value="<s:property value='job.employer.empId'/>"/><br>
-    	 <table width="400" height="263" border="0" align="left" cellpadding="0" cellspacing="0">
+    	<input type="hidden" name="job.employer.empId" value="<s:property value='job.employer.empId'/>"/>
+    	 <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
         <tr>
           <th colspan="2">Update Job</th>
         </tr>
@@ -54,11 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td><input type="text" name="job.jobDesc" value="<s:property value='job.jobDesc'/>" class="formstyle">
           <font color="#F9481C">*</font></td>
         </tr>
-        <tr>
-          <td><span class="style1">Start Date:</span></td>
-          <td><input type="text" name="job.startDate" value="<s:property value='job.startDate'/>" class="formstyle" onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})">
-          <font color="#F9481C">*</font></td>
-        </tr>
+
         <tr>
           <td><span class="style1">Address:</span></td>
           <td><input type="text" name="job.address" value="<s:property value='job.address'/>" class="formstyle" >
@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 		 <td> <span class="style1">Job:</span></td>
 		<td>
-			<select id="skillCategoryId" name="job.skillCategory.skillCategoryId" onchange="getSkill(this)" style="width:180px">
+			<select id="skillCategoryId" name="job.skillCategory.skillCategoryId" onchange="getSkill2(this)" style="width:180px">
 				<option value=""></option>
 			</select>
         </td>
@@ -145,8 +145,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tfoot>
        <tr>
           <td colspan="2">
-          <input name="back" type="button"  onclick="history.back()" value="Back" ></li>
-          <input name="submit" type="submit" value="Submit"></li>      
+   			<div align="center">
+         <input name="back" type="button" class="btn btn-sm btn-default"  onclick="history.back()" value="Back" >
+				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
+            </div> 
           </td>
         </tr>
         </tfoot>
@@ -154,6 +156,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </form>
 </div>
 
+<script type="text/javascript">
+	var countryId = '<s:property value="job.countryId.areaId"/>';
+	var cityId = '<s:property value="job.countyId.areaId"/>';
+	var areaId = '<s:property value="job.districtId.areaId"/>';
 
+	var categoryId = '<s:property value="job.jobCategory.skillCategoryId"/>';
+	var skillCategoryId = '<s:property value="job.skillCategory.skillCategoryId"/>';
+	$(function(){
+		$('#areaId').select2("val", countryId);
+		getCountry($('#areaId'));
+	});
+	setTimeout(function(){
+		$('#countyId').select2("val", cityId);
+		getDistrict($('#countyId'));
+		$('#categoryId').select2("val", categoryId);
+	},20);
+	setTimeout(function(){
+		$('#districtId').select2("val", areaId);
+		getSubSkillCategory($('#categoryId'));
+	},500);
+	setTimeout(function(){
+		$('#skillCategoryId').select2("val", skillCategoryId);
+	},700);
+</script>
   </body>
 </html>

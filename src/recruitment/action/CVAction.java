@@ -7,23 +7,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.CopyUtils;
 import org.apache.struts2.ServletActionContext;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import recruitment.model.CV;
 import recruitment.model.JobSeeker;
 import recruitment.service.CVManager;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
 @Component("cv")
 @Scope("prototype")
 public class CVAction extends ActionSupport implements ModelDriven{
@@ -33,7 +35,6 @@ public class CVAction extends ActionSupport implements ModelDriven{
 	private List<CV> cvs;
 	private String message="";
 	private CVManager cvm;
-
 	private File upload;  
 	private String uploadFileName;  
 	private String uploadContentType;  
@@ -145,7 +146,10 @@ public class CVAction extends ActionSupport implements ModelDriven{
 		try{
 			JobSeeker js = (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
 			Integer id = js.getJsId();
-			String path = ServletActionContext.getServletContext().getRealPath("/upload");  
+			ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
+	    	String path = rb.getString("filename");
+			//String path = ServletActionContext.getServletContext().getRealPath();  
+			System.out.println(path);
 			filename = path+File.separator+this.getUploadFileName();
 			String[] strs = filename.split("\\\\");
 			StringBuffer sb = new StringBuffer();
@@ -162,7 +166,6 @@ public class CVAction extends ActionSupport implements ModelDriven{
 			File destFile = new File(filename);
 			 //destFile.renameTo(new   File(filename+"." + id));
 			FileOutputStream out = new FileOutputStream(destFile);  
-
 			byte[]b = new byte[1024];  
 			int len = 0;  
 			while((len=in.read(b))>0){  
@@ -181,23 +184,22 @@ public class CVAction extends ActionSupport implements ModelDriven{
 	
 		 
 	public String list() throws Exception {
-		this.cvs = cvm.getCVByJsId(this.cv);
+		this.cvs = cvm.getCVByJsId();
 		return "list";	
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public String downLoadCV() throws Exception{
 		  HttpServletRequest request = ServletActionContext.getRequest();
 		  HttpServletResponse response = ServletActionContext.getResponse();
 		  String fileName =request.getParameter("filename"); 
-		 // String resourceId= request.getParameter("resourceId");
-		 // int userId = (Integer) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
-		 // this.resourceService.addDownLoadResource(userId, Integer.parseInt(resourceId));
 		  fileName = new String(fileName.getBytes("iso-8859-1"),"utf-8");
 		  System.out.println("current file name>>>>>>:"+fileName);
-	        String fullpath = ServletActionContext.getRequest().getRealPath("/upload")+"/"+fileName;
+		  ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
+	    	String fullpath = rb.getString("filename") + "/" + fileName; 	
+	      //  String fullpath = ServletActionContext.getRequest().getRealPath("/upload")+"/"+fileName;
 	        InputStream in = null;
-	       // File file = new File(fullpath);
+
 	        	 try { 
 	                 in = new FileInputStream(fullpath); 
 	                 System.out.print(" read success"); 
@@ -226,9 +228,4 @@ public class CVAction extends ActionSupport implements ModelDriven{
 	             } 
 	        return "success"; 
 	    } 
-
-		
-	
-
-
 }

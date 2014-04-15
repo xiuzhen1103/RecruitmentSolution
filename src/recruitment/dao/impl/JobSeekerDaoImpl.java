@@ -20,6 +20,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import recruitment.dao.JobSeekerDao;
+import recruitment.model.Job;
 import recruitment.model.JobSeeker;
 import recruitment.model.JobSeekerSkill;
 import recruitment.model.Skill;
@@ -129,7 +130,8 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
         return jss.isEmpty() ? null : jss.get(0);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public JobSeeker jsAuthenticate(String email, String password) throws DataAccessException {
         JobSeeker jobSeeker = null;
         List<JobSeeker> jobseekers = hibernateTemplate.find("from JobSeeker js where js.email='" + email
@@ -154,7 +156,36 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
         }
         return false;
     }
+    @Override
+    public List<JobSeeker> getJobSeekersForAdmin(JobSeeker js) throws DataAccessException {
+    	StringBuffer hql = new StringBuffer();
+		Map<String,Object> map = new HashMap<String,Object>();
+		hql.append( " from JobSeeker js where 1= 1");
+		if(null!=js&&js.getJsId()!=null&&js.getJsId()!=0){
+			hql.append(" and js.jsId like :jsId" );
+			map.put("jsId",+ js.getJsId());
+		}
+		if(null!= js &&null!=js.getEmail()&&!"".equals(js.getEmail())) {
+			hql.append(" and LOWER(js.email) like LOWER(:email) ");
+			map.put("email","%"+ js.getEmail()+"%");
+		}
 
+		if(null!= js &&null!=js.getUsername()&&!"".equals(js.getUsername())) {
+			hql.append(" and LOWER(js.username) like LOWER(:username) ");
+			map.put("username","%"+ js.getUsername()+"%");
+		}
+
+		Query query  = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
+		if (null != map && map.size() >= 1) {
+			Iterator<String> it = map.keySet().iterator();
+			while (it.hasNext()) {
+				String key = (String) it.next();
+				query.setParameter(key, map.get(key));
+			}
+		}
+		return query.list();
+	}
+    
     @Override
     public boolean deleteJs(final Integer jsId) throws DataAccessException {
         List<JobSeeker> jobSeekers = hibernateTemplate.find("from JobSeeker js where js.jsId = '" + jsId + "'");
@@ -181,5 +212,22 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
         }
         return false;
     }
+
+    @Override
+    public Long countJobSeekerIsHasJob(boolean isHasJob) {
+        List<Object> list = hibernateTemplate.find("select count(*) from JobSeeker js where js.status = ?", isHasJob ? 1 : 0);
+        return Long.valueOf(list.get(0).toString());
+    }
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<JobSeeker> sortJsByParamAsc(String sort) throws DataAccessException {
+		return (List<JobSeeker>) this.hibernateTemplate.find("From JobSeeker j order by j."+ sort + " asc");
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<JobSeeker> sortJsByParamDesc(String sort) throws DataAccessException {
+		return (List<JobSeeker>) this.hibernateTemplate.find("From JobSeeker j order by j."+ sort + " desc");
+	}
 
 }

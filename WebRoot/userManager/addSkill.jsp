@@ -30,7 +30,7 @@ Hello <s:property value="#session.admin.username"/><br/>
   <br />
    <div id="reg">
   <b> Add Skill </b>
-    <form method="post" action="sk.action" id="form1">
+    <form method="post" action="sk.action" id="form2">
     <table width="350" height="163" border="0"  align="left" cellpadding="0" cellspacing="0">
     <tr>
           <th colspan="2">Add Skill</th>
@@ -48,8 +48,8 @@ Hello <s:property value="#session.admin.username"/><br/>
     	<tfoot>
        <tr>
           <td colspan="2">
-          <input name="back" type="button"  onclick="history.back()" value="Back" ></li>
-          <input name="submit" type="submit" value="Submit"></li>      
+          <input name="back" type="button" class="btn btn-sm btn-default"  onclick="history.back()" value="Back" >
+          <input name="submit" type="submit" value="Submit">   
           </td>
         </tr>
    </tfoot>

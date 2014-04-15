@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import recruitment.model.Employer;
-import recruitment.model.JobSeeker;
 
 public interface EmployerDao {
 	public void save(Employer emp) throws DataAccessException;

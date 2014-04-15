@@ -11,32 +11,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <head>
     <base href="<%=basePath%>">
-    <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-	<link type="text/css" href="<%=basePath%>style/style.css" rel="StyleSheet" />
+
 	<link type="text/css" href="<%=basePath%>js/select2/select2.css" rel="StyleSheet" />
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/select2/select2.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/select2/select2_locale_en.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/area.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jobskill.js"></script>
+	  <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
   </head>
   <body>
-    <p align="right">
+	 <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
-<a href="admin!logout.action">Logout</a>
+<a href="admin!logout">Logout</a>
 </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="userManager/admin.jsp">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
+	<div class="banner" >
+
 </div>
+
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="userManager/admin.jsp">Home</a></li>
+  <li class="active">News</li>
+  <li><a href="report">Statistic</a></li>
+    <li><a href="#">About Us</a></li>
+</ol>
 </div>
-    <b>Display all Jobs:</b>  
- <br> <br />
+  </div>
+  </div>
+  <h3><span class="label label-info">Display All Jobs:</span></h3>   
+
  <form method="post" action="job!list.action">
  
 &nbsp;Country:
@@ -74,30 +85,29 @@ Hello <s:property value="#session.admin.username"/><br/>
     <option></option>
   </select>
   &nbsp;Job Skill:
-  <select multiple id="skillId" name="job.checkboxes" style="width:180px">
+  <select multiple id="skillId2" name="job.checkboxes" style="width:180px">
     <option></option>
   </select>
 
 <button type="submit" class="btn btn-primary">Submit</button>
  </form>
 <br />
- 	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
+ 	 <table  class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
  	 	  <tr>
-		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
-		      <td width="20%" height="37" align="center"><b>Requirement</b></td>
-		      <td width="10%" height="37" align="center"><b>Category</b></td>
-		      <td width="8%" height="37" align="center"><b>Skill Category</b></td>
-		      <td width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td width="5%" height="37" align="center"><b>Salary</b></td>
-		      <td width="5%" height="37" align="center"><b>Number of Position</b></td>
-		      <td width="5%" height="37" align="center"><b>Employer</b></td>
-		      <td width="15%" height="37" align="center"><b>Start Date</b></td>
+		     <td  class="info" width="10%" height="37" align="center"><b>Job Title</b></td>
+		      <td  class="info" width="5%" height="37" align="center"><b>Category </b> <a href="job!sortJobForAdmin?sort=jobCategory.name"><img src="images/sort.png"  height="20" width="15" alt="sort by category" title="sort by category"></a></td>
+		      <td class="info" width="5%" height="37" align="center"><b>Skill Category</b></td>
+		      <td class="info"  width="10%" height="37" align="center"><b>Skill</b></td>
+		      <td class="info" width="5%" height="37" align="center"><b>Company Name</b></td>
+		      <td class="info" width="5%" height="37" align="center"><b>Salary </b><a href="job!sortJobForAdmin?sort=salary"><img src="images/sort.png" alt="sort by salary" title="sort by salary" height="20" width="20" ></a></td>
+		      <td class="info" width="5%" height="37" align="center"><b>Area</b></td>
+         	  <td class="info" width="10%" height="37" align="center"><b>Create Time </b><a href="job!sortJobForAdmin?sort=createTime"><img src="images/sort.png" alt="sort by date" title="sort by date" height="20" width="20" ></a></td>
+         
           </tr>
  	
           <s:iterator value="jobs" id="j">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
 		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
-    	  <td align="center" ><s:property value="#j.requirement" /></td>
     	  <td align="center" >
             <s:property value="#j.jobCategory.name" />
           </td>
@@ -109,10 +119,11 @@ Hello <s:property value="#session.admin.username"/><br/>
                 ${js.skill.name}<s:if test="!#st.last">,</s:if>
             </s:iterator>
           </td>
-    	  <td align="center" ><s:property value="#j.salary" /></td>
-    	  <td align="center" ><s:property value="#j.numPosition" /></td>
+    	  
     	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
-		  <td align="center" ><s:property value="#j.startDate" /></td>
+    	  <td align="center" ><s:property value="#j.salary" /></td>
+    	   <td align="center" ><s:property value="#j.districtId.areaName" />,<s:property value="#j.countyId.areaName" /></td>
+		  <td align="center" ><s:property value="#j.createTime" /></td>
         </tr>
      </s:iterator>
     </table>

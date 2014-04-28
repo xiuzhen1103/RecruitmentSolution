@@ -17,7 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
   <body>
  <p align="right">
-Hello <s:property value="#session.employer.username"/><br/>
+Hello <s:property value="#session.employer.username"/>
+<img src="upload/emp/<s:property value='#session.employer.image'/>" title="profile_image" alt="profile_image" height="50" width="50" >
 <a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
 <a href="emp!logout.action">Logout</a>
 </p>
@@ -30,8 +31,8 @@ Hello <s:property value="#session.employer.username"/><br/>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="empLog.action">Home</a></li>
-  <li class="active" >News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
+  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>" target="_blank">Manage Job</a></li>
+    <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -40,7 +41,7 @@ Hello <s:property value="#session.employer.username"/><br/>
 <h3><span class="label label-info">Display All JobSeeker:</span></h3>
 
  <br />
-   <form method="post" action="js!list.action" >  
+   <form method="post" action="js!list.action"  class="formstyle" style="padding: 5px 3px;">  
    User Name:<input type="text" name="js.username"  placeholder="Please Enter A User Name"/>
    Email:<input type="text" name="js.email"  placeholder="Please Enter Email"/>
   	  	<button type="submit" class="btn btn-sm btn-primary">Submit</button>
@@ -54,7 +55,7 @@ Hello <s:property value="#session.employer.username"/><br/>
 		      <td width="20%" height="37" align="center"><b>Email</b></td>
 		      <td width="15%" height="37" align="center"><b>Phone</b></td>
 		      <td width="15%" height="37" align="center"><b>Expected Salary</b></td>
-		      <td width="5%" height="37" align="center"><b>Employed</b></td>
+
           </tr>
       
           <s:iterator value="jobseekers" id="seekers">
@@ -68,10 +69,12 @@ Hello <s:property value="#session.employer.username"/><br/>
 	          <td align="center"><s:property value="#seekers.email"/></td>
 	          <td align="center"><s:property value="#seekers.phone"/></td>
 	          <td align="center"><s:property value="#seekers.expectedSalary"/></td>
+	          <!--  
 	          <td align="center">
                 <s:if test="#seekers.status == 0">No</s:if>
                 <s:else>Yes</s:else>
               </td>
+              -->
         </tr>
          </s:iterator>
         

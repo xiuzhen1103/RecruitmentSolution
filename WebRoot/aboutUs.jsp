@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,16 +9,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 	<title>Welcome</title>
-	<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
-	<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<link href="<%=basePath%>about/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-
-	<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+	
+	<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />	
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
+	
 
-	<script src="http://maps.googleapis.com/maps/api/js?key= AIzaSyCgs-jm1x4RPPLPRBs-2f8o3VkjBG0sulw&sensor=false">
-</script>
-
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCgs-jm1x4RPPLPRBs-2f8o3VkjBG0sulw&sensor=false"></script>
 	<script>
 	var myCenter=new google.maps.LatLng(53.340175, -6.265876);
 
@@ -47,35 +49,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
-
-
 </head>
-
 
 <body>
 
 
-<div class="banner" >
-
-</div>
-
-<div align="center">
-
-<div class='navbar navbar-inverse'>
-  <div class='nav-collapse' style="height: auto;">
-    <ol class="breadcrumb" >
-  
-  <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
-    <li><a href="aboutUs.jsp">About Us</a></li>
-</ol>
-</div>
-  </div>
-</div>	
-
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+		<div class="carousel slide" id="carousel-301476">
+				<ol class="carousel-indicators">
+					<li data-slide-to="0" data-target="#carousel-301476">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-301476">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-301476" class="active">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item">
+						<img alt="" src="http://career.daimler.com/dhr/wms/images/header/special/00_Unternehmenskultur_900x300.jpg" />
+						<div class="carousel-caption">
+							<h4>
+								Not a member?
+							</h4>
+							<p>
+								Join Ireland's No. 1 recruitment website and open your doors to thousands of employers and countless job opportunities. You¡¯ll find a wealth of information, enhanced profiles and helpful hints and tips on how to secure your ideal job.
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="http://uk-business-expert.com/wp-content/uploads/2013/09/careerfair_900x300.jpg" />
+						<div class="carousel-caption">
+							<h4>
+								Jobs, Jobs, Jobs
+							</h4>
+							<p>
+								Each month, thousands of new jobs are available on Recruiment Solution. See who is hiring in your industry and find out more about the top brands advertising on RecruitmentSolution.ie
+							</p>
+						</div>
+					</div>
+					<div class="item active">
+						<img alt="" src="http://rockconsultancy.gi/wp-content/uploads/multitasking-businessman-900x300-900x300.jpg" />
+						<div class="carousel-caption">
+							<h4>
+								Let employers find you
+							</h4>
+							<p>
+								Follow our simple three-step guide to making the most out of using Recruitment Solution for your job search
+							</p>
+						</div>
+					</div>
+				</div> <a class="left carousel-control" href="#carousel-301476" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-301476" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+
+		
+		
+		
+		
+		
 			<div class="jumbotron well">
 				<h1>
 					Welcome
@@ -89,18 +121,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div id="reg"><
 	<div id="map">
-		<table class="table table-striped table-bordered info" width="30" height="50" border="0" align="left" cellpadding="5" cellspacing="5"  >
+		<table class="table table-striped table-bordered info" width="40" height="50" border="0" align="left" cellpadding="5" cellspacing="5"  >
     	<tr>
           <th colspan="2" class="info">Opening Hours</th>
         </tr>
          <tr>
           <td><span class="style1">Monday:</span></td>
-          <td>9:00 - 5:30</td>
+          <td>9:00 - 6:00</td>
         </tr>
  
          <tr>
           <td><span class="style1">Tuesday:</span></td>
-          <td>9:00 - 5:30</td>
+          <td>9:00 - 6:00</td>
         </tr>
         <tr>
           <td><span class="style1">Wednesday</span></td>
@@ -112,10 +144,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
           <td><span class="style1">Friday</span></td>
-          <td>9:00 - 5:30</td>
+          <td>9:00 - 5:00</td>
         </tr>
  
           </table>
+          
+          
           </div>
           </div>
 			<div class="row clearfix">

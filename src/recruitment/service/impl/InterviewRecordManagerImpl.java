@@ -52,4 +52,9 @@ public class InterviewRecordManagerImpl implements InterviewRecordManager {
         
     }
 
+	@Override
+	public boolean delete(InterviewRecord ir) throws DataAccessException {
+		return interviewRecordDao.deleteIr(ir.getInterviewId());
+	}
+
 }

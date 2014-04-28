@@ -23,14 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
   <body>
 <p align="right">
-			Hello
-			<s:property value="#session.employer.username" />
-			<br />
-			<a
-				href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
-			<a href="emp!logout.action">Logout</a>
-			<br />
-		</p>
+Hello <s:property value="#session.employer.username"/>
+<img src="upload/emp/<s:property value='#session.employer.image'/>" title="profile_image" alt="profile_image" height="50" width="50" >
+<a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
+<a href="emp!logout.action">Logout</a>
+</p>
 <div class="banner">
 </div> 
 <div align="center">
@@ -38,9 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="job!logged.action">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
+ <li><a href="empLog.action">Home</a></li>
+  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Post Job</a></li>
+  <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -68,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <td align="center" style="width:400px;height:200px;"><s:property value="#c.coverLetter"  /></td>
 	       
 		  <td align="center"><a href="downLoadCV.action?filename=<s:property value='#c.cvTitle' />"><s:property value="#c.cvTitle" /> </a></td>
-          <td align="center"><a href="ir!preSend?ir.job.jobId=${job.jobId}&ir.js.jsId=${js.jsId}&ir.cv.cvId=${c.cvId}">Send Interview Letter</a></td>
+          <td align="center"><a href="ir!preSend?ir.job.jobId=${job.jobId}&ir.js.jsId=${js.jsId}&ir.cv.cvId=${c.cvId}">Send Interview Email</a></td>
 		 <!-- <td align="center" > <a href="downLoadCV.action?filename=<s:property value='#c.cvTitle' />">group journal.docx</a></td>-->
 		  </tr>
     </s:iterator>

@@ -1,5 +1,7 @@
 package recruitment.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,8 +21,9 @@ public class Employer {
 	private String webSite;
 	private Integer companySize=0;
 	private String companyType;
+	private String image;
+	private Date loginTime;
 
-	
 	public  Employer() {
 	}
 	@Transient
@@ -35,6 +38,7 @@ public class Employer {
 	public Integer getEmpId() {
 		return empId;
 	}
+	
 	public void setEmpId(Integer empId) {
 		this.empId = empId;
 	}
@@ -98,6 +102,18 @@ public class Employer {
 	}
 	public void setCompanyType(String companyType) {
 		this.companyType = companyType;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Date getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(Date loginTime) {
+		this.loginTime = loginTime;
 	}
 	
 	

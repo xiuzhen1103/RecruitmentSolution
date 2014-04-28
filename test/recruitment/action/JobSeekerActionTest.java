@@ -1,12 +1,9 @@
 package recruitment.action;
 import static org.junit.Assert.assertEquals;
 import junit.framework.Assert;
-
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-
 
 public class JobSeekerActionTest {
 

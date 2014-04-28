@@ -1,42 +1,40 @@
 /*
-Navicat MySQL Data Transfer
+SQLyog v10.2 
+MySQL - 5.1.12-beta-community-nt : Database - recruitment
+*********************************************************************
+*/
 
-Source Server         : Leo
-Source Server Version : 50701
-Source Host           : localhost:3306
-Source Database       : recruitment
+/*!40101 SET NAMES utf8 */;
 
-Target Server Type    : MYSQL
-Target Server Version : 50701
-File Encoding         : 65001
+/*!40101 SET SQL_MODE=''*/;
 
-Date: 2014-04-01 23:19:31
-*/
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`recruitment` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
 
-SET FOREIGN_KEY_CHECKS=0;
+USE `recruitment`;
 
--- ----------------------------
--- Table structure for administrator
--- ----------------------------
+/*Table structure for table `administrator` */
+
 DROP TABLE IF EXISTS `administrator`;
+
 CREATE TABLE `administrator` (
   `adminId` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `password` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`adminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of administrator
--- ----------------------------
-INSERT INTO `administrator` VALUES ('1', 'xiuzhen', 'xiuzhen');
-INSERT INTO `administrator` VALUES ('2', 'zhen', 'zhen');
-INSERT INTO `administrator` VALUES ('3', 'zhen', 'zhen');
+/*Data for the table `administrator` */
 
--- ----------------------------
--- Table structure for applyjob
--- ----------------------------
+insert  into `administrator`(`adminId`,`username`,`password`) values (1,'xiuzhen','xiuzhen'),(2,'zhen','zhen'),(3,'zhen','zhen');
+
+/*Table structure for table `applyjob` */
+
 DROP TABLE IF EXISTS `applyjob`;
+
 CREATE TABLE `applyjob` (
   `applyJobId` int(11) NOT NULL AUTO_INCREMENT,
   `jobseekerId` int(11) NOT NULL,
@@ -45,109 +43,53 @@ CREATE TABLE `applyjob` (
   PRIMARY KEY (`applyJobId`),
   KEY `jobseekerId` (`jobseekerId`),
   KEY `jobId` (`jobId`),
-  CONSTRAINT `applyjob_ibfk_1` FOREIGN KEY (`jobseekerId`) REFERENCES `jobseeker` (`jsId`),
-  CONSTRAINT `applyjob_ibfk_2` FOREIGN KEY (`jobId`) REFERENCES `job` (`jobId`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  CONSTRAINT `applyjob_ibfk_1` FOREIGN KEY (`jobseekerId`) REFERENCES `jobseeker` (`jsId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of applyjob
--- ----------------------------
-INSERT INTO `applyjob` VALUES ('1', '1', '1', '8');
-INSERT INTO `applyjob` VALUES ('3', '1', '13', '11');
-INSERT INTO `applyjob` VALUES ('4', '1', '12', '5');
-INSERT INTO `applyjob` VALUES ('5', '1', '16', '16');
-INSERT INTO `applyjob` VALUES ('10', '1', '1', '17');
-INSERT INTO `applyjob` VALUES ('12', '1', '1', '18');
-INSERT INTO `applyjob` VALUES ('13', '1', '17', '1');
-INSERT INTO `applyjob` VALUES ('14', '1', '1', '19');
-INSERT INTO `applyjob` VALUES ('15', '1', '1', '19');
-INSERT INTO `applyjob` VALUES ('16', '1', '1', '20');
-INSERT INTO `applyjob` VALUES ('17', '1', '1', '20');
-INSERT INTO `applyjob` VALUES ('18', '1', '1', '17');
+/*Data for the table `applyjob` */
 
--- ----------------------------
--- Table structure for area
--- ----------------------------
+insert  into `applyjob`(`applyJobId`,`jobseekerId`,`jobId`,`cvId`) values (1,1,1,8),(3,1,13,11),(5,1,16,16),(10,1,1,17),(12,1,1,18),(13,1,17,1),(14,1,1,19),(15,1,1,19),(16,1,1,20),(17,1,1,20),(18,1,1,17),(19,1,0,18),(20,1,0,18),(21,1,0,19),(22,1,0,17),(23,1,0,19),(24,1,0,18),(25,1,0,19),(26,1,0,18),(28,29,18,24),(29,29,18,24),(31,32,18,25),(43,1,19,28),(45,41,61,35),(46,41,63,35),(47,1,18,5),(48,1,18,40),(49,1,29,17),(50,1,32,3);
+
+/*Table structure for table `area` */
+
 DROP TABLE IF EXISTS `area`;
+
 CREATE TABLE `area` (
   `areaId` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
   `areaName` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
-  `latitude` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `longitude` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`areaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  PRIMARY KEY (`areaId`),
+  KEY `parentId` (`parentId`),
+  CONSTRAINT `area_ibfk_1` FOREIGN KEY (`parentId`) REFERENCES `area` (`areaId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of area
--- ----------------------------
-INSERT INTO `area` VALUES ('0', null, 'All Country', '0', '0', '0');
-INSERT INTO `area` VALUES ('1', '0', 'Ireland', '0', '34', '34');
-INSERT INTO `area` VALUES ('2', '0', 'China', '0', '9', '34');
-INSERT INTO `area` VALUES ('3', '1', 'Monaghan', '1', '2', '2');
-INSERT INTO `area` VALUES ('4', '1', 'Donegal', '1', '45', '34');
-INSERT INTO `area` VALUES ('5', '1', 'Sligo', '1', '42', '34');
-INSERT INTO `area` VALUES ('6', '1', 'Meath', '1', '34', '34');
-INSERT INTO `area` VALUES ('7', '1', 'Wicklow', '1', '13', '34');
-INSERT INTO `area` VALUES ('8', '1', 'Wexford', '1', '3342', '32');
-INSERT INTO `area` VALUES ('9', '1', 'Kildare', '1', '323', '34');
-INSERT INTO `area` VALUES ('10', '1', 'Clare', '1', '34', '34');
-INSERT INTO `area` VALUES ('11', '1', 'Galway', '1', '59', '58');
-INSERT INTO `area` VALUES ('12', '0', 'UK', '0', '54', '34');
-INSERT INTO `area` VALUES ('15', '1', 'Waterford', '1', '33', '4');
-INSERT INTO `area` VALUES ('20', '4', 'Letterkenny', '2', '45', '546');
-INSERT INTO `area` VALUES ('21', '4', 'Castlefin', '2', '34', null);
-INSERT INTO `area` VALUES ('23', '2', 'BeiJing', '1', '78', '98');
-INSERT INTO `area` VALUES ('24', '2', 'FuJian', '1', '89', '43');
-INSERT INTO `area` VALUES ('25', '24', 'FuZhou', '2', '45', '43');
-INSERT INTO `area` VALUES ('26', '24', 'XiaMen', '2', '43', '34');
-INSERT INTO `area` VALUES ('27', '2', 'HuBei', '1', '89', '67');
-INSERT INTO `area` VALUES ('28', '27', 'WuHan', '2', '56', '45');
-INSERT INTO `area` VALUES ('29', '12', 'London', '1', '43', '34');
-INSERT INTO `area` VALUES ('30', '29', 'London City', '2', '43', '34');
-INSERT INTO `area` VALUES ('31', '1', 'Dublin', '1', '34', '43');
-INSERT INTO `area` VALUES ('32', '31', 'Dublin City Center', '2', '34', '32');
-INSERT INTO `area` VALUES ('33', '31', 'Dublin 2', '2', '32', '23');
-INSERT INTO `area` VALUES ('35', '31', 'Dublin 4', '2', '34', '34');
-INSERT INTO `area` VALUES ('36', '31', 'Dublin 3', '2', '59', '4');
-INSERT INTO `area` VALUES ('37', '23', 'ChaoYang', '1', '2', '4');
-INSERT INTO `area` VALUES ('38', '2', 'ChengDu', '1', '439', '23');
+/*Data for the table `area` */
 
--- ----------------------------
--- Table structure for cv
--- ----------------------------
+insert  into `area`(`areaId`,`parentId`,`areaName`,`level`) values (0,NULL,'All Country',0),(1,NULL,'Ireland',0),(2,NULL,'China',0),(3,1,'Dublin',1),(4,1,'Donegal',1),(5,1,'Sligo',1),(6,1,'Meath',1),(7,1,'Wicklow',1),(8,1,'Wexford',1),(9,1,'Kildare',1),(10,1,'Clare',1),(11,1,'Galway',1),(12,NULL,'UK',0),(15,1,'Waterford',1),(20,4,'Letterkenny',2),(21,4,'Castlefin',2),(23,2,'BeiJing',1),(24,2,'FuJian',1),(25,24,'FuZhou',2),(26,24,'XiaMen',2),(27,2,'HuBei',1),(28,27,'WuHan',2),(29,12,'London',1),(30,29,'London City',2),(31,1,'',1),(32,3,'Dublin City Center',2),(33,3,'Dublin 2',2),(35,3,'Dublin 4',2),(36,3,'Dublin 3',2),(37,23,'ChaoYang',1),(38,2,'ChengDu',1),(39,3,'Dublin 24',2),(41,3,'City West',2),(42,3,'Dublin 24',2);
+
+/*Table structure for table `cv` */
+
 DROP TABLE IF EXISTS `cv`;
+
 CREATE TABLE `cv` (
   `cvId` int(11) NOT NULL AUTO_INCREMENT,
   `cvTitle` varchar(300) COLLATE utf8_bin DEFAULT NULL,
-  `coverLetter` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `coverLetter` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `jsId` int(11) NOT NULL,
   PRIMARY KEY (`cvId`),
   KEY `cv_job_fk` (`jsId`),
   CONSTRAINT `cv_job_fk` FOREIGN KEY (`jsId`) REFERENCES `jobseeker` (`jsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of cv
--- ----------------------------
-INSERT INTO `cv` VALUES ('1', 'aaaaaa', 'aaaaa', '1');
-INSERT INTO `cv` VALUES ('2', 'b', 'bbbbbbbbbbbbbbbbb', '4');
-INSERT INTO `cv` VALUES ('3', 'test CV', 'test CV', '1');
-INSERT INTO `cv` VALUES ('4', '1_group_journal.docx', 'Mr/Mrs', '12');
-INSERT INTO `cv` VALUES ('5', '1_group_journal.docx', 'Dear Sir/Madam', '1');
-INSERT INTO `cv` VALUES ('8', 'gfjkh', 'dfskhj', '1');
-INSERT INTO `cv` VALUES ('11', '24', '234', '1');
-INSERT INTO `cv` VALUES ('16', '1_coverLetter.docx', '5665464', '1');
-INSERT INTO `cv` VALUES ('17', '1_null', 'Mr/Mrs', '1');
-INSERT INTO `cv` VALUES ('18', '1_salesCV.docx', 'Mr/Mrs', '1');
-INSERT INTO `cv` VALUES ('19', '1_Submission Form.docx', 'Mr/Mrs', '1');
-INSERT INTO `cv` VALUES ('20', '1_CV.docx', 'Mr/Mrs', '1');
+/*Data for the table `cv` */
 
--- ----------------------------
--- Table structure for employer
--- ----------------------------
+insert  into `cv`(`cvId`,`cvTitle`,`coverLetter`,`jsId`) values (2,'b','bbbbbbbbbbbbbbbbb',4),(21,'26_CV.docx','Dear Sir/Madam',26),(23,'26_er.txt','cv',26),(24,'29_CV.docx','CV',29),(25,'32_new.docx','my CV',32),(35,'41_CV.docx','Mr/MrsMr/MrsMr/MrsMr/Mrs',41),(54,NULL,'sfsfs',88),(55,'1_Question 2.docx','f',1);
+
+/*Table structure for table `employer` */
+
 DROP TABLE IF EXISTS `employer`;
+
 CREATE TABLE `employer` (
   `empId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'employer id',
   `username` varchar(20) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'username unique',
@@ -160,83 +102,56 @@ CREATE TABLE `employer` (
   `webSite` varchar(40) COLLATE utf8_bin DEFAULT NULL COMMENT 'company website',
   `companySize` int(20) DEFAULT NULL,
   `companyType` varchar(30) COLLATE utf8_bin DEFAULT NULL,
+  `image` varchar(50) COLLATE utf8_bin DEFAULT 'emp_default.jpg' COMMENT 'image of company',
+  `loginTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`empId`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of employer
--- ----------------------------
-INSERT INTO `employer` VALUES ('1', 'Darren', 'd', 'd@gmail.com', '234', 'aaaaaa', 'aaaaaaa', 'aaaaaaa', 'aaaaaaa', '234', 'aaaaaaaaa');
-INSERT INTO `employer` VALUES ('6', 'bob', 'b', 'b@gmail.com', '0871234776', 'Tracy', 'Tracy', 'George St', 'www.tracy.com', '30', 'retail');
-INSERT INTO `employer` VALUES ('8', 'Ciara', 'c', 'c@gmail.com', 'cc', 'cc', 'cc', 'cc', 'www.cc.vom', '20', 'cc');
-INSERT INTO `employer` VALUES ('9', 'Anna', 'a', 'a@gmail.com', 'a', 'a', 'a', 'a', 'a', '0', 'a');
-INSERT INTO `employer` VALUES ('10', 'Mary', 'mary', 'mary@gmail.com', '32432', 'macy', 'macy', 'macy', 'macy', '20', 'IT');
-INSERT INTO `employer` VALUES ('11', 'Sarah', 'sarah', 'sarah@gmail.com', '3q2w4', 'sd', 'sfd', 'sfd', 'sdf', '324', '423');
-INSERT INTO `employer` VALUES ('14', 'Tom', 'tom', 'tom@gmail.com', '5436985798', 'Bella', 'Bella', 'Bella', 'www.bella.com', '47', 'Pub');
-INSERT INTO `employer` VALUES ('15', 'aaaa', 'aaa', 'aaa@gmail.com', '5436985798', 'Bella', 'Bella', 'Bella', 'www.bella.com', '47', 'Pub');
-INSERT INTO `employer` VALUES ('16', 'darling', 'zhen', 'da@gmail.com', '0138778', 'DaWa', 'DIT', 'Aungier st', 'www.dit.ie', '100', 'Education');
-INSERT INTO `employer` VALUES ('17', 'darling1', '1', 'darling1@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('18', 'darling111', '1', 'darling12@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('19', 'darling1111', '1', 'darling121@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('20', 'darling11111', '1', 'darling1211@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('21', 'darling111111', '1', 'darling12111@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('22', 'darling1111111', '1', 'darling121111@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('23', 'darling11111111', 'q', 'darling1211111@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('24', 'darling111111111', '1', 'darling12111111@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('25', 'darling2', '1', 'darling2@gmail.com', '1', 'aa', 'aa', 'aa', 'www.cc.vom', '100', 'Pub');
-INSERT INTO `employer` VALUES ('26', 'darling22', '1', 'darling22@gmail.com', '1', 'aa', 'aa', 'aa', 'www.cc.vom', '100', 'Pub');
-INSERT INTO `employer` VALUES ('27', 'darling1111111111', '1', 'darling121111111@gmail.com', '1543', 'aa', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('28', 'darling222', '2', 'darling222@gmail.com', '1', 'aa', 'aa', 'aa', 'www.cc.vom', '100', 'Pub');
-INSERT INTO `employer` VALUES ('29', 'darling2222', '2', 'darling2222@gmail.com', '1', 'aa', 'aa', 'aa', 'www.cc.vom', '100', 'Pub');
-INSERT INTO `employer` VALUES ('30', 'aaaaa', 'a', 'aa@gmail.com', '1543', 'a', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('31', 'aaaaaa', '1', 'xiuzhen1103@gmail.com', '1543', 'a', 'aa', 'aa', 'www.bella.com', '20', 'Pub');
-INSERT INTO `employer` VALUES ('32', '', '', '', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('33', 'aaaaaaaaaaaaa', 'a', 'dddd@gmail.com', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('34', 'aaaaaaaaaaaaaaa', '1', 'dddddd@gmail.com', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('35', 'ddddd', 'd', 'ddddddd@gmail.com', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('36', 'aaaaaaaaaaa', '', 'dddddddddd@gmail.com', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('37', 'aaaaaaaaaaaa', 'a', 'dddddddd@gmail.com', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('38', 'aaaaaaaaaa', '', 'aaaaaaaaa@gmail.com', '', '', '', '', '', null, '');
-INSERT INTO `employer` VALUES ('39', 'adfdssfs', 'aa', 'dd@gmail.com', '', '', '', '', 'www.bella', null, '');
-INSERT INTO `employer` VALUES ('40', 'test111', 'xiuzhen', 'xiu@hotmail.com', '', 'Xiu', '', '', 'www.bella.com', null, '');
+/*Data for the table `employer` */
 
--- ----------------------------
--- Table structure for interviewrecord
--- ----------------------------
+insert  into `employer`(`empId`,`username`,`password`,`email`,`phone`,`contactName`,`companyName`,`address`,`webSite`,`companySize`,`companyType`,`image`,`loginTime`) values (1,'alex@hotmail.com','1','alex@hotmail.com',NULL,'Alex',NULL,NULL,NULL,NULL,NULL,'emp_default.jpg',NULL),(6,'bob','bing','b@gmail.com','0871234776','Tracy','Tracy','George St','George St',30,'retail','emp_default.jpg','2014-04-28 23:11:32'),(8,'Ciara','c','c@gmail.com','cc','cc','cc','cc','www.cc.vom',20,'cc','emp_default.jpg',NULL),(9,'Anna','a','a@gmail.com','a','a','a','a','a',0,'a','emp_default.jpg',NULL),(10,'Mary','mary','mary@gmail.com','32432','macy','macy','macy','macy',20,'IT','emp_default.jpg',NULL),(11,'Sarah','sarah','sarah@gmail.com','3q2w4','sd','sfd','sfd','sdf',324,'423','emp_default.jpg',NULL),(14,'Tom','tom','tom@gmail.com','5436985798','Bella','Bella','Bella','www.bella.com',47,'Pub','emp_default.jpg',NULL),(15,'aaaa','aaa','aaa@gmail.com','5436985798','Bella','Bella','Bella','www.bella.com',47,'Pub','emp_default.jpg',NULL);
+
+/*Table structure for table `interviewrecord` */
+
 DROP TABLE IF EXISTS `interviewrecord`;
+
 CREATE TABLE `interviewrecord` (
   `interviewId` int(11) NOT NULL AUTO_INCREMENT,
   `empId` int(11) NOT NULL COMMENT 'employee id',
   `jsId` int(11) NOT NULL COMMENT 'job seeker id',
   `jobId` int(11) NOT NULL COMMENT 'job id0',
-  `cvId` int(11) NOT NULL COMMENT 'cover id',
+  `cvId` int(11) NOT NULL COMMENT 'cv id',
   `interviewTime` varchar(20) COLLATE utf8_bin NOT NULL,
   `phone` varchar(15) COLLATE utf8_bin NOT NULL,
   `memo` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT 'fail(0), No interview(1), success(2)',
-  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`interviewId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`interviewId`),
+  KEY `empId` (`empId`),
+  KEY `jsId` (`jsId`),
+  KEY `jobId` (`jobId`),
+  KEY `cvId` (`cvId`),
+  CONSTRAINT `interviewrecord_ibfk_1` FOREIGN KEY (`empId`) REFERENCES `employer` (`empId`),
+  CONSTRAINT `interviewrecord_ibfk_2` FOREIGN KEY (`jsId`) REFERENCES `jobseeker` (`jsId`),
+  CONSTRAINT `interviewrecord_ibfk_3` FOREIGN KEY (`jobId`) REFERENCES `job` (`jobId`),
+  CONSTRAINT `interviewrecord_ibfk_4` FOREIGN KEY (`cvId`) REFERENCES `cv` (`cvId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of interviewrecord
--- ----------------------------
-INSERT INTO `interviewrecord` VALUES ('1', '6', '1', '1', '8', '29/3/2014 09:30', '13544106275', 'please don\'t later', '1', '2014-03-23 23:06:57');
-INSERT INTO `interviewrecord` VALUES ('2', '6', '1', '1', '18', '29/3/2014 13:00', '13544106275', 'test', '1', '2014-03-23 23:08:09');
-INSERT INTO `interviewrecord` VALUES ('3', '6', '1', '1', '17', '31/3/2014 23:27', '13544106275', 'fdsfdsfds', '1', '2014-03-31 23:27:12');
-INSERT INTO `interviewrecord` VALUES ('4', '6', '1', '1', '18', '31/3/2014 23:30', '13544106275', 'test', '1', '2014-03-31 23:30:44');
+/*Data for the table `interviewrecord` */
 
--- ----------------------------
--- Table structure for job
--- ----------------------------
+insert  into `interviewrecord`(`interviewId`,`empId`,`jsId`,`jobId`,`cvId`,`interviewTime`,`phone`,`memo`,`status`,`createTime`) values (8,1,32,18,25,'25/4/2014 01:42','0139798','sfd',1,'2014-04-13 01:42:19'),(24,6,41,61,35,'1/4/2014 16:43','sdf','trre',0,'2014-04-22 16:43:35');
+
+/*Table structure for table `job` */
+
 DROP TABLE IF EXISTS `job`;
+
 CREATE TABLE `job` (
   `jobId` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(40) COLLATE utf8_bin DEFAULT NULL,
   `jobDesc` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `startDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `address` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `phone` varchar(20) COLLATE utf8_bin NOT NULL,
   `numPosition` int(11) DEFAULT NULL,
   `requirement` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `salary` int(11) DEFAULT NULL,
@@ -247,48 +162,26 @@ CREATE TABLE `job` (
   `jobCategoryId` int(11) DEFAULT NULL,
   `skillCategoryId` int(11) DEFAULT NULL,
   PRIMARY KEY (`jobId`),
-  KEY `empId` (`empId`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `empId` (`empId`),
+  KEY `countyId` (`countyId`),
+  KEY `countryId` (`countryId`),
+  KEY `districtId` (`districtId`),
+  KEY `jobCategoryId` (`jobCategoryId`),
+  KEY `skillCategoryId` (`skillCategoryId`),
+  CONSTRAINT `job_ibfk_1` FOREIGN KEY (`empId`) REFERENCES `employer` (`empId`),
+  CONSTRAINT `job_ibfk_2` FOREIGN KEY (`countyId`) REFERENCES `area` (`areaId`),
+  CONSTRAINT `job_ibfk_3` FOREIGN KEY (`countryId`) REFERENCES `area` (`areaId`),
+  CONSTRAINT `job_ibfk_4` FOREIGN KEY (`districtId`) REFERENCES `area` (`areaId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of job
--- ----------------------------
-INSERT INTO `job` VALUES ('1', 'lecturer', 'lecturer', '2014-02-28 21:56:56', 'DIT', '0138989', '2', 'experiences required', '40000', '6', '1', '4', '20', null, null);
-INSERT INTO `job` VALUES ('2', 'Advertising', 'advertising', '2014-03-19 22:06:07', 'Bolton st', '0137878', '1', 'expereinces required', '30000', '1', '1', '4', '20', null, null);
-INSERT INTO `job` VALUES ('12', 'Designer', 'Designer', '2014-03-28 21:58:50', 'Malahide', '013878', '1', 'experiences required', '30000', '9', '1', '4', '20', null, null);
-INSERT INTO `job` VALUES ('13', 'barman', 'barman', '2014-03-27 22:00:08', 'Aungier St', '0134898', '1', 'minimum 2 years experiences', '35000', '9', '1', '4', '20', null, null);
-INSERT INTO `job` VALUES ('14', 'Database administrator', 'administrator', '2015-02-05 22:11:15', 'Belfast', '0145365456', '1', 'minimum two years experiences', '40000', '1', '2', null, null, null, null);
-INSERT INTO `job` VALUES ('17', 'Database administrator', 'lecturer', '2014-02-28 22:36:16', 'DBS', '353871234776', '2', 'minimum two years experiences', '40000', '1', '1', '4', '20', null, null);
-INSERT INTO `job` VALUES ('18', 'business support', 'support', '2014-03-27 22:51:15', 'DCU', '0145365456', '1', 'minimum two years experiences', '40000', '1', '1', '31', '32', null, null);
-INSERT INTO `job` VALUES ('19', 'UI Designer', 'Designer', '2014-03-12 23:00:00', 'DCU', '01304384', '1', 'minimum two years experiences', '40000', '1', '1', '31', '32', null, null);
-INSERT INTO `job` VALUES ('20', '', '', '2014-03-07 23:08:40', '', '', null, '', null, '1', '1', '31', '25', null, null);
-INSERT INTO `job` VALUES ('21', 'Lecturer', 'lecturer', '2014-03-07 23:08:40', 'DCU', '353871234776', '1', 'minimum two years experiences', '40000', '1', '2', '27', '28', null, null);
-INSERT INTO `job` VALUES ('22', 'Lecturer', 'lecturer', '2014-03-07 23:08:40', 'DCU', '353871234776', '1', 'minimum two years experiences', '40000', '1', '2', '27', '28', null, null);
-INSERT INTO `job` VALUES ('27', '.Net developer', 'asp. web services', '2014-02-27 15:15:09', 'Datalex', '0138787', '1', '', null, '1', '2', '24', '26', null, null);
-INSERT INTO `job` VALUES ('28', '.Net developer', 'asp. web services', '2014-02-27 15:15:09', 'Datalex', '0138787', '1', '', null, '1', '2', null, null, null, null);
-INSERT INTO `job` VALUES ('29', '.Net developer', 'asp. web services', '2014-02-27 15:15:09', 'Datalex', '0138787', '1', '', null, '1', '2', null, null, null, null);
-INSERT INTO `job` VALUES ('31', 'graduate developer', 'junior developer', '2014-04-30 15:23:47', 'College green', '0145365456', '1', 'minimum two years experiences', '40000', '1', '1', '31', '35', null, null);
-INSERT INTO `job` VALUES ('32', 'graduate developer', 'junior developer', '2014-04-30 15:23:47', 'College green', '0145365456', '1', 'minimum two years experiences', '40000', '1', '1', '31', '35', null, null);
-INSERT INTO `job` VALUES ('33', 'Junior developer', '.Net', '2014-03-07 15:28:45', 'Ballsbridge', '353871234776', '1', 'minimum two years experiences', '40000', '1', '2', '24', '25', null, null);
-INSERT INTO `job` VALUES ('34', 'Junior developer', '.Net', '2014-03-07 15:28:45', 'Ballsbridge', '353871234776', '1', 'minimum two years experiences', '40000', '1', '2', '24', '25', null, null);
-INSERT INTO `job` VALUES ('35', 'graduate developer', 'J2EE', '2014-02-28 15:35:46', 'College green', '353871234776', '1', 'minimum two years experiences', '40000', '1', '1', '31', '32', null, null);
-INSERT INTO `job` VALUES ('36', 'lecturer', 'lecturer', '2014-02-27 13:20:29', '5 Stewart Hall', '353871234776', '1', '2.1 ', '40000', '1', '1', '31', '35', null, null);
-INSERT INTO `job` VALUES ('37', 'lecturer', 'lecturer', '2014-02-27 13:20:29', '5 Stewart Hall', '353871234776', '1', '2.1 ', '40000', '1', '1', null, null, null, null);
-INSERT INTO `job` VALUES ('41', 'Lecturer', 'lecturer', '2014-03-07 13:25:12', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '2', '23', '37', null, null);
-INSERT INTO `job` VALUES ('43', 'l', 'l', '2014-02-13 13:26:47', '5 Stewart Hall', '353871234776', null, '', null, '1', '1', '4', '20', null, null);
-INSERT INTO `job` VALUES ('44', 'Test', 'Test', '2014-03-18 15:35:09', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '1', '31', '0', null, null);
-INSERT INTO `job` VALUES ('45', 'Technical Support', 'support analysis', '2014-04-15 17:52:10', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '1', '31', '32', null, null);
-INSERT INTO `job` VALUES ('46', 'Tester', 'Tester', '2014-04-15 17:57:50', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '1', '31', '36', null, null);
-INSERT INTO `job` VALUES ('48', 'l', 'df', '2014-03-10 18:19:23', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '1', '31', '32', null, null);
-INSERT INTO `job` VALUES ('57', '.Net developer', 'asp. web services', '2014-03-27 19:06:43', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '2', '24', '25', null, null);
-INSERT INTO `job` VALUES ('58', '.Net developer', 'asp. web services', '2014-03-20 19:09:59', '5 Stewart Hall', '353871234776', '1', 'minimum two years experiences', '40000', '1', '1', '31', '36', null, null);
-INSERT INTO `job` VALUES ('59', 'lecturer', 'lecturer', '2014-03-19 13:13:29', '5 Stewart Hall', '353871234776', '1', '2.1 ', '40000', '1', '1', '31', '32', null, null);
-INSERT INTO `job` VALUES ('62', 'test', 'test', '2014-04-01 22:51:47', 'test', '123456', '2', 'test', '5000', '6', '2', '27', '28', '1', '2');
+/*Data for the table `job` */
 
--- ----------------------------
--- Table structure for jobseeker
--- ----------------------------
+insert  into `job`(`jobId`,`title`,`jobDesc`,`address`,`createTime`,`phone`,`numPosition`,`requirement`,`salary`,`empId`,`countryId`,`countyId`,`districtId`,`jobCategoryId`,`skillCategoryId`) values (1,'Child Minder','Child Minder','Creche & Montessori Schools','2014-03-02 16:55:25','',0,'experiences required',40000,6,1,4,20,23,24),(2,'Advertising','advertising','Bolton st','2014-01-14 16:55:25','0137878',1,'expereinces required',30000,1,1,4,20,21,22),(12,'Designer','Designer','Malahide','2014-04-01 16:55:25','013878',1,'experiences required',30000,9,1,4,20,5,6),(13,'barman','barman','Aungier St','2014-04-11 16:55:25','0134898',1,'minimum 2 years experiences',35000,9,1,4,20,19,20),(14,'Database administrator','administrator','Belfast','2014-03-01 16:55:25','0145365456',1,'minimum two years experiences',40000,1,1,3,33,1,4),(17,'Database administrator','lecturer','DBS','2014-02-01 16:55:25','353871234776',2,'minimum two years experiences',40000,1,1,4,20,1,4),(18,'business support','support','DCU','2014-01-23 16:55:25','0145365456',0,'minimum two years experiences',40000,1,32,3,32,1,2),(19,'UI Designer','Designer','DCU','2014-01-01 16:55:25','01304384',1,'minimum two years experiences',40000,1,1,3,32,1,2),(27,'.Net developer','asp. web services','Datalex','2014-04-01 16:55:25','0138787',1,'',NULL,1,2,24,26,1,2),(28,'.Net developer','asp. web services','Datalex','2013-12-18 16:55:25','0138787',1,'',NULL,1,1,3,32,1,2),(29,'.Net developer','asp. web services','Datalex','2014-01-13 16:55:25','0138787',1,'',NULL,1,1,3,33,1,2),(31,'graduate developer','junior developer','College green','2014-04-01 16:55:25','0145365456',1,'minimum two years experiences',40000,1,1,3,35,1,2),(32,'graduate developer','junior developer','College green','2014-03-11 16:55:25','0145365456',1,'minimum two years experiences',40000,1,1,3,35,1,2),(33,'Junior developer','.Net','Ballsbridge','2014-01-21 16:55:25','353871234776',1,'minimum two years experiences',40000,1,2,24,25,1,2),(34,'Junior developer','.Net','Ballsbridge','2014-02-01 16:55:25','353871234776',1,'minimum two years experiences',40000,1,2,24,25,1,2),(35,'graduate developer','J2EE','College green','2013-11-30 16:55:25','353871234776',1,'minimum two years experiences',40000,1,1,3,32,1,2),(57,'.Net developer','asp. web services','5 Stewart Hall','2014-04-02 16:55:25','353871234776',1,'minimum two years experiences',40000,1,2,24,25,1,2),(58,'.Net developer','asp. web services','5 Stewart Hall','2014-04-01 16:55:25','353871234776',1,'minimum two years experiences',40000,1,1,3,36,1,2),(59,'lecturer','lecturer','5 Stewart Hall','2014-03-04 16:55:25','353871234776',1,'2.1 ',40000,1,1,3,32,1,2),(60,'Database administrator','web services','DIT','2014-04-01 16:55:25','01304384',2,'minimum two years experiences',40000,6,33,3,32,1,2),(61,'Designer','product design','DIT','2014-02-24 16:55:25','0138787',2,'2.1 ',40000,6,37,23,37,5,6),(62,'J2EE Developer','J2EE Developer','D2','2014-03-24 16:55:25','353871234776',1,'minimum two years experiences',30000,6,1,3,32,1,2),(63,'Teacher','Teacher','IBAT','2014-02-11 16:55:25','0145365456',1,'2.1 ',40000,6,37,23,37,5,6),(64,'Hospitality Manager','Practical experiences required','5 Stewart Hall','2014-04-12 21:29:28','353871234776',1,'Practical experiences required',40000,1,1,3,32,19,20),(67,'Interior Designer','Interior Designer','Dublin','2013-12-10 22:09:06','01349798',1,'experiences required',30000,8,1,3,36,5,6),(68,'lecturer','asp. web services','5 Stewart Hall','2014-04-23 14:48:44','353871234776',NULL,'minimum two years experiences',NULL,6,1,3,41,1,2),(69,'Developer','23423','123','2014-04-23 15:02:03','353871234776',1,'minimum two years experiences',40000,6,1,3,32,1,2),(70,'Developer','23423','123','2014-04-23 15:21:26','353871234776',1,'minimum two years experiences',40000,6,32,3,32,1,2);
+
+/*Table structure for table `jobseeker` */
+
 DROP TABLE IF EXISTS `jobseeker`;
+
 CREATE TABLE `jobseeker` (
   `jsId` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8_bin NOT NULL,
@@ -298,192 +191,88 @@ CREATE TABLE `jobseeker` (
   `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `expectedSalary` int(11) DEFAULT NULL,
+  `status` int(4) DEFAULT '0',
+  `image` varchar(50) COLLATE utf8_bin DEFAULT 'default.jpg',
+  `loginTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`jsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of jobseeker
--- ----------------------------
-INSERT INTO `jobseeker` VALUES ('1', 'xiuzhen', 'xiuzhen', 'Danny', 'Danny', 'xiu.z@hotmail.com', '8656', '50000');
-INSERT INTO `jobseeker` VALUES ('4', 'a', 'www', 'Jeff', 'jefff', 'ccc@hotmail.com', '04376', '40000');
-INSERT INTO `jobseeker` VALUES ('5', 'aa', 'cc', 'ccc', '', 'ccc@hotmail.com', '0871234776', '40000');
-INSERT INTO `jobseeker` VALUES ('6', 'aa', 'c', 'ccc', '', 'ccc@hotmail.com', '0871234776', '40000');
-INSERT INTO `jobseeker` VALUES ('7', 'www', 'www', 'www', 'r', 'www@hotmail.com', '0871234776', '40000');
-INSERT INTO `jobseeker` VALUES ('8', 'jeff', 'jeff', 'jefff', 'Aungier stt', 'jeff@hotmail.com', '08712347766', '40001');
-INSERT INTO `jobseeker` VALUES ('9', 'r', 'r', 'r', 'r', 'r@hotmail.com', '1111111', '40000');
-INSERT INTO `jobseeker` VALUES ('10', '4', 'r', 'linda', 'bolton st', '4@hotmail.com', '22222', '50000');
-INSERT INTO `jobseeker` VALUES ('12', '1', '1', 'James', 'James st', '11@hotmail.com', '34890', '50000');
-INSERT INTO `jobseeker` VALUES ('13', 'zhenzhen', 'z', 'zhen', 'aa', 'xiuzhen1103@gmail.com', '32423', '30000');
-INSERT INTO `jobseeker` VALUES ('14', 'Micheal', 'xiuzhen', 'micheal', 'Crumlin', 'micheal@gmail.com', '453909', '234242');
-INSERT INTO `jobseeker` VALUES ('15', 'snail', 'xiuzhen', 'snail', 'China', 'snail@gmail.com', '2342342', '30894');
-INSERT INTO `jobseeker` VALUES ('16', 'test11', 'xiuzhen', 'Xiu', '5 Stewart Hall', 'xiu@hotmail.com', '0134589', '300055');
-INSERT INTO `jobseeker` VALUES ('17', 'test111', 'a, a', 'Xiu', '5 Stewart Hall', 'xiuu@hotmail.com', '0134589', '300055');
-INSERT INTO `jobseeker` VALUES ('18', 'test1111', 'aa, aa', 'Xiu', '5 Stewart Hall', 'xiuuu@hotmail.com', '0134589', '300055');
-INSERT INTO `jobseeker` VALUES ('19', 'test11111', '1, 1', 'Xiu', '5 Stewart Hall', 'xiuuu1@hotmail.com', '0134589', '300055');
-INSERT INTO `jobseeker` VALUES ('20', 'test111111', '1, 1', 'Xiu', '5 Stewart Hall', 'xiuuu11@hotmail.com', '0134589', '300055');
-INSERT INTO `jobseeker` VALUES ('21', 'test22', 't', 'test', 'test', 'test2@gmail.com', '01321978', '2418709');
-INSERT INTO `jobseeker` VALUES ('22', 'xiuzhen2', 'aa', 'aa', 'aa', '1aa@gmail.co,', '0134829', '2343534');
-INSERT INTO `jobseeker` VALUES ('23', 'xiuzhen21', '1', 'aa', 'aa', '1aa@gmail.com', '', null);
-INSERT INTO `jobseeker` VALUES ('24', 'xiuzhenaa', 'a', 'aa', 'Danny', 'xiu.z@', '', null);
-INSERT INTO `jobseeker` VALUES ('26', 'xiuzhenaaff', '1', '1', '1', 'xiu.z11@hotmail.com', '353871234776', '30000');
-INSERT INTO `jobseeker` VALUES ('27', 'xiuzhenaaffa', 'a', '1', '1', 'xiu.z1a1@hotmail.com', '353871234776', '30000');
-INSERT INTO `jobseeker` VALUES ('28', 'xiuzhen11q', 'a', 'Xiuzhen Chen', '5 Stewart Hall', 'xiu.zaaa@hotmail.com', '353871234776', '30000');
-INSERT INTO `jobseeker` VALUES ('29', 'xiuzhen111', '1', '1', '1', '1@gmail.com', '01546546', '30000');
-INSERT INTO `jobseeker` VALUES ('30', 'xiuzhen1111', '1', '1', '1', '13@gmail.com', '01546546', '30000');
-INSERT INTO `jobseeker` VALUES ('31', 'xiuzhen1100', 'q', 'q', 'q@gmail.com', 'q@gmail.com', '1343', '30000');
-INSERT INTO `jobseeker` VALUES ('32', 'xiuzhen1100', 'q', 'q', 'q@gmail.com', 'q@gmail.com', '1343', '30000');
-INSERT INTO `jobseeker` VALUES ('33', 'xiuzhen11234', '1', '1', '1', 'xiu.z1211@hotmail.com', '1343', '30000');
-INSERT INTO `jobseeker` VALUES ('34', 'xiuzhen112341', '1', '1', '1', 'xiu.z121111@hotmail.com', '1343', '30000');
-INSERT INTO `jobseeker` VALUES ('35', 'xiu111', '1', '1', '12@gmail.com', '12@gmail.com', '013989', '30000');
-INSERT INTO `jobseeker` VALUES ('36', 'xiuzhen11134', '1', 'Xiuzhen Chen', '5 Stewart Hall', 'sdd@gmail.com', '353871234776', '30000');
-INSERT INTO `jobseeker` VALUES ('37', 'xiuzhen11s', 's', 's', 's@', 'sdddd@gmail.com', '34890', '50000');
-INSERT INTO `jobseeker` VALUES ('38', 'test11211', '1', 'Xiuzhen Chen', '5 Stewart Hall', 'xiu.dz@hotmail.com', '353871234776', '30000');
+/*Data for the table `jobseeker` */
 
--- ----------------------------
--- Table structure for jobseekerskill
--- ----------------------------
+insert  into `jobseeker`(`jsId`,`username`,`password`,`name`,`address`,`email`,`phone`,`expectedSalary`,`status`,`image`,`loginTime`) values (1,'xiuzhen','xiuzhen','Linda','Bolton St','xiu.z@hotmail.com','01878656',50000,0,'1_cat.jpg','2014-04-28 23:49:20'),(4,'a','www','Jeff','jefff','ccc@hotmail.com','01987897',40000,0,'upload/default.jpg',NULL),(26,'xiuzhenaaff','1','1','1','xiu.z11@hotmail.com','353845245676',30000,0,'upload/default.jpg',NULL),(27,'xiuzhenaaffa','a','1','1','xiu.z1a1@hotmail.com','35383145645',30000,0,'upload/default.jpg',NULL),(28,'xiuzhen11q','a','Xiuzhen Chen','5 Stewart Hall','xiu.zaaa@hotmail.com','35385456546',30000,0,'upload/default.jpg',NULL),(29,'xiuzhen111','1','1','1','1@gmail.com','01546546',30000,0,'upload/default.jpg',NULL),(30,'xiuzhen1111','1','1','1','13@gmail.com','01546546',30000,0,'upload/default.jpg',NULL),(32,'xiuzhen1100','q','q','q@gmail.com','q@gmail.com','017981343',30000,0,'upload/default.jpg',NULL),(33,'xiuzhen11234','1','1','1','xiu.z1211@hotmail.com','04541343',30000,0,'upload/default.jpg',NULL),(39,'yuanyong','1234','xiuzhen','xiuzhen','yuanyong@gmai..com','014897398',30000,0,'upload/default.jpg',NULL),(41,'Angelico','1','angelico','DIT','xiuzhen1103@gmail.com','01374989',3000,0,'upload/default.jpg',NULL),(42,'s','1','1','DIT','xiu.z28@hotmail.com','013435436',30000,0,'upload/default.jpg',NULL),(88,'xiuzhen2434','1','Xiuzhen Chen','5 Stewart Hall','angelico3343@gmail.com','353871234776',30000,0,'88_26866090c9a6d17.jpg','2014-04-22 16:02:04'),(92,'test3','1','Linda','','xiu.z@hotmail.com','1343',30000,0,'default.jpg','2014-04-28 23:09:00');
+
+/*Table structure for table `jobseekerskill` */
+
 DROP TABLE IF EXISTS `jobseekerskill`;
+
 CREATE TABLE `jobseekerskill` (
   `jobSeekerSkillId` int(11) NOT NULL AUTO_INCREMENT,
   `skillId` int(11) DEFAULT NULL,
   `jsId` int(11) DEFAULT NULL,
   PRIMARY KEY (`jobSeekerSkillId`),
   KEY `skillId` (`skillId`),
-  KEY `jsId` (`jsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `jsId` (`jsId`),
+  CONSTRAINT `jobseekerskill_ibfk_2` FOREIGN KEY (`skillId`) REFERENCES `skill` (`skillId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of jobseekerskill
--- ----------------------------
-INSERT INTO `jobseekerskill` VALUES ('7', '1', '26');
-INSERT INTO `jobseekerskill` VALUES ('8', '2', '26');
-INSERT INTO `jobseekerskill` VALUES ('10', '2', '27');
-INSERT INTO `jobseekerskill` VALUES ('12', '1', '27');
-INSERT INTO `jobseekerskill` VALUES ('13', '1', '28');
-INSERT INTO `jobseekerskill` VALUES ('15', '1', '29');
-INSERT INTO `jobseekerskill` VALUES ('16', '2', '29');
-INSERT INTO `jobseekerskill` VALUES ('17', '1', '30');
-INSERT INTO `jobseekerskill` VALUES ('18', '2', '30');
-INSERT INTO `jobseekerskill` VALUES ('19', '2', '31');
-INSERT INTO `jobseekerskill` VALUES ('20', '1', '31');
-INSERT INTO `jobseekerskill` VALUES ('21', '1', '32');
-INSERT INTO `jobseekerskill` VALUES ('22', '2', '32');
-INSERT INTO `jobseekerskill` VALUES ('23', '2', '33');
-INSERT INTO `jobseekerskill` VALUES ('24', '1', '33');
-INSERT INTO `jobseekerskill` VALUES ('25', '2', '34');
-INSERT INTO `jobseekerskill` VALUES ('27', '1', '34');
-INSERT INTO `jobseekerskill` VALUES ('28', '4', '35');
-INSERT INTO `jobseekerskill` VALUES ('30', '3', '36');
-INSERT INTO `jobseekerskill` VALUES ('31', '2', '36');
-INSERT INTO `jobseekerskill` VALUES ('54', '1', '1');
-INSERT INTO `jobseekerskill` VALUES ('55', '3', '1');
-INSERT INTO `jobseekerskill` VALUES ('56', '3', '37');
-INSERT INTO `jobseekerskill` VALUES ('57', '1', '37');
-INSERT INTO `jobseekerskill` VALUES ('58', '1', '38');
-INSERT INTO `jobseekerskill` VALUES ('59', '2', '38');
-INSERT INTO `jobseekerskill` VALUES ('65', '2', '1');
-INSERT INTO `jobseekerskill` VALUES ('66', '5', '39');
-INSERT INTO `jobseekerskill` VALUES ('67', '1', '40');
+/*Data for the table `jobseekerskill` */
 
--- ----------------------------
--- Table structure for jobskill
--- ----------------------------
+insert  into `jobseekerskill`(`jobSeekerSkillId`,`skillId`,`jsId`) values (7,1,26),(8,2,26),(10,2,27),(12,1,27),(13,1,28),(15,1,29),(16,2,29),(17,1,30),(18,2,30),(19,2,31),(20,1,31),(21,1,32),(22,2,32),(23,2,33),(24,1,33),(25,2,34),(27,1,34),(28,4,35),(29,3,35),(30,3,36),(31,2,36),(56,3,37),(57,1,37),(58,1,38),(59,2,38),(60,4,39),(63,1,40),(65,9,41),(66,1,42),(67,2,42),(72,9,4),(73,10,4),(173,2,1),(175,1,1);
+
+/*Table structure for table `jobskill` */
+
 DROP TABLE IF EXISTS `jobskill`;
+
 CREATE TABLE `jobskill` (
   `jobSkillId` int(11) NOT NULL AUTO_INCREMENT,
   `jobId` int(11) DEFAULT NULL,
   `skillId` int(11) DEFAULT NULL,
   PRIMARY KEY (`jobSkillId`),
   KEY `jobId` (`jobId`),
-  KEY `skillId` (`skillId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `skillId` (`skillId`),
+  CONSTRAINT `jobskill_ibfk_1` FOREIGN KEY (`skillId`) REFERENCES `skill` (`skillId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of jobskill
--- ----------------------------
-INSERT INTO `jobskill` VALUES ('1', '57', '2');
-INSERT INTO `jobskill` VALUES ('2', '57', '3');
-INSERT INTO `jobskill` VALUES ('3', '58', '4');
-INSERT INTO `jobskill` VALUES ('4', '58', '3');
-INSERT INTO `jobskill` VALUES ('5', '59', '3');
-INSERT INTO `jobskill` VALUES ('6', '59', '1');
-INSERT INTO `jobskill` VALUES ('9', '62', '3');
-INSERT INTO `jobskill` VALUES ('10', '62', '1');
+/*Data for the table `jobskill` */
 
--- ----------------------------
--- Table structure for pastexperience
--- ----------------------------
-DROP TABLE IF EXISTS `pastexperience`;
-CREATE TABLE `pastexperience` (
-  `pxId` int(11) NOT NULL AUTO_INCREMENT,
-  `jobDescription` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `duty` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `empName` varchar(30) COLLATE utf8_bin DEFAULT NULL,
-  `email` varchar(30) COLLATE utf8_bin DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `address` varchar(80) COLLATE utf8_bin DEFAULT NULL,
-  `startDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `endDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `reasonForLeave` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `jsId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`pxId`),
-  KEY `jsId` (`jsId`),
-  CONSTRAINT `pastexperience_ibfk_1` FOREIGN KEY (`jsId`) REFERENCES `jobseeker` (`jsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+insert  into `jobskill`(`jobSkillId`,`jobId`,`skillId`) values (1,57,2),(2,57,3),(3,58,4),(4,58,3),(5,59,3),(6,59,1),(7,60,3),(8,60,1),(9,60,2),(10,61,10),(11,61,9),(12,1,16),(13,1,17),(14,2,14),(15,2,15),(16,12,9),(17,13,12),(18,13,13),(19,14,18),(20,14,19),(21,17,19),(22,17,20),(23,17,21),(24,18,1),(25,18,2),(26,18,3),(27,19,2),(28,19,3),(29,19,1),(30,27,1),(31,27,3),(32,28,3),(33,28,4),(34,29,1),(35,29,2),(36,31,3),(37,31,4),(38,32,1),(39,32,2),(40,33,5),(41,33,3),(42,34,1),(43,34,2),(44,35,4),(45,35,2),(46,62,1),(47,62,2),(48,62,3),(49,63,9),(50,64,12),(51,64,13),(52,65,12),(53,66,10),(54,67,11),(55,67,10),(56,68,2),(57,68,1),(58,68,1),(61,68,1),(66,69,1),(75,70,2),(76,70,1),(79,71,2),(80,71,1),(81,72,1),(82,72,2);
 
--- ----------------------------
--- Records of pastexperience
--- ----------------------------
-INSERT INTO `pastexperience` VALUES ('1', 'waitress', 'barmaid', 'Mary', 'mary@gmail.com', '03473892', 'Foley st', '2013-11-09 20:51:35', '2014-10-10 20:51:38', 'holidays', '1');
-INSERT INTO `pastexperience` VALUES ('5', 'reception', 'greeting, appointment', 'Eva', 'eva@gmail.com', '03473892', 'Foley st', '2013-12-05 11:24:18', '2014-10-27 21:17:02', 'bored', '1');
-INSERT INTO `pastexperience` VALUES ('9', 'reception', 'intern', 'Mayr', 'mary@gmail.com', '013487', 'Aungier St', '2011-12-13 21:48:46', '2013-12-09 21:48:51', 'holidays', '1');
+/*Table structure for table `skill` */
 
--- ----------------------------
--- Table structure for skill
--- ----------------------------
 DROP TABLE IF EXISTS `skill`;
+
 CREATE TABLE `skill` (
   `skillId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) COLLATE utf8_bin NOT NULL,
   `skillCategoryId` int(11) NOT NULL,
   PRIMARY KEY (`skillId`),
-  KEY `skillCategoryId` (`skillCategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `skillCategoryId` (`skillCategoryId`),
+  CONSTRAINT `skill_ibfk_1` FOREIGN KEY (`skillCategoryId`) REFERENCES `skillcategory` (`skillCategoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of skill
--- ----------------------------
-INSERT INTO `skill` VALUES ('1', 'Java', '2');
-INSERT INTO `skill` VALUES ('2', '.Net', '2');
-INSERT INTO `skill` VALUES ('3', 'J2EE', '2');
-INSERT INTO `skill` VALUES ('4', 'C#', '2');
-INSERT INTO `skill` VALUES ('5', 'Web Service', '3');
-INSERT INTO `skill` VALUES ('6', 'Asp', '3');
-INSERT INTO `skill` VALUES ('7', 'DBA', '3');
-INSERT INTO `skill` VALUES ('8', 'Test', '1');
+/*Data for the table `skill` */
 
--- ----------------------------
--- Table structure for skillcategory
--- ----------------------------
+insert  into `skill`(`skillId`,`name`,`skillCategoryId`) values (1,'Java',2),(2,'.Net',2),(3,'J2EE',2),(4,'C#',2),(5,'ABAP',2),(6,'Selenium',3),(7,'JBehave',3),(8,'JUnit',3),(9,'Furniture',6),(10,'CAD',6),(11,'Graphic Composition',6),(12,'Customer Skills',20),(13,'IELTS certificate',20),(14,'Computer Design Packages',22),(15,'Customer Skills',22),(16,'TESOL certificate',24),(17,'FETAC in Childcare ',24),(18,'SQL',4),(19,'Oracle',4),(20,'HANA',4),(21,'MANGO',4),(22,'',0),(23,'Test',2);
+
+/*Table structure for table `skillcategory` */
+
 DROP TABLE IF EXISTS `skillcategory`;
+
 CREATE TABLE `skillcategory` (
   `skillCategoryId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `parentId` int(11) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
-  PRIMARY KEY (`skillCategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  PRIMARY KEY (`skillCategoryId`),
+  KEY `parentId` (`parentId`),
+  CONSTRAINT `skillcategory_ibfk_1` FOREIGN KEY (`parentId`) REFERENCES `skillcategory` (`skillCategoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of skillcategory
--- ----------------------------
-INSERT INTO `skillcategory` VALUES ('1', 'Software Development', null, '0');
-INSERT INTO `skillcategory` VALUES ('2', 'Progamm', '1', '1');
-INSERT INTO `skillcategory` VALUES ('3', '.Net', '1', '0');
-INSERT INTO `skillcategory` VALUES ('4', 'Mechanic', '1', '1');
-INSERT INTO `skillcategory` VALUES ('5', 'Design', '1', '0');
-INSERT INTO `skillcategory` VALUES ('6', 'Design', '6', '1');
-INSERT INTO `skillcategory` VALUES ('7', 'Design', '1', '1');
-INSERT INTO `skillcategory` VALUES ('8', 'Product Design', '1', '1');
-INSERT INTO `skillcategory` VALUES ('9', 'Home Service', '4', '1');
-INSERT INTO `skillcategory` VALUES ('19', 'Engineering', null, '0');
+/*Data for the table `skillcategory` */
+
+insert  into `skillcategory`(`skillCategoryId`,`name`,`parentId`,`level`) values (0,' ',0,0),(1,'Software Development',NULL,0),(2,'Progamm',1,1),(3,'Testing',1,1),(4,'DB Development',1,1),(5,'Design',NULL,0),(6,'Interior Design',5,1),(7,'Indutrial Design',5,1),(8,'Product Design',5,1),(9,'Home Service',5,1),(19,'Hopitality',NULL,0),(20,'Bar & Restaurant',19,1),(21,'Marketing',NULL,0),(22,'Advertisings',21,1),(23,'Education',NULL,0),(24,'Child Care',23,1),(25,'Design',1,0);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

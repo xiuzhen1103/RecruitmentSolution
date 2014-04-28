@@ -28,7 +28,7 @@ Hello <s:property value="#session.admin.username"/><br/>
     <ol class="breadcrumb" >
   <li><a href="userManager/admin.jsp">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
+ <li><a href="<%=basePath%>report/report.jsp">Statistic</a>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>

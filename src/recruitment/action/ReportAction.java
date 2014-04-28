@@ -21,11 +21,10 @@ public class ReportAction extends ActionSupport {
     private JFreeChart chart;
 
     public JFreeChart getChart() {
-        chart = ChartFactory.createPieChart3D("Jobseeker Employment statistics", getDataset(), true, false, false);
+        chart = ChartFactory.createPieChart3D("Jobseeker Employment Statistics", getDataset(), true, false, false);
         PiePlot3D plot = (PiePlot3D) chart.getPlot();
         plot.setForegroundAlpha(0.6f);
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}: ({2})"));
-
         return chart;
     }
 

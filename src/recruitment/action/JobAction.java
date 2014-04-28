@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import recruitment.model.Area;
 import recruitment.model.CV;
+import recruitment.model.Employer;
 import recruitment.model.Job;
 import recruitment.model.JobSeeker;
 import recruitment.model.JobSeekerSkill;
@@ -43,6 +44,7 @@ public class JobAction extends ActionSupport {
 	private List<Area> listCountys;
 	private List<Area> listDistricts;
 	private List<Area> listCountrys;
+	private List<Area> listIrelandCountys;
 	private AreaManager am;
 	private Area area;
 	private SkillCategory skillCategory;
@@ -126,6 +128,13 @@ public class JobAction extends ActionSupport {
 		return "list";
 	}
 	
+	public String listForAdmin() throws Exception {
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.listCountrys = am.listCountrys(area);
+		this.jobs = jm.getJobsForAdmin(this.job);
+		return "listForAdmin";
+	}
+	
 	public String sortJob() throws Exception {
 		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		this.listCountrys = am.listCountrys(area);
@@ -156,11 +165,34 @@ public class JobAction extends ActionSupport {
 		return "sortJobForAdmin";
 	}
 	
+	public List<Area> getIreland() throws Exception {
+		
+		return listIrelandCountys;
+	}
+	
+	
 	public String first() throws Exception {
 		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		
 		this.listCountrys = am.listCountrys(area);
+		//this.listIrelandCountys = am.listIrelandCounties(area);
+		
+		job.setJobCategory(skillCategory);
+		//job.setCountyId(area);
+		job.setCountryId(area);
 		this.jobs = jm.getJobs(this.job);
 		return "first";
+	}
+	
+	public String first1() throws Exception {
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		
+		this.listCountrys = am.listCountrys(area);
+		
+		job.setJobCategory(skillCategory);
+		job.setCountryId(area);
+		this.jobs = jm.getJobs(this.job);
+		return "first1";
 	}
 
 	public String listEmpJob() throws Exception {
@@ -229,7 +261,8 @@ public class JobAction extends ActionSupport {
 			int count = 0;
 			for (Integer i : skillIds) {
 				for (Integer j : jSkillIds) {
-					if (i == j) {
+					
+					if (i!= null && i.equals(j)) {
 						count ++;
 					}
 				}
@@ -489,9 +522,13 @@ public class JobAction extends ActionSupport {
 		this.sort = sort;
 	}
 
+	public List<Area> getListIrelandCountys() {
+		return listIrelandCountys;
+	}
 
-	
-	
-	
+	public void setListIrelandCountys(List<Area> listIrelandCountys) {
+		this.listIrelandCountys = listIrelandCountys;
+	}
+
 
 }

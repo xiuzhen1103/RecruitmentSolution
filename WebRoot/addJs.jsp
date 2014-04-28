@@ -83,7 +83,6 @@ or
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
   <li class="active">News</li>
- <li><a href="report" target="_blank" >Statistic</a></li>
 <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -92,7 +91,7 @@ or
 
   <div id="reg">
  <div id="displayTip" class="displayNone"></div>  
-    <form name="register" method="post" action="js.action" id="form2" enctype="multipart/form-data" onsubmit="return job_validateForm();">
+    <form name="register" method="post" action="js.action" id="form2" enctype="multipart/form-data" onsubmit="return validateForm();">
       <div class="panel panel-primary">
 		<div class="panel-heading">
           <h3 class="panel-title">Jobseeker Register</h3>
@@ -152,11 +151,11 @@ or
         </tr>
         
         <tr>
-          <td><span class="style1">Choose File:</span></td>
-          <td><input type="file" name="upload" class="formstyle">
+          <td><span class="style1">Profile Picture:</span></td>
+          <td><input type="file" name="upload" class="formstyle" id="image"> 
+          <font color="#F9481C" id="image_hint"></font>
        </td>
         </tr>
-        
         
         <tr>
         <td> <span class="style1" >Job Category:</span></td>
@@ -194,6 +193,12 @@ or
             <span style="color:#F9481C" id="skill_hint"></span>
 		</td>
 		</tr>
+		
+		<tr>
+          <td align="left"><span class="style1">&nbsp;</span></td>
+          <td><s:if test="tips != null"><font color="red">${tips}</font></s:if>
+          </td>
+        </tr>
   
     <tfoot>
         <tr>

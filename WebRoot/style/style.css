@@ -121,6 +121,13 @@ input[type="submit"]{
    width: 400px;
 }
 
+.footer {
+	width: 800px;
+	height:150px;
+	margin:0 auto;
+	padding-left: 160px;
+}
+
 
 
     

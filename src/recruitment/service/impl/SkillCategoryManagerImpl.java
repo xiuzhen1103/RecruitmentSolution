@@ -24,7 +24,6 @@ public class SkillCategoryManagerImpl implements SkillCategoryManager {
 	@Override
 	public void add(SkillCategory sc) throws Exception {
 		skillCategoryDao.save(sc);
-
 	}
 
 	@Override
@@ -43,13 +42,11 @@ public class SkillCategoryManagerImpl implements SkillCategoryManager {
 	}
 	@Override
 	public boolean update(SkillCategory skillCategory) throws Exception {
-		// TODO Auto-generated method stub
 		return skillCategoryDao.updateSkillCategory(skillCategory.getSkillCategoryId(), skillCategory.getName());
 	}
 	@Override
 	public List<SkillCategory> listMainSkillCategory(SkillCategory sc)
 			throws Exception {
-		// TODO Auto-generated method stub
 		return skillCategoryDao.listMainSkillCategory(sc);
 	}
 	

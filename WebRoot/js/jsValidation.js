@@ -68,17 +68,39 @@ $(function(){
 		}
 	});
 	
-	$('#date').blur(function(){
+	$('#title').blur(function(){
 		var date = $('#title').val();
 		if (date==null || date==""){
-			$('#date').addClass('bred');
-			$('#date_hint').html("<span class='formtips onSuccess'>" + "title invalid "+  "</span>");
+			$('#title').addClass('bred');
+			$('#title_hint').html("<span class='formtips onSuccess'>" + "title invalid "+  "</span>");
 		} else {
-			$('#date').addClass('bgreen');
-			$('#date_hint').html("");
+			$('#title').addClass('bgreen');
+			$('#title_hint').html("");
 		}
 	});
 	
+	$('#requirement').blur(function(){
+		var name = $('#requirement').val();
+		if (name==null || name==""){
+			$('#requirement').addClass('bred');
+			$('#requirement_hint').html("<span class='formtips onSuccess'>" + "name invalid "+  "</span>");
+		} else {
+			$('#requirement').addClass('bgreen');
+			$('#requirement_hint').html("");
+		}
+	});
+	
+	
+	$('#image').blur(function(){
+		var image = $('#image').val();
+		if (isImage(image)){
+			$('#image').addClass('bgreen');
+			$('#image_hint').html("");
+		} else {
+			$('#image').addClass('bred');
+			$('#image_hint').html("<span class='formtips onSuccess'>" + "image invalid "+  "</span>");
+		}
+	});
 	
 	$('#email').blur(function(){
 		var email = $('#email').val();
@@ -103,10 +125,19 @@ $('#emp_email').blur(function(){
 });
 });
 
+function isImage(str){
+	if (str == null || str == "")
+		return true;
+	
+    return /\.(jpg|png|gif)$/ig.test(str);
+}
+
+
 function isEmail(str){
     var reg = /^[a-zA-Z0-9]+(\.)*[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-    return reg.test(str);
+    return reg.test(str);	
 }
+
 
 function checkUsername() {
 	var username = $('#username').val();
@@ -190,14 +221,26 @@ function checkEmpEmail() {
 }
 
 function validateForm() {
+	
 	$('input[need="true"]').each(function(i, dom){
 		var val = $(dom).val();
 		if (null == val || '' == val) {
 			$(dom).addClass('bred');
+			return false;
 		} else {
 			$(dom).addClass('bgreen');
 		}
 	});
+	
+	var image = $('#image').val();
+	if (isImage(image)){
+		$('#image').addClass('bgreen');
+		$('#image_hint').html("");
+	} else {
+		$('#image').addClass('bred');
+		$('#image_hint').html("<span class='formtips onSuccess'>" + "image invalid "+  "</span>");
+		return false;
+	}
 	
 	var category = $('#category').val();
 	if (null == category || '' == category) {
@@ -226,10 +269,12 @@ function job_validateForm() {
 		var val = $(dom).val();
 		if (null == val || '' == val) {
 			$(dom).addClass('bred');
+			return false;
 		} else {
 			$(dom).addClass('bgreen');
 		}
 	});
+	return false;
 	
 	var category = $('#category').val();
 	if (null == category || '' == category) {
@@ -248,7 +293,7 @@ function job_validateForm() {
 		$('#skill_hint').html("<span class='formtips onSuccess'>please select skills</span>");
 		return false;
 	}
-
+	  
 }
 
 

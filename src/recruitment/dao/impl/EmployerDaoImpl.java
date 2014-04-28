@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import recruitment.dao.EmployerDao;
 import recruitment.model.Employer;
+import recruitment.model.JobSeeker;
 
 
 @Component("employerDao")
@@ -126,7 +127,7 @@ public class EmployerDaoImpl implements EmployerDao{
 	@Override
 	public boolean updateEmp(Integer empId, String phone, String conatctName,
 			String companyName, String address, String webSite,
-			Integer companySize, String companyType) throws DataAccessException{
+			Integer companySize, String companyType, String image) throws DataAccessException{
 		Employer emp = (Employer) this.hibernateTemplate.load(Employer.class, empId);
 		if(emp!=null) {
 		emp.setPhone(phone);
@@ -136,6 +137,7 @@ public class EmployerDaoImpl implements EmployerDao{
 		emp.setWebSite(webSite);
 		emp.setCompanySize(companySize);
 		emp.setCompanyType(companyType);
+		emp.setImage(image);
 		this.hibernateTemplate.saveOrUpdate(emp);
 		return true;
 		}
@@ -152,6 +154,18 @@ public class EmployerDaoImpl implements EmployerDao{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Employer> sortEmpByParamAsc(String sort)
+			throws DataAccessException {
+		return (List<Employer>) this.hibernateTemplate.find("From Employer e order by e."+ sort + " asc");
+	}
+
+	@Override
+	public List<Employer> sortEmpByParamDesc(String sort)
+			throws DataAccessException {
+		return (List<Employer>) this.hibernateTemplate.find("From Employer e order by e."+ sort + " desc");
 	}
 	
 	

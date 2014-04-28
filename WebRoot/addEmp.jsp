@@ -39,7 +39,6 @@ or
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
   <li class="active">News</li>
- <li><a href="report" target="_blank" >Statistic</a></li>
 <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -47,7 +46,7 @@ or
 </div>	
   <div id="reg">
   <div id="displayTip" class="displayNone"></div>  
-    <form name="register" method="post" action="emp.action" id="form2" onsubmit="return emp_validateForm();">
+    <form name="register" method="post" action="emp.action" id="form2" enctype="multipart/form-data" onsubmit="return emp_validateForm();">
      <div class="panel panel-primary">
 		<div class="panel-heading">
           <h3 class="panel-title">Employer Register</h3>
@@ -106,7 +105,7 @@ or
         </tr>
          <tr>
 
-         <td><span class="style1">WebSite:</span></td>
+         <td><span class="style1">Web Site:</span></td>
           <td><input name="emp.webSite" type="text" id="webSite" class="formstyle">
    		  </td>
         </tr>
@@ -121,6 +120,13 @@ or
           <td><input name="emp.companyType" type="text" id="companyType" class="formstyle">
    		</td>
         </tr>
+        
+        <tr>
+          <td><span class="style1">Profile Picture:</span></td>
+          <td><input type="file" name="upload" name="emp.image"  value="<s:property value='emp.image' />" class="formstyle">
+       </td>
+        </tr>
+        
         <tfoot>
         <tr>
           <td colspan="2">

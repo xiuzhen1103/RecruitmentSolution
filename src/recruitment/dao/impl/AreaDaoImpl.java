@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import recruitment.dao.AreaDao;
 import recruitment.model.Area;
+import recruitment.model.Job;
 
 @Component("areaDao")
 public class AreaDaoImpl implements AreaDao {
@@ -74,6 +75,14 @@ public class AreaDaoImpl implements AreaDao {
 			return query.list();
 		}
 	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Area> listIrelandCounties(Area area) throws DataAccessException {
+		return (List<Area>) this.hibernateTemplate.find("From Area a where a.parentArea.areaId=1 and a.level=1");
+		}
+	
+	
+	
 	public List<Area> getAreas(Area area) throws DataAccessException {
 		StringBuffer hql = new StringBuffer();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -122,14 +131,12 @@ public class AreaDaoImpl implements AreaDao {
 	}
 
 	@Override
-	public boolean updateArea(Integer areaId, String areaName, List<Area> area,
-			 String latitude, String longitude)throws DataAccessException {
+	public boolean updateArea(Integer areaId, String areaName, List<Area> area )throws DataAccessException {
 		Area a = (Area) this.hibernateTemplate.load(Area.class,areaId);
 		if(a!=null) {
 			a.setAreaName(areaName);
 			a.setAreas(area);
-			a.setLatitude(latitude);
-			a.setLongitude(longitude);
+
 			this.hibernateTemplate.saveOrUpdate(a);
 			return true;
 		}

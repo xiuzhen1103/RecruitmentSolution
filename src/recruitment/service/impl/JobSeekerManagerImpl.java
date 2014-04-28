@@ -60,7 +60,7 @@ public class JobSeekerManagerImpl implements JobSeekerManager {
 	@Override
 	public boolean update(JobSeeker js) throws Exception {
 		return jobSeekerDao.updateJs(js.getJsId(), js.getName(), js.getAddress(), 
-				js.getPhone(), js.getExpectedSalary());
+				js.getPhone(), js.getExpectedSalary(), js.getImage(), js.getCheckboxes());
 	}
 
 	@Override

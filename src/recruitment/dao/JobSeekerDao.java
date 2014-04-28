@@ -17,7 +17,7 @@ public interface JobSeekerDao {
 	public JobSeeker jsAuthenticate(String email, String password) throws DataAccessException;
 	public boolean deleteJs(Integer jsId) throws DataAccessException;
 	public boolean updateJs(Integer jsId,String name,String address,
-			String phone, Integer expectedSalary) throws DataAccessException;
+			String phone, Integer expectedSalary, String image, Integer[] checkbox) throws DataAccessException;
 	public JobSeeker loadByEmail(JobSeeker js) throws DataAccessException;
 	public boolean updatePassword(Integer jsId,String currentPassword, String password, String password2) throws DataAccessException;
 	//public List<JobSeeker> getJsByJobCategory(JobSeeker js) throws DataAccessException;

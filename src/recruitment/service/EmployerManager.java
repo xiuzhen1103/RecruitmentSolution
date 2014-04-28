@@ -22,5 +22,9 @@ public abstract boolean checkEmpUsernameExists(Employer emp) throws Exception;
 	public boolean update(Employer emp) throws Exception;
 	
 	public boolean updatePassword(Employer emp, String currentPassword) throws Exception;
+
+	public  List<Employer> sortEmpByParamAsc(String sort);
+
+	public  List<Employer> sortEmpByParamDesc(String sort);
 	
 }

@@ -3,91 +3,86 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
 	"http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
+	<constant name="struts.multipart.maxSize" value="100000000" />
 	<package name="recruitment" extends="struts-default">
 		<global-results>
 			<result name="Exception">/common/exception.jsp</result>
 		</global-results>
-
 		<global-exception-mappings>
 			<exception-mapping result="Exception"
 				exception="java.lang.RuntimeException"></exception-mapping>
 		</global-exception-mappings>
-		
 		<action name="job1" class="job" method="logged">
 			<result name="logged" type="redirectAction">job!first</result>
 		</action>
-
 		<action name="js" class="js">
+			<result name="success_register">/loginJs.jsp</result>
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="load">/preUpdateJs.jsp</result>
 			<result name="detail">/jsDetail.jsp</result>
 			<result name="get">/jsProfile.jsp</result>
+			<result name="jGet">/updateJsProfile.jsp</result>
 			<result name="list">/listJobSeeker.jsp</result>
 			<result name="logout" type="chain">job1</result>
 			<result name="registerJs">/addJs.jsp</result>
 			<result name="lisOneCV">/jsDetail.jsp</result>
 			<result name="sortJs">//userManager/listJobSeeker.jsp</result>
 			<result name="listJsForAdmin">/userManager/listJobSeeker.jsp</result>
-			
 		</action>
-		
-		<action name="searchJsByEmail" class="js" >
+		<action name="searchJsByEmail" class="js">
 			<result name="loadByEmail">/preLoginJs.jsp</result>
 		</action>
-
 		<action name="job2" class="job" method="logged">
 			<result name="logged">/jsLogged.jsp</result>
 		</action>
-				
 		<action name="jsLogin" class="js" method="isLogin">
 			<result name="success" type="chain">job2</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="login">/loginJs.jsp</result>
 		</action>
-				
-		<action name="jsCheckUsername" class="js" method="checkUsernameExist"/>
-		<action name="jsCheckEmail" class="js" method="checkEmailExist"/>
-		
+		<action name="jsCheckUsername" class="js" method="checkUsernameExist" />
+		<action name="jsCheckEmail" class="js" method="checkEmailExist" />
 		<action name="job1" class="job" method="logout">
-			<result name="logout" type="redirectAction">job!first</result>
+		<result name="logout" type="redirectAction">job!first</result>
 		</action>
-		
 		<action name="jsLogout" class="js" method="logout">
 			<result name="logout" type="chain">job1</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="success">/success.jsp</result>
-		</action>
-		
+		</action> 
 		<action name="updateJs" class="js" method="updateJs">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">job!logged</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="update">/updateJs.jsp</result>
 		</action>
-		
 		<action name="updateJsPassword" class="js" method="updatePassword">
+			<result name="success" type="redirectAction">job!logged</result>
+			<result name="fail">/fail.jsp</result>
+			<result name="input">/updateJsPassword.jsp</result>
+		</action>
+		<action name="checkCPassword" class="js" method="checkCPassword">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
+			<result name="input">/updateJsPassword.jsp</result>
 		</action>
-
 		<action name="deleteJs" class="js" method="delete">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="delete">/deleteJs.jsp</result>
 		</action>
-
 		<action name="emp" class="emp">
+			<result name="success_register">/loginEmp.jsp</result>
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="list">/userManager/listEmployer.jsp</result>
 			<result name="load">/preUpdateEmp.jsp</result>
 			<result name="get">/empProfile.jsp</result>
+			<result name="eGet">/updateEmpProfile.jsp</result>
 			<result name="logout" type="chain">job1</result>
+			<result name="sortEmp">//userManager/listEmployer.jsp</result>
 		</action>
-		
-		<action name="empCheckUsername" class="emp" method="checkUsernameExist"/>
-		<action name="empCheckEmail" class="emp" method="checkEmailExist"/>
-
+		<action name="empCheckUsername" class="emp" method="checkUsernameExist" />
+		<action name="empCheckEmail" class="emp" method="checkEmailExist" />
 		<action name="ir" class="ir">
 			<result name="preResult">/updateInterviewRecord.jsp</result>
 			<result name="preSend">/sendInterviewRecord.jsp</result>
@@ -97,117 +92,103 @@
 			<result name="listMySend">/listMyInterviewRecord.jsp</result>
 			<result name="success" type="redirectAction">ir!listSend</result>
 		</action>
-
 		<action name="searchEmp" class="emp" method="loadById">
 			<result name="load">/searchEmpById.jsp</result>
 		</action>
-		<!-- 
+		<!-- <action name="empLog" class="js" method="listByJc"> <result name="listByJc">/listJobSeeker.jsp</result> 
+			</action> -->
 		<action name="empLog" class="js" method="listByJc">
 			<result name="listByJc">/listJobSeeker.jsp</result>
 		</action>
-		-->
-		<action name="empLog" class="js" method="listByJc">
-			<result name="listByJc">/listJobSeeker.jsp</result>
-		</action>
-		
 		<action name="empLogin" class="emp" method="isLogin">
 			<result name="success" type="chain">empLog</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="login">/loginEmp.jsp</result>
 		</action>
-
 		<action name="deleteEmp" class="emp" method="delete">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="delete">/deleteEmp.jsp</result>
 		</action>
-
 		<action name="updateEmp" class="emp" method="updateEmp">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="chain">empLog</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="update">/updateEmp.jsp</result>
 		</action>
-		
 		<action name="updateEmpPassword" class="emp" method="updatePassword">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 		</action>
-		
+		<action name="checkEmpPassword" class="emp" method="checkEmpPassword">
+			<result name="success">/success.jsp</result>
+			<result name="fail">/fail.jsp</result>
+		</action>
 		<action name="admin" class="admin">
 			<result name="logout">/userManager/adminLogin.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="success">/success.jsp</result>
 		</action>
-
 		<action name="adminLogin" class="admin" method="isLogin">
 			<result name="success">/userManager/admin.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="login">/userManager/adminLogin.jsp</result>
 		</action>
-		
 		<action name="empLog" class="js" method="listByJc">
 			<result name="listByJc">/listJobSeeker.jsp</result>
 		</action>
-		
 		<action name="cv" class="cv">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">/cv!list</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="addCV">/addCV.jsp</result>
 			<result name="list">/listCV.jsp</result>
+			<result name="load">/preUpdateCV.jsp</result>
 		</action>
-		
-		<action name="uploadCV" class="cv" method="upload">
-			<result name="upload">/success.jsp</result>
+		<action name="uploadCV" class="cv" method="update">
+			<result name="success">/success.jsp</result>
+			<result name="input">/addCV.jsp</result>
 		</action>
-		
 		<action name="downLoadCV" class="cv" method="downLoadCV">
 			<result name="success">/success.jsp</result>
-		</action>
-		
-		<action name="updateCV" class="cv" method="update">
-			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="cvUpdate">/updateCV.jsp</result>
 		</action>
+		<action name="updateCV" class="cv" method="update">
+			<result name="success" type="redirectAction">cv!list</result>
+			<result name="fail">/fail.jsp</result>
 		
+		</action>
 		<action name="deleteCV" class="cv" method="delete">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="deleteCV">/deleteCV.jsp</result>
+
 		</action>
-		
 		<action name="area" class="area">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">area!list</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="addArea">/userManager/addArea.jsp</result>
 			<result name="load">/userManager/preUpdateArea.jsp</result>
 			<result name="list">/userManager/listArea.jsp</result>
 		</action>
-		
 		<action name="deleteArea" class="area" method="delete">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">area!list</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="deleteArea">/DeleteArea.jsp</result>
 		</action>
-		
 		<action name="updateArea" class="area" method="update">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">area!list</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="updateArea">/updateArea.jsp</result>
 		</action>
-		
 		<action name="searchArea" class="area" method="loadById">
 			<result name="load">/searchAreaById.jsp</result>
 		</action>
-		
 		<action name="job" class="job">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="list">/userManager/listJob.jsp</result>
+			<result name="listForAdmin">/userManager/listJob.jsp</result>
 			<result name="listEmpJob">/listEmpJob.jsp</result>
 			<result name="listCVByJsId">/listCVbyJsId.jsp</result>
 			<result name="listAppliedJs">listAppliedJs.jsp</result>
 			<result name="first">/welcome.jsp</result>
+			<result name="first1">/first.jsp</result>
 			<result name="logged">/jsLogged.jsp</result>
 			<result name="detail">/jobDetail.jsp</result>
 			<result name="delete">/deleteJob.jsp</result>
@@ -217,48 +198,41 @@
 			<result name="sortJob">/welcome.jsp</result>
 			<result name="sortJobForAdmin">/userManager/listJob.jsp</result>
 		</action>
-		
 		<action name="listCountry" class="job" method="listCountry">
 		</action>
-
 		<action name="listDistrict" class="job" method="listDistrict">
 		</action>
-		
 		<action name="listSkillCategory" class="js" method="listSkillCategory">
 		</action>
-		
 		<action name="listSkill" class="js" method="listSkill">
 		</action>
 		<action name="listSubSkill" class="js" method="listSubSkillCategory">
 		</action>
-		
-		<action name="listSkills" class="job" method="listSkills"/>
-		<action name="listSkills2" class="job" method="listSkills2"/>
+		<action name="listSkills" class="job" method="listSkills" />
+		<action name="listSkills2" class="job" method="listSkills2" />
 		<action name="listSubSkills" class="job" method="listSubSkillCategorys">
 		</action>
 		<action name="listSkillCategorys" class="job" method="listSkillCategorys">
 		</action>
-		
+		<action name="arealistCountry" class="area" method="listCountry">
+		</action>
+		<action name="arealistDistrict" class="area" method="listDistrict">
+		</action>
 		<action name="getSkills" class="jsskill" method="listSkill">
 		</action>
 		<action name="getSubSkills" class="jsskill" method="listSubSkillCategory">
 		</action>
 		<action name="getSkillCategorys" class="jsskill" method="listSkillCategory">
 		</action>
-		
-
 		<action name="updateJob" class="job" method="update">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="update">/updateJob.jsp</result>
 		</action>
-		
 		<action name="deleteJob" class="job" method="delete">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="delete">/deleteJob.jsp</result>
 		</action>
-		
 		<action name="sc" class="sc">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
@@ -266,13 +240,10 @@
 			<result name="list">/userManager/listSkillCategory.jsp</result>
 			<result name="load">/userManager/preUpdateSc.jsp</result>
 		</action>
-		
 		<action name="updateSc" class="sc" method="update">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">sc!list</result>
 			<result name="fail">/fail.jsp</result>
-			<result name="update">/updateSc.jsp</result>
 		</action>
-		
 		<action name="sk" class="sk">
 			<result name="success">/success.jsp</result>
 			<result name="fail">/fail.jsp</result>
@@ -280,24 +251,20 @@
 			<result name="list">/userManager/listSkill.jsp</result>
 			<result name="load">/userManager/preUpdateSkill.jsp</result>
 		</action>
-		
 		<action name="updateSk" class="sk" method="update">
-			<result name="success">/success.jsp</result>
+			<result name="success" type="redirectAction">sk!list</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="update">/updateSkill.jsp</result>
 		</action>
-		
 		<action name="apply" class="apply">
 			<result name="success" type="redirectAction">job!logged</result>
 			<result name="fail">/fail.jsp</result>
 			<result name="login">/loginJs.jsp</result>
 			<result name="selectCV">/addApplyJob.jsp</result>
 		</action>
-
 		<action name="listJsSkill" class="jsskill" method="list">
 			<result name="list">/listJsSkill.jsp</result>
 		</action>
-
 		<action name="jsSkill" class="jsskill">
 			<result name="deleted" type="chain">listJsSkill</result>
 			<result name="fail">/fail.jsp</result>
@@ -306,16 +273,30 @@
 			<result name="list">/listJsSkill.jsp</result>
 			<result name="delete">/listJsSkill.jsp</result>
 		</action>
-
 	</package>
-    
-    <package name="report" extends="struts-default,jfreechart-default">
-        <action name="report" class="report">
-         <result name="success" type="chart">
-             <param name="height">400</param>
-             <param name="width">550</param>
-         </result>
-     </action>
-    </package>
+	<package name="report" extends="struts-default,jfreechart-default">
+		<action name="report" class="report">
+			<result name="success" type="chart">
+				<param name="height">400</param>
+				<param name="width">550</param>
+			</result>
+		</action>
+	</package>
+	<package name="report2" extends="struts-default,jfreechart-default">
+		<action name="report2" class="report2">
+			<result name="success" type="chart">
+				<param name="height">400</param>
+				<param name="width">550</param>
+			</result>
+		</action>
+	</package>
+	<package name="report3" extends="struts-default,jfreechart-default">
+		<action name="report3" class="report3">
+			<result name="success" type="chart">
+				<param name="height">400</param>
+				<param name="width">550</param>
+			</result>
+		</action>
+	</package>
+
 </struts>
-	

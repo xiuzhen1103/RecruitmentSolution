@@ -17,9 +17,7 @@ public class Area {
 	private List<Area> areas = new ArrayList<Area>();
 	private Area parentArea;
 	private Integer level;
-	private String latitude;
-	private String longitude;
-	
+
 	public Area() {}
 	
 	@Id
@@ -29,18 +27,6 @@ public class Area {
 	}
 	public void setAreaId(Integer areaId) {
 		this.areaId = areaId;
-	}
-	public String getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-	public String getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
 	}
 	
 	@OneToMany(mappedBy="parentArea")

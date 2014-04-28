@@ -1,5 +1,7 @@
 package recruitment.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -216,5 +218,14 @@ public class Job {
 		this.createTime = createTime;
 	}
 
-
+	public void setCreateTime2(String createTime) {
+		if (createTime != null && createTime.length() > 0) {
+			SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			try {
+				this.createTime = sdf.parse(createTime);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

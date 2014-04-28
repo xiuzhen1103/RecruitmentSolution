@@ -58,12 +58,20 @@ public class EmployerManagerImpl implements EmployerManager {
 	public boolean update(Employer emp) throws Exception{
 		return employerDao.updateEmp(emp.getEmpId(), emp.getPhone(), emp.getContactName(),
 				emp.getCompanyName(), emp.getAddress(), emp.getAddress(), 
-				emp.getCompanySize(), emp.getCompanyType());
+				emp.getCompanySize(), emp.getCompanyType(),emp.getImage());
 	}
 	@Override
 	public boolean updatePassword(Employer emp, String currentPassword)
 			throws Exception {
 		return employerDao.updatePassword(emp.getEmpId(), currentPassword, emp.getPassword(), emp.getPassword2());
+	}
+	@Override
+	public List<Employer> sortEmpByParamAsc(String sort) {
+		return employerDao.sortEmpByParamAsc(sort);
+	}
+	@Override
+	public List<Employer> sortEmpByParamDesc(String sort) {
+		return employerDao.sortEmpByParamDesc(sort);
 	}
 	
 }

@@ -1,15 +1,20 @@
 package recruitment.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import recruitment.dao.InterviewRecordDao;
+import recruitment.model.CV;
 import recruitment.model.InterviewRecord;
 
 @Component("interviewRecordDao")
@@ -84,5 +89,23 @@ public class InterviewRecordDaoImpl implements InterviewRecordDao {
     public void updateInterviewRecord(InterviewRecord ir) throws DataAccessException {
         this.hibernateTemplate.update(ir);
     }
+    
+    @Override
+	public boolean deleteIr(final Integer irId) throws DataAccessException {
+		List<CV> cvs = hibernateTemplate.find("from InterviewRecord ir where ir.interviewId = '" + irId + "'");
+		if(cvs != null && cvs.size() > 0) {
+			hibernateTemplate.executeWithNativeSession(
+					new HibernateCallback() {
+						@Override
+						public Object doInHibernate(Session session)
+						throws HibernateException, SQLException {
+							return session.createQuery
+							("delete InterviewRecord ir where ir.interviewId='"+irId + "'").executeUpdate();
+						}					
+					});
+			return true;
+		}
+		return false;
+	}
 
 }

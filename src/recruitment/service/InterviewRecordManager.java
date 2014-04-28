@@ -8,13 +8,15 @@ import recruitment.model.InterviewRecord;
 
 public interface InterviewRecordManager {
 
-    InterviewRecord loadById(Integer InterviewId) throws DataAccessException;
+    public InterviewRecord loadById(Integer InterviewId) throws DataAccessException;
 
-    InterviewRecord loadByJobAndJsAndEmp(Integer jobId, Integer jsId, Integer empId) throws DataAccessException;
+    public InterviewRecord loadByJobAndJsAndEmp(Integer jobId, Integer jsId, Integer empId) throws DataAccessException;
 
-    void addIR(InterviewRecord interviewRecord) throws DataAccessException;
+    public  void addIR(InterviewRecord interviewRecord) throws DataAccessException;
 
-    List<InterviewRecord> loadIRs(InterviewRecord ir) throws DataAccessException;
+    public List<InterviewRecord> loadIRs(InterviewRecord ir) throws DataAccessException;
 
-    boolean update(InterviewRecord ir) throws DataAccessException;
+    public boolean update(InterviewRecord ir) throws DataAccessException;
+    
+    public boolean delete(InterviewRecord ir) throws DataAccessException;
 }

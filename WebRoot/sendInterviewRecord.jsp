@@ -26,14 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<p align="right">
-			Hello
-			<s:property value="#session.employer.username" />
-			<br />
-			<a
-				href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
-			<a href="emp!logout.action">Logout</a>
-			<br />
-		</p>
+Hello <s:property value="#session.employer.username"/>
+<img src="upload/emp/<s:property value='#session.employer.image'/>" title="profile_image" alt="profile_image" height="50" width="50" >
+<a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
+<a href="emp!logout.action">Logout</a>
+</p>
 	<div class="banner" >
 
 </div>
@@ -44,9 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="empLog.action">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="report" target="_blank" >Statistic</a></li>
+ <li><a href="empLog.action">Home</a></li>
+  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Manage Job</a></li>
+  <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -59,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <input type="hidden" name="js.jsId" value="${js.jsId}"/>
    <table width="450" id="form1" height="263" border="0" align="left" cellpadding="0" cellspacing="0">
         <tr>
-          <th colspan="2">Send Interview Letter</th>
+          <th colspan="2">Send Interview Email</th>
         </tr>
 
          <tr>
@@ -89,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tr>
           <td colspan="2">
             <input name="back" type="button" onclick="history.back()" value="Back" >
-            <input name="submit" type="submit" value="Submit">
+            <input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
           </td>
         </tr>
         </tfoot>

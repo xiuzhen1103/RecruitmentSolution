@@ -26,7 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <p align="right">
-Hello <s:property value="#session.employer.username"/><br/>
+Hello <s:property value="#session.employer.username"/>
+<img src="upload/emp/<s:property value='#session.employer.image'/>" title="profile_image" alt="profile_image" height="50" width="50" >
 <a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
 <a href="emp!logout.action">Logout</a> <br/>
 </p> 
@@ -38,73 +39,71 @@ Hello <s:property value="#session.employer.username"/><br/>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="empLog.action">Home</a></li>
-  <li class="active" >News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
+  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Manage Job</a></li>
+    <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
   </div>
 </div>
   <div id="reg">
-
-   <form method="post" action="updateEmp" id="form1">
+<a href="emp!eGet?empId=<s:property value="#session.employer.empId" />"><img src="images/edit.png" title="edit" alt="edit" height="20" width="25" ></a>
+   <form method="post" action="updateEmp" id="form2">
    <input type="hidden" name="emp.empId" value="<s:property value='emp.empId'/>"><br>
     <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
         <tr>
-          <th colspan="2">Update Employer</th>
+          <th colspan="2" class="info">Employer Profile</th>
+          <img src="upload/emp/${emp.image}"  title="profile image" alt="profile image" height="80" width="80" >
+        </tr>
+        
+        <tr>
+          <td><span class="style1">User Name:</span></td>
+          <td><s:property value="emp.username"/></td>
         </tr>
 
         <tr>
           <td><span class="style1">Email:</span></td>
-          <td><input name="emp.email" type="text" id="email" value="<s:property value='emp.email'/>" readonly class="formstyle">
-          <font color="#F9481C">*</font></td>
+          <td><s:property value="emp.email"/></td>
         </tr>
          <tr>
           <td><span class="style1">Phone:</span></td>
-          <td><input name="emp.phone" type="text" id="phone" value="<s:property value='emp.phone'/>"  class="formstyle">
+          <td><s:property value='emp.phone'/>
           </td>
         </tr>
         
          <tr>
           <td><span class="style1">Contact Name:</span></td>
-          <td><input name="emp.contactName" type="text" id="contactName" value="<s:property value='emp.contactName'/>"  class="formstyle">
+          <td><s:property value='emp.contactName'/>
           </td>
         </tr>
         <tr>
           <td><span class="style1">Company Name:</span></td>
-          <td><input name="emp.companyName" type="text" id="companyName" value="<s:property value='emp.companyName'/>"  class="formstyle">
+          <td><s:property value='emp.companyName'/>
           </td>
         </tr>
          <tr>
           <td><span class="style1">Address:</span></td>
-          <td><input name="emp.address" type="text" id="address" value="<s:property value='emp.address'/>"  class="formstyle">
+          <td><s:property value='emp.address'/>
           </td>
         </tr>
          <tr>
           <td><span class="style1">WebSite:</span></td>
-          <td><input name="emp.webSite" type="text" id="webSite" value="<s:property value='emp.webSite'/>"  class="formstyle">
+          <td><s:property value='emp.webSite'/>
           </td>
         </tr>
         <tr>
         <td><span class="style1">Company Size:</span></td>
-          <td><input name="emp.companySize" type="text" id="companySize" value="<s:property value='emp.companySize'/>"  class="formstyle">
+          <td><s:property value='emp.companySize'/>
           </td>
         </tr>
         <tr>
         <td><span class="style1">Company Type:</span></td>
-          <td><input name="emp.companyType" type="text" id="companyType" value="<s:property value='emp.companyType'/>"  class="formstyle">
+          <td><s:property value='emp.companyType'/>	
           </td>
         </tr>
 
  <tfoot>
-        <tr>
-         <td colspan="2">
-   			<div align="center">
-         <input name="back" type="button" class="btn btn-sm btn-default"  onclick="history.back()" value="Back" >
-				<input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
-            </div> 
-          </td>
-        </tr>
+        
         </tfoot>
           </table>
           
@@ -112,9 +111,7 @@ Hello <s:property value="#session.employer.username"/><br/>
    		
 
 <font style="font-size: 17px;" > 
-    <a href="job!registerJob.action">Add Job</a> <br/>
-    <a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">View Posted Job</a> <br/>
-    <a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">View Send Interview Letter</a> <br/>
+<br />
     <a href="updateEmpPassword.jsp" target="_bank">Update Password</a> <br/>
 </font>
     </form>

@@ -52,7 +52,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 			JobSeeker js = (JobSeeker) session.getAttribute("user");
 			String js_email = js==null?null:js.getEmail();
 			
-			Employer emp = (Employer) session.getAttribute("emp_user");
+			Employer emp = (Employer) session.getAttribute("employer");
 			String emp_email = emp==null?null:emp.getEmail();
 			
 			Administrator admin = (Administrator) session.getAttribute("admin");

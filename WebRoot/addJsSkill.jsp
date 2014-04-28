@@ -84,7 +84,6 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
     <ol class="breadcrumb" >
   <li><a href="job!logged.action">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>

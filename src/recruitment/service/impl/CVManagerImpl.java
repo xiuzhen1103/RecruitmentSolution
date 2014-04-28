@@ -42,8 +42,8 @@ public class CVManagerImpl implements CVManager {
 		return cvDao.getCVbyJsId();
 	}
 	@Override
-	public CV loadByCVId(Integer cvId) throws Exception {
-		return cvDao.loadByCVId(cvId);
+	public CV loadByCVId(CV cv) throws Exception {
+		return cvDao.loadByCVId(cv.getCvId());
 	}
 	@Override
 	public List<CV> getOneCVDetail(Integer jsId) throws DataAccessException {

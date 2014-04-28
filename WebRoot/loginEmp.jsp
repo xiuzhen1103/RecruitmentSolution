@@ -34,7 +34,6 @@ or
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
     <li><a href="aboutUs.jsp">About Us</a></li>
 </ol>
 </div>

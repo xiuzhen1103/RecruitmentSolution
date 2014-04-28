@@ -41,6 +41,8 @@ public class CVAction extends ActionSupport implements ModelDriven{
 	private String name;
 	private File[] files;
 	private String filename;
+	private Integer cvId;
+	
 
 	public CVManager getCvm() {
 		return cvm;
@@ -90,7 +92,6 @@ public class CVAction extends ActionSupport implements ModelDriven{
 		this.cv = cv;
 	}
 
-
 	public String delete() throws Exception{
 		boolean deleted = cvm.deleteCV(cv);
 		if(deleted) {
@@ -104,7 +105,46 @@ public class CVAction extends ActionSupport implements ModelDriven{
 	}
 
 	public String update() throws Exception {
+		try{
+			JobSeeker js = (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
+ 			Integer id = js.getJsId();
+			ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
+			String path = rb.getString("cv_filename");
+			System.out.println(path);
+			filename = path+File.separator+this.getUploadFileName();
+			String[] strs = filename.split("\\\\");
+			StringBuffer sb = new StringBuffer();
+			for(int i = 0; i < strs.length; i ++){
+				if(i == strs.length-1)
+					sb.append(id+"_" );
+				sb.append(strs[i]);
+				if(i != strs.length-1)
+					sb.append("\\");
+			}
+			filename = sb.toString();
+			FileInputStream in = new FileInputStream(upload);
+			File destFile = new File(filename);
+			FileOutputStream out = new FileOutputStream(destFile);  
+			byte[]b = new byte[1024];  
+			int len = 0;  
+			while((len=in.read(b))>0){  
+				out.write(b,0,len);  
+			}  
+			in.close();
+			out.close();  
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		String title = filename.substring(filename.lastIndexOf("\\")+1);
+		cv.setCvTitle(title);
+		if (cv.getCvId() == null) {
+			cvm.addCV(cv);
+			
+			message = "update succeeded";
+			return "success";
+		}
 		boolean updated = cvm.updateCV(cv);
+		
 		if(updated) {
 			message = "update succeeded";
 			return "success";
@@ -114,6 +154,7 @@ public class CVAction extends ActionSupport implements ModelDriven{
 			return "failed";
 		}
 	}
+
 	public File getUpload() {
 		return upload;
 	}
@@ -142,29 +183,26 @@ public class CVAction extends ActionSupport implements ModelDriven{
 		return serialVersionUID;
 	}
 
-	public String upload()throws Exception{  
+	public String execute()throws Exception{  
 		try{
 			JobSeeker js = (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
 			Integer id = js.getJsId();
 			ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
-	    	String path = rb.getString("filename");
-			//String path = ServletActionContext.getServletContext().getRealPath();  
+			String path = rb.getString("cv_filename"); 
 			System.out.println(path);
 			filename = path+File.separator+this.getUploadFileName();
 			String[] strs = filename.split("\\\\");
 			StringBuffer sb = new StringBuffer();
-	        for(int i = 0; i < strs.length; i ++){
-	            if(i == strs.length-1)
-	                sb.append(id+"_" );
-	            sb.append(strs[i]);
-	            if(i != strs.length-1)
-	            	sb.append("\\");
-	        }
-	      filename = sb.toString();
-			//filename = id + "_" +filename;
+			for(int i = 0; i < strs.length; i ++){
+				if(i == strs.length-1)
+					sb.append(id+"_" );
+				sb.append(strs[i]);
+				if(i != strs.length-1)
+					sb.append("\\");
+			}
+			filename = sb.toString();
 			FileInputStream in = new FileInputStream(upload);
 			File destFile = new File(filename);
-			 //destFile.renameTo(new   File(filename+"." + id));
 			FileOutputStream out = new FileOutputStream(destFile);  
 			byte[]b = new byte[1024];  
 			int len = 0;  
@@ -179,10 +217,10 @@ public class CVAction extends ActionSupport implements ModelDriven{
 		String title = filename.substring(filename.lastIndexOf("\\")+1);
 		cv.setCvTitle(title);
 		cvm.addCV(cv);
-		return "upload";  
+		return "success";  
 	}
-	
-		 
+
+
 	public String list() throws Exception {
 		this.cvs = cvm.getCVByJsId();
 		return "list";	
@@ -190,42 +228,58 @@ public class CVAction extends ActionSupport implements ModelDriven{
 
 	@SuppressWarnings("deprecation")
 	public String downLoadCV() throws Exception{
-		  HttpServletRequest request = ServletActionContext.getRequest();
-		  HttpServletResponse response = ServletActionContext.getResponse();
-		  String fileName =request.getParameter("filename"); 
-		  fileName = new String(fileName.getBytes("iso-8859-1"),"utf-8");
-		  System.out.println("current file name>>>>>>:"+fileName);
-		  ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
-	    	String fullpath = rb.getString("filename") + "/" + fileName; 	
-	      //  String fullpath = ServletActionContext.getRequest().getRealPath("/upload")+"/"+fileName;
-	        InputStream in = null;
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String fileName =request.getParameter("filename"); 
+		fileName = new String(fileName.getBytes("iso-8859-1"),"utf-8");
+		System.out.println("current file name>>>>>>:"+fileName);
+		ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
+		String fullpath = rb.getString("cv_filename") + "/" + fileName; 	
+		InputStream in = null;
 
-	        	 try { 
-	                 in = new FileInputStream(fullpath); 
-	                 System.out.print(" read success"); 
-	                 response.reset();
-	                 response.setCharacterEncoding("utf-8");
-	                 ServletActionContext.getRequest().setCharacterEncoding("utf-8");
-	                 response.setContentType("application/x-pn-realmedia"); 
-	                 response.addHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileName,"UTF-8") + "\""); 
-	                 CopyUtils.copy(in, response.getOutputStream());
-	             } catch (FileNotFoundException e) { 
-	                 e.printStackTrace(); 
-	                 request.setAttribute("message", "file not exist"); 
-	             } catch (IOException e) { 
-	                 return null; 
-	             } catch (Exception e) { 
-	                 e.printStackTrace(); 
-	                 return null; 
-	             } finally { 
-	                 if (in != null) { 
-	                     try { 
-	                         in.close(); 
-	                     } catch (IOException e) { 
-	                         e.printStackTrace(); 
-	                     } 
-	                 } 
-	             } 
-	        return "success"; 
-	    } 
+		try { 
+			in = new FileInputStream(fullpath); 
+			System.out.print(" read success"); 
+			response.reset();
+			response.setCharacterEncoding("utf-8");
+			ServletActionContext.getRequest().setCharacterEncoding("utf-8");
+			response.setContentType("application/x-pn-realmedia"); 
+			response.addHeader("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileName,"UTF-8") + "\""); 
+			CopyUtils.copy(in, response.getOutputStream());
+		} catch (FileNotFoundException e) { 
+			e.printStackTrace(); 
+			request.setAttribute("message", "file not exist"); 
+		} catch (IOException e) { 
+			return null; 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+			return null; 
+		} finally { 
+			if (in != null) { 
+				try { 
+					in.close(); 
+				} catch (IOException e) { 
+					e.printStackTrace(); 
+				} 
+			} 
+		} 
+		return "success"; 
+	}
+
+	public String load() throws Exception {
+		this.cv = this.cvm.loadByCVId(cv);
+		return "load";
+	}
+	public Integer getCvId() {
+		return cvId;
+	}
+	public void setCvId(Integer cvId) {
+		this.cvId = cvId;
+	}
+
+	
+	
+
+
+
 }

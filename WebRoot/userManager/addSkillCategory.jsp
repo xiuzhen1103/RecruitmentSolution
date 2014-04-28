@@ -30,10 +30,16 @@ Hello <s:property value="#session.admin.username"/><br/>
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="userManager/admin.jsp">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
-    <li><a href="#">About Us</a></li>
+  <li>
+                        <a href="userManager/admin.jsp">Home</a>
+                    </li>
+                    <li class="active">News</li>
+                    <li>
+                        <a href="<%=basePath%>report/report.jsp">Statistic</a>
+                    </li>
+                    <li>
+                        <a href="aboutUs.jsp" target="_blank">About Us</a>
+                    </li>
 </ol>
 </div>
   </div>

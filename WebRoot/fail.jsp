@@ -33,13 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="#">Failed page</a></li>
+  <li>Failed page</li>
 </ol>
 </div>
   </div>
 </div>	
   <div align="center">
-  <img src="images/error.png" height="6 0" width="60">
+  <img src="images/error.jpg" height="260" width="260">
   
   <h3> <font color="#F9481C">Error Page!</font> </h3><br>
     <s:property value="message"/> <br />

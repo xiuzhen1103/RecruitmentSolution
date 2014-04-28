@@ -35,6 +35,7 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
     private List<InterviewRecord>  irs              = new ArrayList<InterviewRecord>();
  
     private String                 tips;
+    private String sort;
 
 
     public String preSend() {
@@ -80,8 +81,6 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
     
     private boolean isEmployed() throws Exception {
     	JobSeeker j = jsm.loadByJsId(ir.getJs().getJsId());
-    	System.out.println(">>>>>>>>" + ir.getJs().getJsId() );
-    	System.out.println(">>>>>>>>" + j.getStatus() );
     	return j.getStatus() == 1;	     	
     }
        
@@ -127,7 +126,6 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
         int status = ir.getStatus();
         ir = irManager.loadById(ir.getInterviewId());
         if (status == 0 || status == 1) {
-           // ir.getJs().setStatus(0);
             String subject = "Interview";
             String content = "We have completed our interviews at this stage and I am afraid you have not been successful.Thank you for coming in to see us and I wish you the best in your job hunting. \n Best Regards \n"   + ir.getEm().getCompanyName();
             this.sendEmailToJobSeeker(irManager.loadById(ir.getInterviewId()), subject, content);
@@ -152,7 +150,20 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
         irManager.update(ir);
         return "success";
     }
-
+    
+    public String delete() throws Exception{
+		boolean deleted = irManager.delete(ir);
+		if(deleted) {
+			tips="delete succeeded";
+			return "success";
+		}
+		else {
+			tips = "delete failed, Employer id is not exist";
+			return "fail";
+		}
+	}
+    
+   
     private Employer getEmployerFromSession() {
         return (Employer) ServletActionContext.getRequest().getSession().getAttribute("employer");
     }

@@ -25,10 +25,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <p align="right">
 Hello <s:property value="#session.jobSeeker.username"/>
-<img src=<s:property value="#session.jobSeeker.image"/> title="profile_image" alt="profile_image" height="30" width="30" >
+<img src="upload/js/<s:property value='#session.jobSeeker.image'/>" title="profile_image" alt="profile_image" height="30" width="30" >
 <a href="js!get?jsId=<s:property value="#session.jobSeeker.jsId"/> ">Profile</a> 
 <a href="js!logout.action">Logout</a>
 </p> 
+
 
 <div class="banner" >
 
@@ -40,8 +41,8 @@ Hello <s:property value="#session.jobSeeker.username"/>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="job!logged.action">Home</a></li>
-  <li class="active" >News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
+  <li><a href="cv!list.action" target="_bank">Manage CV</a> </li>
+   <li><a href="ir!listMySend">Interview History</a> </li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -86,7 +87,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
 		      <td width="10%" height="37" align="center"><b>Skill</b></td>
 		      <td width="5%" height="37" align="center"><b>Salary</b></td>
 		      <td width="5%" height="37" align="center"><b>Number of Position</b></td>
-		      <td width="5%" height="37" align="center"><b>Employer</b></td>
+		      <td width="5%" height="37" align="center"><b>Company Name</b></td>
 		      <td width="15%" height="37" align="center"><b>Create Time</b></td>
           </tr>
  	
@@ -141,7 +142,5 @@ Hello <s:property value="#session.jobSeeker.username"/>
           </s:iterator>
     </table>
     
-
-
 </body>
 </html>

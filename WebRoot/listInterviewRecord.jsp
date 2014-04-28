@@ -20,15 +20,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
  
   <body>
-  	<p align="right">
-			Hello
-			<s:property value="#session.employer.username" />
-			<br />
-			<a
-				href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
-			<a href="emp!logout.action">Logout</a>
-			<br />
-		</p>
+  	 <p align="right">
+Hello <s:property value="#session.employer.username"/>
+<img src="upload/emp/<s:property value='#session.employer.image'/>" title="profile_image" alt="profile_image" height="50" width="50" >
+<a href="emp!get?empId=<s:property value="#session.employer.empId"/> ">Profile</a>
+<a href="emp!logout.action">Logout</a>
+</p>
 	<div class="banner" >
 
 </div>
@@ -39,9 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="empLog.action">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="report" target="_blank" >Statistic</a></li>
+   <li><a href="empLog.action">Home</a></li>
+  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Post Job</a></li>
+  <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">View Interview Email</a> </li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -61,6 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <td width="15%" height="37" align="center"><b>Interview Time</b></td>
 		      <td width="15%" height="37" align="center"><b>Status</b></td>
 		      <td width="5%" height="37" align="center"><b>Update</b></td>
+		      <td width="5%" height="37" align="center"><b>Delete</b></td>
           </tr>
  	
           <s:iterator value="irs" id="j">
@@ -68,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		  <td align="center" ><a href="job!detail?job.jobId=${j.job.jobId}"><s:property value="#j.job.title" /></a></td>
     		  <td align="center" ><a href="js!detail?js.jsId=${j.js.jsId}"><s:property value="#j.js.username" /></a></td>
     		  <td align="center" ><s:property value="#j.js.phone" /></td>
-    		  <td align="center" ><s:property value="#j.cv.cvTitle" /></td>
+    		  <td align="center" ><a href="downLoadCV.action?filename=<s:property value='#j.cv.cvTitle' />"><s:property value="#j.cv.cvTitle" /></a></td>
         	  <td align="center" ><s:property value="#j.interviewTime" /></td>
         	  <td align="center" >
                 <s:if test="status == 1">
@@ -82,6 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </s:else>
               </td>
         	  <td><a href="ir!preUpdate?ir.interviewId=<s:property value="#j.interviewId" />"><img src="images/edit.png" title="edit" alt="edit" height="25" width="30" ></a></td>
+        	  <td><a href="ir!delete?ir.interviewId=<s:property value="#j.interviewId" />"><img src="images/delete.png" title="delete" alt="delete" height="20" width="25" ></a></td>
           </tr>
      </s:iterator>
     </table>

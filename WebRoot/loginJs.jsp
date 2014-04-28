@@ -34,7 +34,6 @@ or
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
     <li><a href="aboutUs.jsp">About Us</a></li>
 </ol>
 </div>
@@ -71,7 +70,7 @@ or
 <input type="submit" id="login" tabindex="4" name="submit" class="input-submit large" value="Login" />
 </p>
 <div class="separator"></div>
-<p class="no-account">Haven't Register,Yet? <a href="addJs.jsp" class="reg-now">Register</a></p>
+<p class="no-account">Haven't Register,Yet? <a href="js!registerJs.action" class="reg-now">Register</a></p>
 </form>
 </div>
 </div>

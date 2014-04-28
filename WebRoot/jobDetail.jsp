@@ -33,7 +33,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <ol class="breadcrumb" >
   <li><a href="javascript:history.back()">Back</a></li>
   <li class="active">News</li>
-  <li><a href="report" target="_blank" >Statistic</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -51,6 +50,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <s:set var="j" value="job"/>
 						<table width="400" height="263" border="0" align="left"
 							cellpadding="0" cellspacing="0">
+							
+							<tr>
+								<td>
+									<span class="style1">Profile Image:</span>
+								</td>
+								<td>
+								<img src="upload/emp/${j.employer.image}"  title="profile_image" alt="profile_image" height="120" width="120" >
+									
+								</td>
+							</tr>
+							
 							<tr>
 								<td>
 									<span class="style1">Job Title:</span>

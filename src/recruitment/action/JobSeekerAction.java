@@ -3,6 +3,7 @@ package recruitment.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,6 +20,7 @@ import recruitment.model.JobSeeker;
 import recruitment.model.Skill;
 import recruitment.model.SkillCategory;
 import recruitment.service.CVManager;
+import recruitment.service.DbDao;
 import recruitment.service.JobSeekerManager;
 import recruitment.service.SkillCategoryManager;
 import recruitment.service.SkillManager;
@@ -41,7 +43,6 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 	private SkillCategoryManager skillCategoryM;
 	private List<SkillCategory>  listMainSkillCategory;
 	private List<SkillCategory>  listSubSkillCategory;
-	// private SkillCategory skillCategory;
 	private Skill                skill;
 	private List<Skill>          listSkills;
 	private boolean              flag;
@@ -62,7 +63,9 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 	private File upload;  
 	private String filename;
 	private String uploadFileName;  
-
+	private String tips;
+	private DbDao dbDao;
+	
 
 	public SkillCategory getSkillCategory() {
 		return skillCategory;
@@ -109,13 +112,11 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 		this.jobseekers = um.getJobSeekersByEmpId(this.js, empId);
 		return "list";
 	}
-	
+
 	public String listJsForAdmin() throws Exception {
-		Integer id = null;
 		this.jobseekers = um.getJobSeekersForAdmin(this.js);
 		return "listJsForAdmin";
 	}
-	
 
 	public String listByJc() throws Exception {
 		Employer employer = this.getEmployerFromSession();
@@ -154,7 +155,7 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 
 		sms.sendTextMail(mailInfo);
 	}
-
+	
 	public String execute() throws Exception {
 		if (um.checkJsUsernameExists(js)) {
 			message = "user name is exist";
@@ -164,21 +165,73 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 			message = "email is exist";
 			return "fail";
 		}
-			try{
+		js.setImage("default.jpg");	
+		um.add(js);
+		Integer id=js.getJsId();
+		if(getUploadFileName()!=null) {
+		try{
+			ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
+	    	String path = rb.getString("js_filename");
+			System.out.println(path);
+			 filename = path+File.separator+this.getUploadFileName();
+			String[] strs = filename.split("\\\\");
+			
+			StringBuffer sb = new StringBuffer();
+	        for(int i = 0; i < strs.length; i ++){
+	            if(i == strs.length-1)
+	                sb.append(id+"_");
+	            sb.append(strs[i]);
+	            if(i != strs.length-1)
+	            	sb.append("\\");
+	        }
+	      filename = sb.toString();
+			FileInputStream in = new FileInputStream(upload);
+			File destFile = new File(filename);
+			FileOutputStream out = new FileOutputStream(destFile);  
+			byte[]b = new byte[1024];  
+			int len = 0;  
+			while((len=in.read(b))>0){  
+				out.write(b,0,len);  
+			}  
+			in.close();
+			out.close();  
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	String image = filename.substring(filename.lastIndexOf("\\")+1);
+
+		js.setImage(image);
+		um.add(js);
+		}
+		welcomeEmail();
+		return "success_register";
+	}
+	
+	public String updateJs() throws Exception {
+		JobSeeker j = (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
+			Integer id = js.getJsId();
+
+		js.setImage(j.getImage());
+		um.update(js);
+		message = "update succeeded";
+		
+		if(getUploadFileName()!=null) {
+			try{	
 				ResourceBundle rb = ResourceBundle.getBundle("uploadDirectory");
-		    	String path = rb.getString("filename");
+				String path = rb.getString("js_filename");
 				System.out.println(path);
-				 filename = path+File.separator+this.getUploadFileName();
+				filename = path+File.separator+this.getUploadFileName();
 				String[] strs = filename.split("\\\\");
+
 				StringBuffer sb = new StringBuffer();
-		        for(int i = 0; i < strs.length; i ++){
-		            if(i == strs.length-1)
-		                sb.append("upload/" );
-		            sb.append(strs[i]);
-		            if(i != strs.length-1)
-		            	sb.append("\\");
-		        }
-		      filename = sb.toString();
+				for(int i = 0; i < strs.length; i ++){
+					if(i == strs.length-1)
+						sb.append( id+"_");
+					sb.append(strs[i]);
+					if(i != strs.length-1)
+						sb.append("\\");
+				}
+				filename = sb.toString();
 				FileInputStream in = new FileInputStream(upload);
 				File destFile = new File(filename);
 				FileOutputStream out = new FileOutputStream(destFile);  
@@ -192,17 +245,26 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		String image = filename.substring(filename.lastIndexOf("\\")+1);
+			String image = filename.substring(filename.lastIndexOf("\\")+1);
 
-		js.setImage(image);
-		um.add(js);
-		welcomeEmail();
+			js.setImage(image);
+			um.update(js);
+		}
+		
 		return "success";
+		
 	}
+
 
 	public String get() throws Exception {
 		this.js = this.um.loadByJsId(js);
 		return "get";
+	}
+
+	public String jGet() throws Exception {
+		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
+		this.js = this.um.loadByJsId(js);
+		return "jGet";
 	}
 
 	public String load() throws Exception {
@@ -240,9 +302,14 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 	}
 
 	public String isLogin() throws Exception {
-		if (this.um.login(js) != null) {
+		js = this.um.login(js);
+		if (js != null) {
 			message = "login succeeded ";
-			ServletActionContext.getRequest().getSession().setAttribute("user", js);
+			ServletActionContext.getRequest().getSession().setAttribute("jobSeeker", js);
+			
+			JobSeeker e = (JobSeeker) dbDao.get(JobSeeker.class, js.getJsId());
+			e.setLoginTime(new Date());
+			dbDao.save(e);
 			return "success";
 		} else {
 			message = "login failed";
@@ -250,15 +317,7 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 		}
 	}
 
-	public String updateJs() throws Exception {
-		boolean updated = um.update(js);
-		if (updated) {
-			message = "update succeeded ";
-			return "success";
-		}
-		message = "update failed";
-		return "fail";
-	}
+
 
 	public String detail() throws Exception {
 		js = um.loadByJsId(js);
@@ -295,6 +354,19 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 		}
 		message = "update failed";
 		return "fail";
+	}
+	
+	public void validateUpdatePassword() {
+		JobSeeker j;
+		try {
+			j = um.loadByJsId(js.getJsId());
+			if (!j.getPassword().equals(currentPassword)) {
+				this.addFieldError("pwd.confirmpwd", "invalide");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String registerJs() throws Exception {
@@ -337,6 +409,17 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 
 	public void setSc(SkillCategory sc) {
 		this.sc = sc;
+	}
+	
+	public String checkCPassword() {
+		try {
+			JobSeeker j = um.loadByJsId(js.getJsId());
+			ServletActionContext.getResponse().getWriter().print(j.getPassword().equals(currentPassword));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public String checkUsernameExist() throws Exception {
@@ -491,7 +574,7 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 	public void setCVname(String cVname) {
 		CVname = cVname;
 	}
-	
+
 	public String sortJs() throws Exception {
 
 		if(flag2%2==0) {
@@ -502,7 +585,7 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 			this.jobseekers = um.sortJsByParamDesc(sort);
 			flag2++;
 		}
-		
+
 		return "sortJs";
 	}
 
@@ -545,9 +628,22 @@ public class JobSeekerAction extends ActionSupport implements ModelDriven {
 	public void setUploadFileName(String uploadFileName) {
 		this.uploadFileName = uploadFileName;
 	}
-	
-	
-	
-	
+
+	public String getTips() {
+		return tips;
+	}
+
+	public void setTips(String tips) {
+		this.tips = tips;
+	}
+
+	public DbDao getDbDao() {
+		return dbDao;
+	}
+
+	@Resource
+	public void setDbDao(DbDao dbDao) {
+		this.dbDao = dbDao;
+	}
 
 }

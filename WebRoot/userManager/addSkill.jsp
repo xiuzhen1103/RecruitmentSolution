@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" 
+contentType="text/html; charset=UTF-8" pageEncoding="GB18030"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
@@ -8,32 +9,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-    <title> Skill Register</title>
+  <base href="<%=basePath%>">
+       <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+    <title>Display All Skill </title>
   </head>
+ 
   <body>
-    <p align="right">
+	 <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
-<a href="admin!logout.action">Logout</a>
+<a href="admin!logout">Logout</a>
 </p> 
-  <div align="center" id="header">
-  <h1><i>Recruitment Solution</i></h1>
-  <div class="menu_20124162">
-	<ul>
-    	<li><a href="userManager/admin.jsp">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
-    </ul>
+	<div class="banner" >
+
+</div>
+
+		
+<div align="center">
+
+<div class='navbar navbar-inverse'>
+  <div class='nav-collapse' style="height: auto;">
+    <ol class="breadcrumb" >
+  <li><a href="userManager/admin.jsp">Home</a></li>
+  <li class="active">News</li>
+ <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
+    <li><a href="#">About Us</a></li>
+</ol>
 </div>
   </div>
-  <br />
+  </div>
    <div id="reg">
-  <b> Add Skill </b>
+
     <form method="post" action="sk.action" id="form2">
-    <table width="350" height="163" border="0"  align="left" cellpadding="0" cellspacing="0">
+    <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
     <tr>
-          <th colspan="2">Add Skill</th>
+          <th colspan="2" class="info">Add Skill</th>
         </tr>
          <tr>
           <td><span class="style1">Name:</span></td>
@@ -41,7 +53,7 @@ Hello <s:property value="#session.admin.username"/><br/>
           <font color="#F9481C">*</font></td>
         </tr>
         <tr>
-          <td><span class="style1">Skill Category:</span></td>
+          <td><span class="style1">Skill Category Id:</span></td>
           <td><input type="text" name="skill.skillCategory.skillCategoryId" class="formstyle">
           <font color="#F9481C">*</font></td>
         </tr>
@@ -49,7 +61,7 @@ Hello <s:property value="#session.admin.username"/><br/>
        <tr>
           <td colspan="2">
           <input name="back" type="button" class="btn btn-sm btn-default"  onclick="history.back()" value="Back" >
-          <input name="submit" type="submit" value="Submit">   
+          <input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
           </td>
         </tr>
    </tfoot>

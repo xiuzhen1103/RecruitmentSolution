@@ -28,11 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Hello <s:property value="#session.admin.username"/><br/>
 <a href="admin!logout">Logout</a>
 </p> 
-	<div class="banner" >
+<div class="banner" >
 
 </div>
 
-		
 <div align="center">
 
 <div class='navbar navbar-inverse'>
@@ -40,16 +39,17 @@ Hello <s:property value="#session.admin.username"/><br/>
     <ol class="breadcrumb" >
   <li><a href="userManager/admin.jsp">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
-    <li><a href="#">About Us</a></li>
+  <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
+    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
   </div>
-  </div>
-  <h3><span class="label label-info">Display All Jobs:</span></h3>   
+</div>	
 
- <form method="post" action="job!list.action">
+<h3><span class="label label-info">Display All Jobs:</span></h3>   
  
+ <form method="post" action="job!first.action" class="formstyle" style="padding: 5px 3px;">
+
 &nbsp;Country:
 <select id="areaId" name="job.countryId.areaId" onchange="getCountry(this);" style="width:180px">
 <option></option>
@@ -69,7 +69,8 @@ Hello <s:property value="#session.admin.username"/><br/>
 <select id="districtId" name="job.districtId.areaId" style="width:180px">
 <option></option>
 </select>
-  Job Title:<input type="text" name="job.title"/>
+  Job Title:<input type="text" name="job.title"  placeholder="Please Enter a Job Title"/>
+  
   <div style="height:2px;margin: 1px 0;">&nbsp;</div>
   &nbsp;Job Category:
   <select id="categoryId" onchange="getSubSkillCategory(this);" name="job.jobCategory.skillCategoryId" style="width:180px">
@@ -85,11 +86,13 @@ Hello <s:property value="#session.admin.username"/><br/>
     <option></option>
   </select>
   &nbsp;Job Skill:
-  <select multiple id="skillId2" name="job.checkboxes" style="width:180px">
+  <select multiple id="skillId" name="job.checkboxes" style="width:180px">
     <option></option>
   </select>
+  
+  <input name="job.createTime" placeholder="Prom Date" onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="formstyle" />
 
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-sm btn-primary">Submit</button>
  </form>
 <br />
  	 <table  class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
@@ -102,12 +105,15 @@ Hello <s:property value="#session.admin.username"/><br/>
 		      <td class="info" width="5%" height="37" align="center"><b>Salary </b><a href="job!sortJobForAdmin?sort=salary"><img src="images/sort.png" alt="sort by salary" title="sort by salary" height="20" width="20" ></a></td>
 		      <td class="info" width="5%" height="37" align="center"><b>Area</b></td>
          	  <td class="info" width="10%" height="37" align="center"><b>Create Time </b><a href="job!sortJobForAdmin?sort=createTime"><img src="images/sort.png" alt="sort by date" title="sort by date" height="20" width="20" ></a></td>
-         
+         	  
+         	  <td class="info" width="5%" height="37" align="center"><b>Number of Position</b><a href="job!sortJobForAdmin?sort=numPosition"><img src="images/sort.png" alt="sort by numPosition" title="sort by numPosition" height="20" width="20" ></a></td>
+         	  
+         	  <td class="info" width="5%" height="37" align="center"><b>Delete</b></td>
           </tr>
  	
           <s:iterator value="jobs" id="j">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
-		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
+		  <td align="center" style="padding: 30px;"><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
     	  <td align="center" >
             <s:property value="#j.jobCategory.name" />
           </td>
@@ -123,7 +129,9 @@ Hello <s:property value="#session.admin.username"/><br/>
     	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
     	  <td align="center" ><s:property value="#j.salary" /></td>
     	   <td align="center" ><s:property value="#j.districtId.areaName" />,<s:property value="#j.countyId.areaName" /></td>
-		  <td align="center" ><s:property value="#j.createTime" /></td>
+		  <td align="center" ><s:date name="#j.createTime"  format="dd-MM-yyy HH:mm:ss" /></td>
+		  <td align="center" ><s:property value="#j.numPosition" /></td>
+		  <td><a href="job!delete?job.jobId=<s:property value="#j.jobId" />"><img src="images/delete.png" title="delete" alt="delete" height="25" width="20" ></a></td>
         </tr>
      </s:iterator>
     </table>

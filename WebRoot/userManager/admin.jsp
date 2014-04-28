@@ -29,7 +29,7 @@ Hello <s:property value="#session.admin.username"/><br/>
     <ol class="breadcrumb" >
   <li><a href="admin.jsp">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report" target="_blank">Statistic</a></li>
+    <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
     <li><a href="../aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -49,7 +49,7 @@ Hello <s:property value="#session.admin.username"/><br/>
 	<a href="area!list.action">Area List</a> <br/> <br/>
 	
 	<b>Job: </b><br/>
-	<a href="job!list.action">Job List</a> <br/> <br/>
+	<a href="job!listForAdmin.action" target="_blank">Job List</a> <br/> <br/>
 	
 	<b>Skill Category: </b><br/>
 	<a href="sc!list.action">Skill Category List</a> <br/> <br/>

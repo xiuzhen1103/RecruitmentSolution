@@ -14,8 +14,8 @@ public interface AreaDao {
 	public List<Area> loadByAreaName(Area area) throws DataAccessException;
 	public List<Area> loadByCounty(Area area) throws DataAccessException;
 	public List<Area> getAreas(Area area) throws DataAccessException;
-	public boolean updateArea(Integer areaId, String areaName, List<Area> area,
-			String latitude, String longitude) throws DataAccessException;
+	public boolean updateArea(Integer areaId, String areaName, List<Area> area) throws DataAccessException;
+	public List<Area> listIrelandCounties(Area area) throws DataAccessException;
 
 	
 }

@@ -12,24 +12,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
     <title>Display all Job Category</title>
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+
   </head>	
   <body>
     <p align="right">
 Hello <s:property value="#session.admin.username"/><br/>
 <a href="admin!logout.action">Logout</a>
-</p> 
-
-  </p> 
+ 
   <div align="center" id="header">
   <h1><i>Recruitment Solution</i></h1>
   <div class="menu_20124162">
 	<ul>
-    	<li><a href="userManager/admin.jsp">Home</a></li>
-        <li><a href="">About Us</a></li>
-        <li><a href="">Contact Us</a></li>
+    	<li>
+                        <a href="userManager/admin.jsp">Home</a>
+                    </li>
+                    <li class="active">News</li>
+                    <li>
+                        <a href="<%=basePath%>report/report.jsp">Statistic</a>
+                    </li>
+                    <li>
+                        <a href="aboutUs.jsp" target="_blank">About Us</a>
+                    </li>
 
     </ul>
 </div>

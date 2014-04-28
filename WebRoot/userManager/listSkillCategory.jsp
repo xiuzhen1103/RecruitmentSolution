@@ -32,7 +32,7 @@ Hello <s:property value="#session.admin.username"/><br/>
     <ol class="breadcrumb" >
   <li><a href="userManager/admin.jsp">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
+  <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
     <li><a href="#">About Us</a></li>
 </ol>
 </div>
@@ -40,7 +40,7 @@ Hello <s:property value="#session.admin.username"/><br/>
   </div>
   
 <div align="center">
-   <a href="userManager/addSkillCategory.jsp">Add Skill Category </a> 
+   <a href="userManager/addSkillCategory.jsp"><img src="images/add.png" title="add" alt="add" height="30" width="30" > </a> 
    </div>
 
   <form method="post" action="sc!list.action" class="formstyle" style="padding: 5px 3px;">  

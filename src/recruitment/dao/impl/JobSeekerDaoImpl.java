@@ -41,7 +41,7 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
             jsskills.add(s);
         }
         js.setJobSeekerSkill(jsskills);
-        hibernateTemplate.save(js);
+        hibernateTemplate.saveOrUpdate(js);
     }
 
     @SuppressWarnings("unchecked")
@@ -144,13 +144,28 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
     }
 
     public boolean updateJs(final Integer jsId, final String name, final String address, final String phone,
-            final Integer expectedSalary) throws DataAccessException {
+            final Integer expectedSalary, String image, Integer[] checkboxList) throws DataAccessException {
         JobSeeker js = (JobSeeker) this.hibernateTemplate.load(JobSeeker.class, jsId);
         if (js != null) {
             js.setName(name);
             js.setAddress(address);
             js.setPhone(phone);
             js.setExpectedSalary(expectedSalary);
+            js.setImage(image);
+            
+            for (JobSeekerSkill k : js.getJobSeekerSkill()) {
+            	this.hibernateTemplate.delete(k);
+            }
+            
+            js.getJobSeekerSkill().clear();
+            for (int i = 0; i < checkboxList.length; i++) {
+                JobSeekerSkill s = new JobSeekerSkill();
+                Skill sc = (Skill) this.hibernateTemplate.load(Skill.class, checkboxList[i]);
+                s.setSkill(sc);
+                s.setJobSeeker(js);
+                js.getJobSeekerSkill().add(s);
+            }
+            
             this.hibernateTemplate.saveOrUpdate(js);
             return true;
         }
@@ -229,5 +244,7 @@ public class JobSeekerDaoImpl implements JobSeekerDao {
 	public List<JobSeeker> sortJsByParamDesc(String sort) throws DataAccessException {
 		return (List<JobSeeker>) this.hibernateTemplate.find("From JobSeeker j order by j."+ sort + " desc");
 	}
+
+
 
 }

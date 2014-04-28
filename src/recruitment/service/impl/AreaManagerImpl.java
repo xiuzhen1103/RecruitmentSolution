@@ -44,33 +44,24 @@ public class AreaManagerImpl implements AreaManager{
 	@Override
 	public boolean update(Area area)throws Exception {
 		return areaDao.updateArea(area.getAreaId(),area.getAreaName(), 
-				area.getAreas(), area.getLatitude(), area.getLongitude());
+				area.getAreas());
 	}
-	/*
+	
 	@Override
 	public List<Area> loadByAreaName(Area area) throws Exception {
-		return areaDao.loadByAreaName(area);
-	}
-	@Override
-	public List<Area> loadByCounty(Area area) throws Exception {
-		// 
-		return List<Area> areaDao.loadByCounty(area.getAreaId());
-	}
-	*/
-	@Override
-	public List<Area> loadByAreaName(Area area) throws Exception {
-		// TODO Auto-generated method stub
 		return  areaDao.loadByAreaName(area);
 	}
 	@Override
 	public List<Area> loadByCounty(Area area) throws Exception {
-		// TODO Auto-generated method stub
 		return areaDao.loadByCounty(area);
 	}
 	@Override
 	public List<Area> listAreas(Area area) throws Exception {
-		// TODO Auto-generated method stub
 		return areaDao.getAreas(area);
+	}
+	@Override
+	public List<Area> listIrelandCounties(Area area) throws Exception {
+		return areaDao.listIrelandCounties(area);
 	}
 	
 

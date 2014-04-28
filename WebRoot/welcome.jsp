@@ -42,7 +42,6 @@ or
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report" target="_blank" >Statistic</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -93,26 +92,26 @@ or
     <option></option>
   </select>
   
-  <input name="job.createTime" placeholder="Prom Date" onFocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="formstyle" />
+  <input name="job.createTime2" placeholder="Prom Date" onFocus="WdatePicker({readOnly:true,dateFmt:'dd/MM/yyyy HH:mm:ss'})" class="formstyle" />
 
 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
  </form>
 <div class="panel-body">
- 	  <table class="table table-responsive table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10" >
- 	 	 <tr>
-		     <td  class="info" width="10%" height="37" align="center"><b>Job Title</b></td>
-		      <td  class="info" width="5%" height="37" align="center"><b>Category </b> <a href="job!sortJob?sort=jobCategory.name"><img src="images/sort.png"  height="20" width="15" alt="sort by category" title="sort by category"></a></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Skill Category</b></td>
-		      <td class="info"  width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Company Name</b></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Salary </b><a href="job!sortJob?sort=salary"><img src="images/sort.png" alt="sort by salary" title="sort by salary" height="20" width="20" ></a></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Area</b></td>
-         	  <td class="info" width="10%" height="37" align="center"><b>Create Time </b><a href="job!sortJob?sort=createTime"><img src="images/sort.png" alt="sort by date" title="sort by date" height="20" width="20" ></a></td>
+ 	  <table class="table table-responsive table-striped table-bordered info" width="400" height="963" border="1" align="left" cellpadding="40" cellspacing="50" >
+ 	 	 <tr class="info" height="37" align="center">
+		     <td   width="10%"><b>Job Title</b></td>
+		      <td  width="5%" ><b>Category </b> <a href="job!sortJob?sort=jobCategory.name"><img src="images/sort.png"  height="20" width="15" alt="sort by category" title="sort by category"></a></td>
+		      <td width="5%" ><b>Skill Category</b></td>
+		      <td  width="10%"><b>Skill</b></td>
+		      <td  width="5%"><b>Company Name</b></td>
+		      <td  width="5%" ><b>Salary </b><a href="job!sortJob?sort=salary"><img src="images/sort.png" alt="sort by salary" title="sort by salary" height="20" width="20" ></a></td>
+		      <td  width="5%" ><b>Area</b></td>
+         	  <td width="10%"><b>Create Time </b><a href="job!sortJob?sort=createTime"><img src="images/sort.png" alt="sort by date" title="sort by date" height="20" width="20" ></a></td>
           </tr>
  	
           <s:iterator value="jobs" id="j">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
-		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
+		  <td align="center" style="padding: 30px;"><a href="job!detail?job.jobId=${j.jobId}"><s:property value="#j.title" /></a></td>
     	  <td align="center" >
             <s:property value="#j.jobCategory.name" />
           </td>
@@ -125,24 +124,49 @@ or
             </s:iterator>
           </td>
     	  
-    	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
+    	  <td  align="center" ><s:property value="#j.employer.companyName" /></td>
     	  <td align="center" ><s:property value="#j.salary" /></td>
     	   <td align="center" ><s:property value="#j.districtId.areaName" />,<s:property value="#j.countyId.areaName" /></td>
-		  <td align="center" ><s:property value="#j.createTime" /></td>
+	 <td align="center" ><s:date name="#j.createTime"  format="dd/MM/yyyy HH:mm:ss" /></td> 
+
         </tr>
      </s:iterator>
     </table>
-    <blockquote>
-			
-								<p align="center">
-
-				 <small>© 2014 recruitmentsolution.ie - 100 jobs from 20 companies. 200 applications delivered.</small></p>
-			</blockquote>
 </div>
 
 
 
 <div align="right" id="stuff"><a href="javascript:scroll(0,0)">Back To Top</a></div>
 </body>
+
+ 
+
+
+<div class="info"">
+ 
+</div>
+
+
+	<div class="row clearfix">
+		<div class="col-md-1 column">
+		</div>
+		<div class="col-md-6 column">
+		<span class="label label-info">Jobs By Category:</span> <br /><br />
+		<s:iterator value="listMainSkillCategorys" id="s">
+ 		<td  align="center" > <a href="job!first.action?skillCategory.skillCategoryId=<s:property value='#s.skillCategoryId' />"> <s:property value="#s.name" /> </a></td>
+ 		</s:iterator>
+		
+		</div>
+		<div class="col-md-4 column">
+		<span class="label label-info">Jobs By Country:</span> <br /><br />
+		<s:iterator value="listCountrys" id="c">
+ 		<td  align="center" > <a href="job!first.action?area.areaId=<s:property value='#c.areaId' />"> <s:property value="#c.areaName" /> </a></td>
+ 		</s:iterator>
+		</div>
+		
+	</div>
+
+
+
 
 </html>

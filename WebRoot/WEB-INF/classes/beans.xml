@@ -74,6 +74,10 @@
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	<bean id="dbDao" class="recruitment.service.impl.DbDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
 
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">

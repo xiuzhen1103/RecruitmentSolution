@@ -12,6 +12,6 @@ public interface CVManager {
 	public boolean deleteCV(CV cv) throws Exception;
 	public boolean updateCV(CV cv)throws Exception;	
 	public List<CV> getCVByJsId()throws Exception;	
-	public CV loadByCVId(Integer cvId) throws Exception;
+	public CV loadByCVId(CV cv) throws Exception;
 	public List<CV> getOneCVDetail(Integer jsId) throws DataAccessException;
 }

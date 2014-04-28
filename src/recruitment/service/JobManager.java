@@ -22,5 +22,6 @@ public interface JobManager {
 	public List<CV> listCVByJsId(Job jobId, JobSeeker jsId) throws Exception;
 	public List<Job> sortJobByAsc(String sort) throws Exception;
 	public List<Job> sortJobByDesc(String sort) throws Exception;
+	public List<Job> getJobsForAdmin(Job job) throws Exception;
 	
 }

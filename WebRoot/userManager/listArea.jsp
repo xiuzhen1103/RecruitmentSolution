@@ -32,7 +32,7 @@ Hello <s:property value="#session.admin.username"/><br/>
     <ol class="breadcrumb" >
   <li><a href="userManager/admin.jsp">Home</a></li>
   <li class="active">News</li>
-  <li><a href="report">Statistic</a></li>
+  <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
     <li><a href="#">About Us</a></li>
 </ol>
 </div>
@@ -53,8 +53,6 @@ Hello <s:property value="#session.admin.username"/><br/>
 		      <td  width="10%" height="37" align="center"><b>Area Name</b></td>
 		      <td  width="10%" height="37" align="center"><b>Parent Area</b></td>
 		      <td 	width="10%" height="37" align="center"><b>Level</b></td>
-		      <td  width="5%" height="37" align="center"><b>Latitude</b></td>
-		      <td width="5%" height="37" align="center"><b>Longitude</b></td>
 		       <td width="5%" height="37" align="center"><b>Update</b></td>
 		      <td width="5%" height="37" align="center"><b>Delete</b></td>
           </tr>
@@ -73,8 +71,7 @@ Hello <s:property value="#session.admin.username"/><br/>
                 <s:else>
                     County
                 </s:else></td>
-    	  <td align="center" ><s:property value="#a.latitude" /></td>
-    	  <td align="center" ><s:property value="#a.longitude" /></td>
+
     	   <td><a href="area!load?area.areaId=<s:property value="#a.areaId" />"><img src="images/edit.png" title="edit" alt="edit" height="20" width="25" ></a></td>
     	  <td><a href="area!delete?area.areaId=<s:property value="#a.areaId" />"><img src="images/delete.png" title="delete" alt="delete" height="25" width="20" ></a></td>
         </tr>

@@ -51,10 +51,10 @@ public class JobManagerImpl implements JobManager {
 
 	@Override
 	public boolean update(Job job) throws Exception {
-		return jobDao.updateJob(job.getJobId(), job.getJobDesc(), job.getAddress(),
+		return jobDao.updateJob(job.getJobId(), job.getTitle(), job.getJobDesc(), job.getAddress(),
 				job.getPhone(), job.getNumPosition(),
 				job.getRequirement(), job.getSalary(), job.getEmployer(), job.getCountryId(),
-				job.getCountyId(),job.getDistrictId());
+				job.getCountyId(),job.getDistrictId(),job.getCheckboxes());
 	}
 
 	@Override
@@ -86,6 +86,11 @@ public class JobManagerImpl implements JobManager {
 	@Override
 	public List<Job> sortJobByDesc(String sort) throws Exception {
 		return jobDao.sortJobByParamDesc(sort);
+	}
+
+	@Override
+	public List<Job> getJobsForAdmin(Job job) throws Exception {
+		return jobDao.getJobsForAdmin(job);
 	}
 
 

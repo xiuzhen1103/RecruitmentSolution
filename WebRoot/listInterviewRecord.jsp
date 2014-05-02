@@ -37,8 +37,9 @@ Hello <s:property value="#session.employer.username"/>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
    <li><a href="empLog.action">Home</a></li>
-  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Post Job</a></li>
-  <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">View Interview Email</a> </li>
+  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Manage Job</a></li>
+  <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
+   <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -50,15 +51,15 @@ Hello <s:property value="#session.employer.username"/>
 <br />
 <div class="panel-body">
  	 <table class="table table-responsive table-striped table-bordered info" width="400" height="263" border="0" align="left"	cellpadding="10" cellspacing="10"  >
- 	 	 <tr class="info">
-		      <td width="15%" height="37" align="center"><b>Job Title</b></td>
-		      <td width="15%" height="37" align="center"><b>Job Seeker Name</b></td>
-		      <td width="15%" height="37" align="center"><b>Job Seeker Phone</b></td>
-		      <td width="15%" height="37" align="center"><b>CV Title</b></td>
-		      <td width="15%" height="37" align="center"><b>Interview Time</b></td>
-		      <td width="15%" height="37" align="center"><b>Status</b></td>
-		      <td width="5%" height="37" align="center"><b>Update</b></td>
-		      <td width="5%" height="37" align="center"><b>Delete</b></td>
+ 	 	 <tr class="info" height="37" align="center">
+		      <td width="15%"><b>Job Title</b></td>
+		      <td width="15%"><b>Job Seeker Name</b></td>
+		      <td width="15%"><b>Job Seeker Phone</b></td>
+		      <td width="15%"><b>CV Title</b></td>
+		      <td width="15%"><b>Interview Time</b></td>
+		      <td width="15%"><b>Status</b></td>
+		      <td width="5%"><b>Update</b></td>
+		      <td width="5%"><b>Delete</b></td>
           </tr>
  	
           <s:iterator value="irs" id="j">

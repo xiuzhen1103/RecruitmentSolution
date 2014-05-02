@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="javascript:history.back()">Back</a></li>
-  <li class="active">News</li>
+  <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</tr>
 							<tr>
 								<td>
-									<span class="style1">Has Job:</span>
+									<span class="style1">Employed:</span>
 								</td>
 								<td>
 									<s:if test="js.status == 0">No</s:if>
@@ -135,8 +135,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 
                                   <s:iterator value="cvs" id="c" var="oneCv" status="st">
        						<s:if test="#st.last">
-        					
-        							  <a href="downLoadCV.action?filename= ${oneCv.cvTitle}" > ${oneCv.cvTitle}</a>
+        							  <a href="downLoadCV.action?filename=<s:property value='#oneCv.cvTitle' />"><s:property value="#oneCv.cvTitle" /> </a>
+        							
  							</s:if>
  							 </s:iterator> 
 

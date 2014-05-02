@@ -35,6 +35,7 @@ Hello <s:property value="#session.employer.username"/>
   <li><a href="empLog.action">Home</a></li>
   <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Post Job</a></li>
   <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
+   <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -46,7 +47,7 @@ Hello <s:property value="#session.employer.username"/>
 							cellpadding="10" cellspacing="10"  >
  	 	 <tr class="info">
 
-		      <td width="10%" height="37" align="center"><b>User Name</B></td>
+		      <td width="10%" height="37" align="center"><b>Image Profile</B></td>
 		      <td width="10%" height="37" align="center"><b>Name</b></td>
 		      <td width="20%" height="37" align="center"><b>Address</b></td>
 		      <td width="20%" height="37" align="center"><b>Email</b></td>
@@ -58,7 +59,7 @@ Hello <s:property value="#session.employer.username"/>
           <s:iterator value="listJobseekers" id="seekers">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor = '#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
 		
-	          <td align="center"><s:property value="#seekers.username"/></td>
+	          <td align="center"> <img src=upload/js/<s:property value="#seekers.image" /> height="50" width="50"/></td>
 	          <td align="center"><s:property value="#seekers.name"/></td>
 	          <td align="center"><s:property value="#seekers.address"/></td>
 	          <td align="center"><s:property value="#seekers.email"/></td>

@@ -23,16 +23,13 @@ Hello <s:property value="#session.admin.username"/><br/>
   <h1><i>Recruitment Solution</i></h1>
   <div class="menu_20124162">
 	<ul>
-    	<li>
-                        <a href="userManager/admin.jsp">Home</a>
-                    </li>
-                    <li class="active">News</li>
-                    <li>
-                        <a href="<%=basePath%>report/report.jsp">Statistic</a>
-                    </li>
-                    <li>
-                        <a href="aboutUs.jsp" target="_blank">About Us</a>
-                    </li>
+    	<li><a href="userManager/admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
 
     </ul>
 </div>
@@ -50,13 +47,13 @@ Hello <s:property value="#session.admin.username"/><br/>
   			</s:form>
  
  	 <table style="width:100%" width="778" border="0" cellPadding="0" cellSpacing="1" bgcolor="#6386d6">
- 	 	 <tr>
-		      <td width="5%" height="37" align="center"><b>Job Category Id</b></td>
-		      <td width="10%" height="37" align="center"><b>Name</b></td>
-		      <td width="5%" height="37" align="center"><b>Level</b></td>
-		      <td width="5%" height="37" align="center"><b>Parent</b></td>
-		      <td width="5%" height="37" align="center"><b>Update</b></td>
-		      <td width="5%" height="37" align="center"><b>Delete</b></td>
+ 	 	 <tr height="37" align="center">
+		      <td width="5%" ><b>Job Category Id</b></td>
+		      <td width="10%"><b>Name</b></td>
+		      <td width="5%" ><b>Level</b></td>
+		      <td width="5%" ><b>Parent</b></td>
+		      <td width="5%" ><b>Update</b></td>
+		      <td width="5%"><b>Delete</b></td>
           </tr>
  
           <s:iterator value="jcs" id="jcs">

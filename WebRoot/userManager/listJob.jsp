@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
+<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -38,9 +39,12 @@ Hello <s:property value="#session.admin.username"/><br/>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="userManager/admin.jsp">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
-    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
 </ol>
 </div>
   </div>
@@ -48,7 +52,7 @@ Hello <s:property value="#session.admin.username"/><br/>
 
 <h3><span class="label label-info">Display All Jobs:</span></h3>   
  
- <form method="post" action="job!first.action" class="formstyle" style="padding: 5px 3px;">
+ <form method="post" action="job!listForAdmin.action" class="formstyle" style="padding: 5px 3px;">
 
 &nbsp;Country:
 <select id="areaId" name="job.countryId.areaId" onchange="getCountry(this);" style="width:180px">
@@ -96,15 +100,15 @@ Hello <s:property value="#session.admin.username"/><br/>
  </form>
 <br />
  	 <table  class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
- 	 	  <tr>
-		     <td  class="info" width="10%" height="37" align="center"><b>Job Title</b></td>
-		      <td  class="info" width="5%" height="37" align="center"><b>Category </b> <a href="job!sortJobForAdmin?sort=jobCategory.name"><img src="images/sort.png"  height="20" width="15" alt="sort by category" title="sort by category"></a></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Skill Category</b></td>
-		      <td class="info"  width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Company Name</b></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Salary </b><a href="job!sortJobForAdmin?sort=salary"><img src="images/sort.png" alt="sort by salary" title="sort by salary" height="20" width="20" ></a></td>
-		      <td class="info" width="5%" height="37" align="center"><b>Area</b></td>
-         	  <td class="info" width="10%" height="37" align="center"><b>Create Time </b><a href="job!sortJobForAdmin?sort=createTime"><img src="images/sort.png" alt="sort by date" title="sort by date" height="20" width="20" ></a></td>
+ 	 	  <tr class="info" height="37" align="center"> 
+		     <td  width="10%"><b>Job Title</b></td>
+		      <td width="5%" ><b>Category </b> <a href="job!sortJobForAdmin?sort=jobCategory.name"><img src="images/sort.png"  height="20" width="15" alt="sort by category" title="sort by category"></a></td>
+		      <td width="5%" ><b>Skill Category</b></td>
+		      <td width="10%" ><b>Skill</b></td>
+		      <td width="5%" ><b>Company Name</b></td>
+		      <td width="5%" ><b>Salary </b><a href="job!sortJobForAdmin?sort=salary"><img src="images/sort.png" alt="sort by salary" title="sort by salary" height="20" width="20" ></a></td>
+		      <td width="5%" ><b>Area</b></td>
+         	  <td width="10%" ><b>Create Time </b><a href="job!sortJobForAdmin?sort=createTime"><img src="images/sort.png" alt="sort by date" title="sort by date" height="20" width="20" ></a></td>
          	  
          	  <td class="info" width="5%" height="37" align="center"><b>Number of Position</b><a href="job!sortJobForAdmin?sort=numPosition"><img src="images/sort.png" alt="sort by numPosition" title="sort by numPosition" height="20" width="20" ></a></td>
          	  
@@ -136,4 +140,5 @@ Hello <s:property value="#session.admin.username"/><br/>
      </s:iterator>
     </table>
   </body>
+   <div align="right" id="stuff"><a href="javascript:scroll(0,0)">Back To Top</a></div>
 </html>

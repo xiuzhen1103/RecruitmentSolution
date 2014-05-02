@@ -3,14 +3,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
-<title>添加记录成功</title>
+<title>Add Success</title>
 <script type="text/javascript">
 
 
 function closewindow(){
 	//if(window.opener){
 	//	window.opener.location.reload();
-		//window.history.back(-1);
+		window.history.back(-1);
 		window.close();
 	//}
 }
@@ -31,9 +31,9 @@ clock();
 </head>
 <body>
 <center>
-	添加记录成功！<p>
+	Add Sucess！<p>
 	<div id="info">This window will be closed in 3 seconds</div>
-	<input type="button" value="关闭窗口" onclick="closewindow();">
+	<input type="button" value="Closw Window" onclick="closewindow();">
 </center>
 </body>
 </html>

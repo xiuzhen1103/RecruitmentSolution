@@ -83,7 +83,7 @@ Hello <s:property value="#session.jobSeeker.username"/><br/>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="job!logged.action">Home</a></li>
-  <li class="active">News</li>
+   <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>

@@ -32,16 +32,20 @@ Hello <s:property value="#session.admin.username"/><br/>
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="userManager/admin.jsp">Home</a></li>
-  <li class="active">News</li>
- <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
-    <li><a href="#">About Us</a></li>
+ <li><a href="userManager/admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
 </ol>
 </div>
   </div>
   </div>
+  <h3><span class="label label-info">Display All Skills:</span></h3>   
 <div align="center">
-   <a href="userManager/addSkill.jsp"><img src="images/add.png" title="add" alt="add" height="25" width="30" ></a> </a> 
+   <a href="userManager/addSkill.jsp"><img src="images/add.png" title="add" alt="add" height="30" width="30" ></a> </a> 
 </div>
 
   <form method="post" action="sk!list.action" class="formstyle" style="padding: 5px 3px;"> 
@@ -50,12 +54,12 @@ Hello <s:property value="#session.admin.username"/><br/>
   </form>
  
  	  <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
- 	 	 <tr>
-		      <td class="info" width="5%" height="37" align="center"><b>Skill Id</b></td>
-		      <td class="info" width="10%" height="37" align="center"><b>name</b></td>
-		      <td class="info" width="10%" height="37" align="center"><b>Skill Category</b></td>
- 			  <td class="info" width="5%" height="37" align="center"><b>Update</b></td>
- 			  <td class="info" width="5%" height="37" align="center"><b>Delete</b></td>
+ 	 	 <tr class="info" height="37" align="center">
+		      <td  width="5%" ><b>Skill Id</b></td>
+		      <td width="10%"><b>name</b></td>
+		      <td width="10%" ><b>Skill Category</b></td>
+ 			  <td width="5%" ><b>Update</b></td>
+ 			  <td width="5%" ><b>Delete</b></td>
           </tr>
           <s:iterator value="skills" id="s">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
@@ -68,6 +72,6 @@ Hello <s:property value="#session.admin.username"/><br/>
      </s:iterator>
     </table>
     
-<div align="right"><a href="javascript:scroll(0,0)">Back To Top</a></div>
+<div align="right" id="stuff"><a href="javascript:scroll(0,0)">Back To Top</a></div>
   </body>
 </html>

@@ -58,12 +58,6 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
         ir.setEm(this.getEmployerFromSession());
         ir.setStatus(1);
         irManager.addIR(ir);
-  
- 
-        Job job = jm.loadById(ir.getJob());
-        if (job.getNumPosition() > 0) {
-            jm.update(job);
-        }
 
         String subject = "[Interview Letter]Welcome to join our company";
         String content = "I'm very glad to invite you attend our company interview at " + ir.getInterviewTime()
@@ -135,7 +129,7 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
             ir.getJs().setStatus(1);
             ir.getJob().setNumPosition(ir.getJob().getNumPosition()-1);
             String subject = "[Offer Letter]Welcome to join our company";
-            String content = "I'm very glad to tell you, you have be one of our company.\n Best Regards \n"   + ir.getEm().getCompanyName();
+            String content = "I'm very glad to tell you, you have be one of our company\n.\n Best Regards \n"   + ir.getEm().getCompanyName();
             this.sendEmailToJobSeeker(irManager.loadById(ir.getInterviewId()), subject, content);
             
          }
@@ -169,7 +163,7 @@ public class InterviewRecordAction extends ActionSupport implements ModelDriven<
     }
 
     private JobSeeker getJobSeekerFromSession() {
-        return (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("user");
+        return (JobSeeker) ServletActionContext.getRequest().getSession().getAttribute("jobSeeker");
     }
 
     @Override

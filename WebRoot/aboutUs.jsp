@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>about/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
 	
 	<link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />	
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.10.1.min.js"></script>
@@ -169,12 +170,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	</div>
 	
-	<blockquote>
-			
-								<p align="center">
-
+	<br />
+			<blockquote><p align="center">
 				 <small>© 2014 recruitmentsolution.ie - 100 jobs from 20 companies. 200 applications delivered.</small></p>
 			</blockquote>
+	
 <div align="right" id="stuff"><a href="javascript:scroll(0,0)">Back To Top</a></div>
 </body>
 

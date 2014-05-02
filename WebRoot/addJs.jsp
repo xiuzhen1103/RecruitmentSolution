@@ -82,7 +82,7 @@ or
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
-  <li class="active">News</li>
+  <li><a href="contactUsForWelcome.jsp" target="_blank">Contact Us</a></li>
 <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>

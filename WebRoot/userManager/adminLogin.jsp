@@ -17,13 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title> Employer Login Page </title>
 </head>
 <body>
-<p align="right">
-<a href="../loginEmp.jsp">Employer Login</a> 
-<a href="../loginJs.jsp">Jobseeker Login</a> 
-or
-<a href="../addEmp.jsp">Employer Register</a> 
-<a href="../js!registerJs.action">Jobseeker Register</a>
-</p> 
+
 <div class="banner" >
 
 </div>
@@ -33,53 +27,50 @@ or
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="job!first.action">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
-    <li><a href="#">About Us</a></li>
+ <li><a href="job!first.action">Home</a></li>
+  <li><a href="../contactUsForWelcome.jsp" target="_blank">Contact Us</a></li>
+    <li><a href="../aboutUs.jsp">About Us</a></li>
 </ol>
 </div>
   </div>
 </div>	
-<div id="reg">
-<div id="opi" class="page-wrapper clearfix">
-<div class="full-page-holder">
-<div class="full-page">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<h3>
+				Administrator Sign in
+			</h3><img alt="140x140" src="http://t1.gstatic.com/images?q=tbn:ANd9GcRRuD9bNWbBoFMhgaa2OlY3dJpLqHSsZ9XuH1uxuaye72NsyAKy" />
+			<form class="form-horizontal" role="form" name="adminLogin" action="adminLogin.action" method="post">
 
-<div class="login-page clearfix">
-<div class="full-login">
-<div class="shadow">
-<div class="login-panel">
-		
-		<form id="loginForm" name="adminLogin" action="adminLogin.action" method="post">
-		  <h2>Adminstrator Login</h2>
-		  <p class="clearfix">
-		<label for="email">Username:</label>
-		<input type="text" name="admin.username" tabindex="1" value="" id="email" class="input-text" placeholder="Plase enter your email" />
-		</p><p class="clearfix">
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="admin.password" class="input-text" tabindex="2" placeholder="Plase enter your password" />
-</p>
-<p class="right">
+				<div class="form-group">
+					 <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-10">
+						<input type="text" name="admin.username"  class="form-control" id="inputEmail3" placeholder="Plase enter your username">
+					</div>
+				</div>
+				<div class="form-group">
+					 <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+					 
+					<div class="col-sm-10">
 
-</p>
-<p class="right">
+						<input type="password" class="form-control" id="inputPassword3"  name="admin.password"  placeholder="Plase enter your password"  />
+					</div>
+				</div>
 
-<input type="hidden" name="origURL" value="#" /><input type="hidden" name="domain"  />
-<input type="hidden" name="formName" value="" /><input type="hidden" name="method"  />
-<input type="hidden" name="isplogin" value="true" />
-<input type="submit" id="login" tabindex="4" name="submit" class="input-submit large" value="Login" />
-</p>
-<div class="separator"></div>
-<p class="no-account">Haven't Register,Yet? <a href="addEmp.jsp" class="reg-now">Register</a></p>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+					</div>
+				</div>
+			</form>
+			
+			
+			<br /><br /><br />
+			<blockquote><p align="center">
+				 <small>© 2014 recruitmentsolution.ie - 100 jobs from 20 companies. 200 applications delivered.</small></p>
+			</blockquote>
+		</div>
+	</div>
 </div>
 </body>
-</html> 
+</html>

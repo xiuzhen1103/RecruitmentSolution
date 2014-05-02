@@ -33,6 +33,7 @@ Hello <s:property value="#session.employer.username"/>
   <li><a href="empLog.action">Home</a></li>
   <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>" target="_blank">Manage Job</a></li>
     <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
+     <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -49,17 +50,22 @@ Hello <s:property value="#session.employer.username"/>
    <div class="panel-body">
  	<table class="table table-responsive table-striped table-bordered info" width="400" height="263" border="0" align="left"
 							cellpadding="10" cellspacing="10"  >
- 	 	 <tr class="info">
-		      <td width="10%" height="37" align="center"><b>User Name</B></td>
-		      <td width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td width="20%" height="37" align="center"><b>Email</b></td>
-		      <td width="15%" height="37" align="center"><b>Phone</b></td>
-		      <td width="15%" height="37" align="center"><b>Expected Salary</b></td>
+ 	 	 <tr class="info" align="center" height="37">
+ 	 	 	  <td width="10%"><b>Profile Image</B> </td>
+		      <td width="10%"><b>User Name</B></td>
+		      <td width="20%"><b>Skill</b></td>
+		      <td width="10%"><b>Email</b></td>
+		      <td width="15%"><b>Phone</b></td>
+		      <td width="10%"><b>Expected Salary</b></td>
+		      <td width="15%"><b>Location</b></td>
 
           </tr>
       
           <s:iterator value="jobseekers" id="seekers">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor = '#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
+	          <td align="center">
+                        <img src=upload/js/<s:property value="#seekers.image" /> height="50" width="50"/>
+                </td>
 	          <td align="center"><a href="js!detail?js.jsId=${seekers.jsId}"><s:property value="#seekers.username"/></a></td>
 	          <td align="center">
                 <s:iterator var="jsk" value="#seekers.jobSeekerSkill" status="st">
@@ -69,6 +75,7 @@ Hello <s:property value="#session.employer.username"/>
 	          <td align="center"><s:property value="#seekers.email"/></td>
 	          <td align="center"><s:property value="#seekers.phone"/></td>
 	          <td align="center"><s:property value="#seekers.expectedSalary"/></td>
+	          <td align="center"><s:property value="#seekers.address"/></td>
 	          <!--  
 	          <td align="center">
                 <s:if test="#seekers.status == 0">No</s:if>

@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<link href="<%=basePath%>style/login.css"  type="text/css" rel="StyleSheet" />
+
 <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
@@ -33,52 +33,50 @@ or
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
   <li><a href="job!first.action">Home</a></li>
-  <li class="active">News</li>
+  <li><a href="contactUsForWelcome.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp">About Us</a></li>
 </ol>
 </div>
   </div>
 </div>	
 
-<div id="reg">
-<div id="opi" class="page-wrapper clearfix">
-<div class="full-page-holder">
-<div class="full-page">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<h3>
+				Employer Sign in
+			</h3><img alt="140x140" src="http://t1.gstatic.com/images?q=tbn:ANd9GcQ6EDs9uhU9uhfCIUMf9UeWajO287tEJ9prXcV_4LYrwrKecuPp" />
+			<form class="form-horizontal" role="form" name="empLogin" action="empLogin.action" method="post">
 
-<div class="login-page clearfix">
-<div class="full-login">
-<div class="shadow">
-<div class="login-panel">
-		
-		<form id="loginForm" name="empLogin" action="empLogin.action" method="post">
-		  <h2>Employer Login</h2>
-		  <p class="clearfix">
-		<label for="email">Email:</label>
-		<input type="text" name="emp.email" tabindex="1"  id="email" class="input-text" placeholder="Plase enter your email">
-		</p><p class="clearfix">
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="emp.password"  class="input-text" placeholder="Plase enter your password" tabindex="2" />
-</p>
-<p class="right">
+				<div class="form-group">
+					 <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+					<div class="col-sm-10">
+						<input type="text" name="emp.email"  class="form-control" id="inputEmail3" placeholder="Plase enter your email">
+					</div>
+				</div>
+				<div class="form-group">
+					 <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+					 
+					<div class="col-sm-10">
 
-</p>
-<p class="right">
+						<input type="password" class="form-control" id="inputPassword3"  name="emp.password"  placeholder="Plase enter your password"  />
+					</div>
+				</div>
 
-<input type="hidden" name="origURL" value="#" /><input type="hidden" name="domain" value="" />
-<input type="hidden" name="formName" value="" /><input type="hidden" name="method" value="" />
-<input type="hidden" name="isplogin" value="true" />
-<input type="submit" id="login" tabindex="4" name="submit" class="input-submit large" value="Login" />
-</p>
-<div class="separator"></div>
-<p class="no-account">Haven't Register,Yet? <a href="addEmp.jsp" class="reg-now">Register</a></p>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						 <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+					</div>
+				</div>
+			</form>
+			
+			
+			<br /><br /><br />
+			<blockquote><p align="center">
+				 <small>© 2014 recruitmentsolution.ie - 100 jobs from 20 companies. 200 applications delivered.</small></p>
+			</blockquote>
+		</div>
+	</div>
 </div>
 </body>
 </html>

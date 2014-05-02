@@ -39,6 +39,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
   <li><a href="job!logged.action">Home</a></li>
   <li><a href="cv!list.action" target="_bank">Manage CV</a> </li>
    <li><a href="ir!listMySend">Interview History</a> </li>
+    <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -46,7 +47,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
 </div>
   
 <div id="reg">
-<a href="addCV.jsp"><img src="images/add.png" title="add" alt="add" height="40" width="40" ></a> 
+<a href="addCV.jsp"><img src="images/add.png" title="add" alt="add" height="35" width="40" ></a> 
   <s:form method="post" action="cv!list.action"> 
    <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
  	 	 <tr class="info"> 

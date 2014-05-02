@@ -47,6 +47,7 @@ Hello <s:property value="#session.employer.username"/>
                      <li><a href="empLog.action">Home</a></li>
 					  <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Manage Job</a></li>
  					   <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
+ 					    <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
  				   <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
                 </ol>
             </div>
@@ -71,16 +72,7 @@ Hello <s:property value="#session.employer.username"/>
                                 <font color="#F9481C" id="title_hint"></font>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <span class="style1">Job Description:</span>
-                            </td>
-                            <td>
-                                <input type="text" name="job.jobDesc" id="desc" class="formstyle">
-                                <font color="#F9481C">*</font>
-                                <font color="#F9481C" id="desc_hint"></font>
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td>
                                 <span class="style1">Address:</span>
@@ -107,22 +99,35 @@ Hello <s:property value="#session.employer.username"/>
                                 <input type="text" name="job.numPosition" class="formstyle">
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <span class="style1">Requirement:</span>
-                            </td>
-                            <td>
-                                <input type="text" name="job.requirement" id="requirement" class="formstyle">
-                                <font color="#F9481C">*</font>
-                                <font color="#F9481C" id="requirement_hint"></font>
-                            </td>
-                        </tr>
+                       
                         <tr>
                             <td>
                                 <span class="style1">Salary:</span>
                             </td>
                             <td>
                                 <input type="text" name="job.salary" class="formstyle">
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                <span class="style1">Requirement:</span>
+                            </td>
+                            <td>
+                             <textarea rows="7" cols="50" name="job.requirement" id="requirement" class="formstyle"></textarea>
+                           
+                                <font color="#F9481C">*</font>
+                                <font color="#F9481C" id="requirement_hint"></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="style1">Job Description:</span>
+                            </td>
+                            <td>
+                               
+                                <textarea rows="7" cols="50" name="job.jobDesc" id="desc" class="formstyle"></textarea>
+                                <font color="#F9481C">*</font>
+                                <font color="#F9481C" id="desc_hint"></font>
                             </td>
                         </tr>
                         <tr>

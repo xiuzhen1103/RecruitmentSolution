@@ -28,15 +28,13 @@
         <div class='navbar navbar-inverse'>
             <div class='nav-collapse' style="height: auto;">
                 <ol class="breadcrumb">
-                    <li>
-                        <a href="userManager/admin.jsp">Home</a>
-                    </li>
-                    <li class="active">News</li>
-                   <li> <a href="<%=basePath%>report/report.jsp">Statistic</a>
-                    </li>
-                    <li>
-                        <a href="#">About Us</a>
-                    </li>
+    <li><a href="userManager/admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
                 </ol>
             </div>
         </div>
@@ -53,6 +51,10 @@
     </form>
     <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10">
         <tr>
+        	<td class="info" width="10%" height="37" align="center">
+                <b>Image</B>
+            </td>
+        
             <td class="info" width="10%" height="37" align="center">
                 <b>User name</B>
             </td>
@@ -86,6 +88,10 @@
         </tr>
         <s:iterator value="employers" id="e">
             <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
+               <td align="center">
+                        <img src=upload/emp/<s:property value="#e.image" /> height="50" width="50"/>
+                </td>
+               
                 <td align="center">
                     <s:property value="#e.username" />
                 </td>
@@ -118,8 +124,6 @@
             </tr>
         </s:iterator>
     </table>
-    <div align="right">
-        <a href="javascript:scroll(0,0)">Back To Top</a>
-    </div>
+   <div align="right" id="stuff"><a href="javascript:scroll(0,0)">Back To Top</a></div>
 </body>
 </html>

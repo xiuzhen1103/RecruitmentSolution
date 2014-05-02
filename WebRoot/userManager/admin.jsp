@@ -10,7 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<%=basePath%>style/style.css"  type="text/css" rel="StyleSheet" />
-<link href="<%=basePath%>style/login.css"  type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/bootstrap.min.css" type="text/css" rel="StyleSheet" />
 <link href="<%=basePath%>style/bootstrap-theme.min.css" type="text/css" rel="StyleSheet" />
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
@@ -27,38 +26,33 @@ Hello <s:property value="#session.admin.username"/><br/>
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="admin.jsp">Home</a></li>
-  <li class="active">News</li>
-    <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
-    <li><a href="../aboutUs.jsp" target="_blank">About Us</a></li>
+  	<li><a href="admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
 </ol>
 </div>
+
+</div>
   </div>
-</div>		<h2> Welcome to administrator page: </h2>
-	<div align="center">
-	<b>Employer: </b><br/>
+	 
+	<div id="reg">
+<iframe src="<%=basePath%>report/report" width=470 height=330 >
+  <p>Your browser does not support iframes.</p>
+</iframe>
+<br /><br />
+<iframe src="<%=basePath%>report/report2" width=470 height=330 >
+  <p>Your browser does not support iframes.</p>
+</iframe>
+<br /><br />
+<iframe src="<%=basePath%>report/report3" width=470 height=330 >
+  <p>Your browser does not support iframes.</p>
+</iframe>
+</div>
 
-	<a href="emp!list.action">Employer List: </a> <br/> <br/>
-
-
-	<b>JobSeeker: </b><br/>
-
-	<a href="js!listJsForAdmin.action">JobSeeker List</a> <br/> <br/>
-	
-	<b>Area: </b><br/>
-	<a href="area!list.action">Area List</a> <br/> <br/>
-	
-	<b>Job: </b><br/>
-	<a href="job!listForAdmin.action" target="_blank">Job List</a> <br/> <br/>
-	
-	<b>Skill Category: </b><br/>
-	<a href="sc!list.action">Skill Category List</a> <br/> <br/>
-	
-	<b>Skill: </b><br/>
-	<a href="sk!list.action">Skill List</a> <br/> <br/>
-	
-</div>	
-	
 
 </body>
 </html>

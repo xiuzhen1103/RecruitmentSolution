@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import recruitment.model.Administrator;
 import recruitment.service.AdministratorManager;
+import util.mail.MailSenderInfo;
+import util.mail.SimpleMailSender;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -19,6 +21,9 @@ public class AdministratorAction extends ActionSupport implements ModelDriven{
 	private Administrator admin = new Administrator();
 	private AdministratorManager am;
 	private String message="";
+	private String subject;
+	private String content;
+	private String email;
 
 	@Override
 	public Object getModel() {
@@ -64,5 +69,60 @@ public class AdministratorAction extends ActionSupport implements ModelDriven{
 		ServletActionContext.getRequest().getSession().removeAttribute("admin");
 		return "logout";
 	}
+	
+	
+	public String execute() throws Exception {
+		contactEmail();
+		return "success";
+	}
+	
+	
+	public void contactEmail() {
+		MailSenderInfo mailInfo = new MailSenderInfo();
+		mailInfo.setMailServerHost("smtp.qq.com");   
+	    mailInfo.setMailServerPort("25");
+	    mailInfo.setValidate(true); 
+	    
+	    mailInfo.setUserName("27248466");
+		mailInfo.setFromAddress("27248466@qq.com");
+		mailInfo.setPassword("zhen1606...");
+		
+		mailInfo.setToAddress("c10712147@mydit.ie");
+		mailInfo.setSubject(subject);   
+		content = "This is from email of " + email + "\n" + content;
+	    mailInfo.setContent(content);
+	    SimpleMailSender sms = new SimpleMailSender();
+	    
+	    sms.sendTextMail(mailInfo);
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+	
+	
+	
 	
 }

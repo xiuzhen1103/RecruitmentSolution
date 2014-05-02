@@ -44,6 +44,7 @@ Hello <s:property value="#session.employer.username"/>
  <li><a href="empLog.action">Home</a></li>
   <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Manage Job</a></li>
   <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
+     <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -85,7 +86,7 @@ Hello <s:property value="#session.employer.username"/>
        <tfoot>
         <tr>
           <td colspan="2">
-            <input name="back" type="button" onclick="history.back()" value="Back" >
+            <input name="back" type="button" class="btn btn-sm btn-default" onclick="history.back()" value="Back" >
             <input name="submit" type="submit" class="btn btn-sm btn-primary" value="Submit">
           </td>
         </tr>

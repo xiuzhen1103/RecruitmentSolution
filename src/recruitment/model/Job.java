@@ -35,7 +35,7 @@ public class Job {
     private SkillCategory jobCategory;
     private SkillCategory skillCategory;
     private Set<JobSkill> jobSkills = new HashSet<JobSkill>(0);
-    private Date createTime = new Date();
+    private Date createTime;
     private Boolean isBestMatch;
     private Boolean isApplied;
 

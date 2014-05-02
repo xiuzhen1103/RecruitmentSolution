@@ -40,6 +40,12 @@ display:inline;
  position: absolute;
 }
 
+#home {
+ width: 350px;
+ left: 60%;
+ position: absolute;
+}
+
 #map {
  width: 350px;
  left: 20%;

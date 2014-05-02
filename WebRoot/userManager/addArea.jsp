@@ -136,16 +136,13 @@
         <div class='navbar navbar-inverse'>
             <div class='nav-collapse' style="height: auto;">
                 <ol class="breadcrumb">
-                    <li>
-                        <a href="userManager/admin.jsp">Home</a>
-                    </li>
-                    <li class="active">News</li>
-                    <li>
-                        <a href="<%=basePath%>report/report.jsp">Statistic</a>
-                    </li>
-                    <li>
-                        <a href="aboutUs.jsp" target="_blank">About Us</a>
-                    </li>
+                   <li><a href="userManager/admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
                 </ol>
             </div>
         </div>

@@ -31,7 +31,7 @@
                         $('#file').addClass('bred');
                         $('#file_hint').html(
                                 "<span class='formtips onSuccess'>"
-                                        + "invalid " + "</span>");
+                                        + "invalid format, only upload in pdf,docx,doc " + "</span>");
                     }
                 })
     });
@@ -46,7 +46,7 @@
             $('#file').addClass('bred');
             $('#file_hint').html(
                     "<span class='formtips onSuccess'>"
-                            + "invalid " + "</span>");
+                            + "invalid format, only upload in pdf,docx,doc " + "</span>");
             return false;
         }
         
@@ -69,6 +69,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
                <li><a href="job!logged.action">Home</a></li>
  				 <li><a href="cv!list.action" target="_bank">Manage CV</a> </li>
   				 <li><a href="ir!listMySend">Interview History</a> </li>
+  				  <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     			<li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
             </ol>
         </div>
@@ -91,7 +92,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
                     <span class="style1">Cover Letter:</span>
                 </td>
                 <td>
-                    <input type="textarea" name="cv.coverLetter" value="<s:property value='cv.coverLetter' />" style="width: 400px; height: 200px;" class="formstyle">
+                    <textarea name="cv.coverLetter"  rows="7" cols="50" class="formstyle"><s:property value="cv.coverLetter" /></textarea>
             </tr>
             <tr>
                 <td>

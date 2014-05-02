@@ -38,6 +38,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
   <li><a href="job!logged.action">Home</a></li>
   <li><a href="cv!list.action" target="_bank">Manage CV</a> </li>
    <li><a href="ir!listMySend">Interview History</a> </li>
+    <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -50,7 +51,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
  	 	 <tr class="info" align="center" height="37">
 
 		      <td width="20%"><b>Job Title</b></td>
-		      <td width="10%" ><b>Interviewee Phone</b></td>
+		      <td width="10%" ><b>Interviewer Phone</b></td>
 		      <td width="15%"><b>Memo</b></td>
 		      <td width="20%" ><b>CV Title</b></td>
 		      <td width="15%"><b>Interview Time</b></td>
@@ -60,7 +61,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
           <s:iterator value="irs" id="j">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
     		
-    		  <td align="center" ><a href="job!detail?job.jobId=${j.job.jobId}"><s:property value="#j.job.title" /></a></td>
+    		  <td align="center" ><a href="job!plain_detail?job.jobId=${j.job.jobId}"><s:property value="#j.job.title" /></a></td>
     		  <td align="center" ><s:property value="#j.phone" /></td>
     		  <td align="center" ><s:property value="#j.memo" /></td>
     		  <td align="center" ><a href="downLoadCV.action?filename=<s:property value='#j.cv.cvTitle' />"><s:property value="#j.cv.cvTitle" /> </a></td>

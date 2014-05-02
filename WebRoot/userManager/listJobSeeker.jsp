@@ -28,15 +28,13 @@
         <div class='navbar navbar-inverse'>
             <div class='nav-collapse' style="height: auto;">
                 <ol class="breadcrumb">
-                    <li>
-                        <a href="userManager/admin.jsp">Home</a>
-                    </li>
-                    <li class="active">News</li>
-                   <li> <a href="<%=basePath%>report/report.jsp">Statistic</a>
-                    </li>
-                    <li>
-                        <a href="#">About Us</a>
-                    </li>
+                   <li><a href="userManager/admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
                 </ol>
             </div>
         </div>
@@ -52,40 +50,49 @@
         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
     </form>
     <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10">
-        <tr>
-            <td class="info" width="10%" height="37" align="center">
+        <tr class="info">
+         <td  width="10%" >
+                <b>Profile Image</B>
+            </td>
+        
+            <td width="10%" >
                 <b>User name</B>
             </td>
-            <td class="info" width="15%" height="37" align="center">
+            <td  width="15%">
                 <b>Skill</b>
             </td>
-            <td class="info" width="10%" height="37" align="center">
+            <td  width="10%">
                 <b>Email</b>
             </td>
-            <td class="info" width="10%" height="37" align="center">
+            <td width="10%" >
                 <b>Phone</b>
             </td>
-            <td class="info" width="15%" height="37" align="center">
+            <td width="15%">
                 <b>Expected salary</b>
             </td>
-            <td class="info" width="5%" height="37" align="center">
+            <td width="5%" >
                 <b>Employed</b>
                 <a href="js!sortJs?sort=status">
                     <img src="images/sort.png" height="20" width="15" alt="sort by status" title="sort by status">
                 </a>
             </td>
-            <td class="info" width="10%" height="37" align="center">
+            <td width="10%">
                 <b>Last login</b>
                 <a href="js!sortJs?sort=loginTime">
                     <img src="images/sort.png" height="20" width="15" alt="sort by login Time" title="sort by login Time">
                 </a>
             </td>
-            <td class="info" width="5%" height="37" align="center">
+            <td width="5%">
                 <b>Delete</b>
             </td>
         </tr>
         <s:iterator value="jobseekers" id="seekers">
             <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor = '#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
+                
+                <td align="center">
+                        <img src=upload/js/<s:property value="#seekers.image" /> height="50" width="50"/>
+                </td>
+                
                 <td align="center">
                     <a href="js!detail?js.jsId=${seekers.jsId}">
                         <s:property value="#seekers.username" />
@@ -120,8 +127,6 @@
             </tr>
         </s:iterator>
     </table>
-    <div align="right">
-        <a href="javascript:scroll(0,0)">Back To Top</a>
-    </div>
+   <div align="right" id="stuff"><a href="javascript:scroll(0,0)">Back To Top</a></div>
 </body>
 </html>

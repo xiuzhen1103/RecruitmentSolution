@@ -43,6 +43,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
   <li><a href="job!logged.action">Home</a></li>
   <li><a href="cv!list.action" target="_bank">Manage CV</a> </li>
    <li><a href="ir!listMySend">Interview History</a> </li>
+    <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -79,16 +80,17 @@ Hello <s:property value="#session.jobSeeker.username"/>
   			<br />
  	 <table class="table table-responsive table-striped table-bordered info" width="400" height="263" border="0" align="left"
 							cellpadding="10" cellspacing="10"  >
- 	 	 <tr class="info">
-		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
-		      <td width="20%" height="37" align="center"><b>Requirement</b></td>
-		      <td width="10%" height="37" align="center"><b>Category</b></td>
-		      <td width="8%" height="37" align="center"><b>Skill Category</b></td>
-		      <td width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td width="5%" height="37" align="center"><b>Salary</b></td>
-		      <td width="5%" height="37" align="center"><b>Number of Position</b></td>
-		      <td width="5%" height="37" align="center"><b>Company Name</b></td>
-		      <td width="15%" height="37" align="center"><b>Create Time</b></td>
+ 	 	 <tr class="info"  height="37" align="center">
+		      <td width="10%"><b>Job Title</b></td>
+		  
+		      <td width="10%"><b>Category</b></td>
+		      <td width="5%"><b>Skill Category</b></td>
+		      <td width="9%"><b>Skill</b></td>
+		      <td width="5%"><b>Salary</b></td>
+		      <td width="5%"><b>Number of Position</b></td>
+		      <td width="10%"><b>Company Name</b></td>
+		      <td width="10%"><b>Area</b></td>
+		      <td width="15%"><b>Create Time</b></td>
           </tr>
  	
           <tr bgcolor="#ddd"><td colspan="9"><b>Best Match</b></td></tr>
@@ -96,7 +98,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
           <s:if test="#j.isBestMatch">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
     		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}&js.jsId=<s:property value="#session.jobSeeker.jsId"/>"><s:property value="#j.title" /></a></td>
-        	  <td align="center" ><s:property value="#j.requirement" /></td>
+        	 
         	  <td align="center" >
                 <s:property value="#j.jobCategory.name" />
               </td>
@@ -111,6 +113,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
         	  <td align="center" ><s:property value="#j.salary" /></td>
         	  <td align="center" ><s:property value="#j.numPosition" /></td>
         	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
+        	  <td align="center" ><s:property value="#j.districtId.areaName" />,<s:property value="#j.countyId.areaName" /></td>
     		  <td align="center" ><s:property value="#j.createTime" /></td>
           </tr>
           </s:if>
@@ -121,7 +124,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
           <s:if test="!#j.isBestMatch">
 	      <tr bgcolor="#EFF3F7" class="TableBody1" onmouseover="this.bgColor='#DEE7FF';" onmouseout="this.bgColor='#EFF3F7';">
     		  <td align="center" ><a href="job!detail?job.jobId=${j.jobId}&js.jsId=<s:property value="#session.jobSeeker.jsId"/>"><s:property value="#j.title" /></a></td>
-        	  <td align="center" ><s:property value="#j.requirement" /></td>
+        	  
         	  <td align="center" >
                 <s:property value="#j.jobCategory.name" />
               </td>
@@ -136,6 +139,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
         	  <td align="center" ><s:property value="#j.salary" /></td>
         	  <td align="center" ><s:property value="#j.numPosition" /></td>
         	  <td align="center" ><s:property value="#j.employer.companyName" /></td>
+        	  <td align="center" ><s:property value="#j.districtId.areaName" />,<s:property value="#j.countyId.areaName" /></td>
     		  <td align="center" ><s:property value="#j.createTime" /></td>
           </tr>
           </s:if>

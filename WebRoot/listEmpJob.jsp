@@ -25,7 +25,6 @@ Hello <s:property value="#session.employer.username"/>
 <a href="emp!logout.action">Logout</a>
 </p>
 	<div class="banner" >
-
 </div>
 
 		
@@ -37,6 +36,7 @@ Hello <s:property value="#session.employer.username"/>
    <li><a href="empLog.action">Home</a></li>
   <li><a href="job!listEmpJob?job.employer.empId=<s:property value='#session.employer.empId'/>">Manage Job</a></li>
     <li><a href="ir!listSend?employer.empId=<s:property value='#session.employer.empId'/>">Manage Interview Email</a> </li>
+     <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
     <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
 </div>
@@ -44,24 +44,25 @@ Hello <s:property value="#session.employer.username"/>
 </div>	
 
 <h3><span class="label label-info">Display All Jobs:</span></h3>
-
-<a href="job!registerJob.action"><img src="images/add.png" title="add" alt="add" height="35" width="35" ></a>
-
+<div id="reg">
+<a href="job!registerJob.action"><img src="images/add.png" title="add" alt="add" height="30" width="30" ></a>
+</div>
 <br />
 <div class="panel-body">
  	 <table class="table table-responsive table-striped table-bordered info" width="400" height="263" border="0" align="left"
 							cellpadding="10" cellspacing="10"  >
- 	 	 <tr class="info">
-		      <td width="10%" height="37" align="center"><b>Job Title</b></td>
-              <td width="10%" height="37" align="center"><b>Job Category</b></td>
-              <td width="10%" height="37" align="center"><b>Skill Category</b></td>
-              <td width="10%" height="37" align="center"><b>Skill</b></td>
-		      <td width="5%" height="37" align="center"><b>Salary</b></td>
-              <td width="5%" height="37" align="center"><b>Employer</b></td>
-              <td width="15%" height="37" align="center"><b>Create Time</b></td>
-		       <td width="5%" height="37" align="center"><b>Update</b></td>
-		      <td width="5%" height="37" align="center"><b>Delete</b></td>
-		      <td width="5%" height="37" align="center"><b>View applied</b></td>
+ 	 	 <tr class="info"  height="37" align="center">
+		      <td width="10%"><b>Job Title</b></td>
+              <td width="10%"><b>Job Category</b></td>
+              <td width="10%"><b>Skill Category</b></td>
+              <td width="10%"><b>Skill</b></td>
+		      <td width="5%"><b>Salary</b></td>
+		      <td  width="5%"><b>Area</b></td>
+              <td width="10%"><b>Create Time</b></td>
+              
+		       <td width="5%"><b>Update</b></td>
+		      <td width="5%"><b>Delete</b></td>
+		      <td width="5%"><b>View applied</b></td>
           </tr>
  	
           <s:iterator value="jobs" id="j">
@@ -80,7 +81,7 @@ Hello <s:property value="#session.employer.username"/>
             </s:iterator>
           </td>
     	  <td align="center" ><s:property value="#j.salary" /></td>
-          <td align="center" ><s:property value="#j.employer.companyName" /></td>
+        <td align="center" ><s:property value="#j.districtId.areaName" />,<s:property value="#j.countyId.areaName" /></td>
           <td align="center" ><s:property value="#j.createTime" /></td>
     	  <td><a href="job!load?job.jobId=<s:property value="#j.jobId" />"><img src="images/edit.png" title="edit" alt="edit" height="25" width="30" ></a></td>
     	  <td><a href="job!delete?job.jobId=<s:property value="#j.jobId" />"><img src="images/delete.png" title="delete" alt="delete" height="25" width="20" ></a></td>

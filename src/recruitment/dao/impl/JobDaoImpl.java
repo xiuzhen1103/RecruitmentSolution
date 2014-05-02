@@ -105,8 +105,7 @@ public class JobDaoImpl implements JobDao {
             hql.append(" and LOWER(j.title) like LOWER(:title) ");
             map.put("title", "%" + job.getTitle() + "%");
         }
-       
-        
+
         if (null != job && null != job.getCountryId() && job.getCountryId().getAreaId() != null
                 && job.getCountryId().getAreaId() > 0) {
             hql.append(" and j.countryId.areaId = :countryId ");
@@ -122,14 +121,12 @@ public class JobDaoImpl implements JobDao {
             hql.append(" and j.districtId.areaId = :districtId");
             map.put("districtId", +job.getDistrictId().getAreaId());
         }
-       /*
+
         if (null != job && null != job.getCreateTime() && !"".equals(job.getCreateTime())) {
             hql.append(" and j.createTime between :createTime and :nowTime ");
             map.put("createTime", job.getCreateTime());
             map.put("nowTime", new Date());
         }
-        */
-
         
 
         Query query = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
@@ -139,9 +136,10 @@ public class JobDaoImpl implements JobDao {
                 String key = (String) it.next();
                 if (key.equals("skillIds")) {
                     query.setParameterList(key, (Integer[]) map.get(key));
-                } else if (("nowTime,createTime").contains(key)) {
-                    query.setTimestamp(key, (Date)map.get(key));
-                } else {
+                } //else if (("nowTime,createTime").contains(key)) {
+                    //query.setTimestamp(key, (Date)map.get(key));
+            //    } 
+            else {
                     query.setParameter(key, map.get(key));
                 }
             }
@@ -152,16 +150,17 @@ public class JobDaoImpl implements JobDao {
     @SuppressWarnings("unchecked")
     @Override
     public List<Job> getJobsForAdmin(final Job job) throws DataAccessException {
-        StringBuffer hql = new StringBuffer();
+    	StringBuffer hql = new StringBuffer();
         Map<String, Object> map = new HashMap<String, Object>();
 
         hql.append("select distinct j from Job j ");
 
         if (null != job.getCheckboxes() && job.getCheckboxes().length > 0) {
-            hql.append(" join fetch j.jobSkills as jss where 1 = 1 and j.numPosition > 0 and jss.skill.skillId in (:skillIds)");
+            hql.append(" join fetch j.jobSkills as jss where 1 = 1 and jss.skill.skillId in (:skillIds)");
             map.put("skillIds", job.getCheckboxes());
+        } else {
+            hql.append(" where 1 = 1 and j.numPosition > 0");
         }
-
         if (null != job.getJobCategory() && null != job.getJobCategory().getSkillCategoryId()
                 && job.getJobCategory().getSkillCategoryId() > 0) {
             hql.append(" and j.jobCategory.skillCategoryId = :jobCategoryId");
@@ -184,6 +183,7 @@ public class JobDaoImpl implements JobDao {
             hql.append(" and LOWER(j.title) like LOWER(:title) ");
             map.put("title", "%" + job.getTitle() + "%");
         }
+        
         if (null != job && null != job.getCountryId() && job.getCountryId().getAreaId() != null
                 && job.getCountryId().getAreaId() > 0) {
             hql.append(" and j.countryId.areaId = :countryId ");
@@ -199,12 +199,13 @@ public class JobDaoImpl implements JobDao {
             hql.append(" and j.districtId.areaId = :districtId");
             map.put("districtId", +job.getDistrictId().getAreaId());
         }
-        /*
-         * if(null!= job &&null!=job.getCreateTime()&&!"".equals(job.getCreateTime())) { Date now=new Date();
-         * hql.append(" and j.createTime between :datenow and :createTime "); SimpleDateFormat currentTime = new
-         * SimpleDateFormat("yy-MM-dd HH:mm:ss"); String s=currentTime.format(new Date()); map.put("createTime",
-         * job.getCreateTime()); map.put("datenow",now); }
-         */
+
+        if (null != job && null != job.getCreateTime() && !"".equals(job.getCreateTime())) {
+            hql.append(" and j.createTime between :createTime and :nowTime ");
+            map.put("createTime", job.getCreateTime());
+            map.put("nowTime", new Date());
+        }
+        
 
         Query query = this.hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql.toString());
         if (null != map && map.size() >= 1) {
@@ -213,7 +214,10 @@ public class JobDaoImpl implements JobDao {
                 String key = (String) it.next();
                 if (key.equals("skillIds")) {
                     query.setParameterList(key, (Integer[]) map.get(key));
-                } else {
+                } //else if (("nowTime,createTime").contains(key)) {
+                    //query.setTimestamp(key, (Date)map.get(key));
+            //    } 
+            else {
                     query.setParameter(key, map.get(key));
                 }
             }
@@ -298,7 +302,7 @@ public class JobDaoImpl implements JobDao {
             jobSkill.setJob(job);
             jobkills.add(jobSkill);
         }
-
+        job.setCreateTime(new Date());
         job.setJobSkills(jobkills);
         hibernateTemplate.save(job);
     }

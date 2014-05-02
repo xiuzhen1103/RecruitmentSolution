@@ -69,6 +69,7 @@ Hello <s:property value="#session.jobSeeker.username"/>
   <li><a href="job!logged.action">Home</a></li>
   <li><a href="cv!list.action" target="_bank">Manage CV</a> </li>
   <li><a href="ir!listMySend">Interview History</a> </li>
+   <li><a href="contactUs.jsp" target="_blank">Contact Us</a></li>
    <li><a href="aboutUs.jsp" target="_blank">About Us</a></li>
 </ol>
         </div>
@@ -90,7 +91,8 @@ Hello <s:property value="#session.jobSeeker.username"/>
                     <span class="style1">Cover Letter:</span>
                 </td>
                 <td width="70%">
-                    <textarea name="cv.coverLetter" style="width: 400px; height: 200px;" class="formstyle"></textarea>
+     
+                    <textarea name="cv.coverLetter" rows="7" cols="50" class="formstyle"></textarea>
                 </td>
             </tr>
             <tr>

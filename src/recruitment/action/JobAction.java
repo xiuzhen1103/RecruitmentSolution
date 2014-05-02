@@ -1,21 +1,16 @@
 package recruitment.action;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import recruitment.model.Area;
 import recruitment.model.CV;
-import recruitment.model.Employer;
 import recruitment.model.Job;
 import recruitment.model.JobSeeker;
 import recruitment.model.JobSeekerSkill;
@@ -27,7 +22,6 @@ import recruitment.service.AreaManager;
 import recruitment.service.JobManager;
 import recruitment.service.SkillCategoryManager;
 import recruitment.service.SkillManager;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 @Component("job")
@@ -99,10 +93,19 @@ public class JobAction extends ActionSupport {
 		}
 		return "detail";
 	}
+	
+	public String plain_detail() throws Exception {
+		job = jm.findById(job);
+		if (null != js && null != js.getJsId()) {
+			job.setIsApplied(ajm.isJobAppliedByJs(job.getJobId(), js.getJsId()));
+		}
+		return "plain_detail";
+	}
 
 	public String execute() throws Exception {
+		
 		jm.add(job);
-		return "success";
+		return "addJob_success";
 	}
 
 	public String registerJob() throws Exception {
@@ -175,11 +178,6 @@ public class JobAction extends ActionSupport {
 		this.listMainSkillCategorys = skillCategoryManager.listMainSkillCategory(skillCategory);
 		
 		this.listCountrys = am.listCountrys(area);
-		//this.listIrelandCountys = am.listIrelandCounties(area);
-		
-		job.setJobCategory(skillCategory);
-		//job.setCountyId(area);
-		job.setCountryId(area);
 		this.jobs = jm.getJobs(this.job);
 		return "first";
 	}

@@ -30,15 +30,18 @@ Hello <s:property value="#session.admin.username"/><br/>
 <div class='navbar navbar-inverse'>
   <div class='nav-collapse' style="height: auto;">
     <ol class="breadcrumb" >
-  <li><a href="userManager/admin.jsp">Home</a></li>
-  <li class="active">News</li>
-  <li><a href="<%=basePath%>report/report.jsp">Statistic</a></li>
-    <li><a href="#">About Us</a></li>
+ <li><a href="userManager/admin.jsp">Home</a></li>
+    <li><a href="emp!list.action">Employers </a></li>
+    <li><a href="js!listJsForAdmin.action">JobSeekers</a></li>
+    <li><a href="area!list.action">Areas</a></li>
+    <li><a href="job!listForAdmin.action" >Jobs </a></li>
+    <li><a href="sc!list.action">Skill Categories</a></li>
+    <li><a href="sk!list.action">Skills</a></li>
 </ol>
 </div>
   </div>
   </div>
-  
+  <h3><span class="label label-info">Display Skill Category:</span></h3>   
 <div align="center">
    <a href="userManager/addSkillCategory.jsp"><img src="images/add.png" title="add" alt="add" height="30" width="30" > </a> 
    </div>
@@ -49,13 +52,13 @@ Hello <s:property value="#session.admin.username"/><br/>
   </form>
  
  	 <table class="table table-striped table-bordered info" width="400" height="263" border="0" align="left" cellpadding="10" cellspacing="10"  >
- 	 	 <tr>
-		      <td  class="info"  width="5%" height="37" align="center"><b>Skill Category Id</b></td>
-		      <td  class="info"  width="10%" height="37" align="center"><b>Name</b></td>   
-		      <td  class="info"  width="5%" height="37" align="center"><b>Parent Id</b></td>
-		       <td  class="info"  width="5%" height="37" align="center"><b>Level</b></td>
-		      <td  class="info"  width="5%" height="37" align="center"><b>Update</b></td>
-		      <td  class="info"  width="5%" height="37" align="center"><b>Delete</b></td>
+ 	 	 <tr class="info" height="37" align="center">
+		      <td width="5%" ><b>Skill Category Id</b></td>
+		      <td width="10%" ><b>Name</b></td>   
+		      <td width="5%" ><b>Parent Id</b></td>
+		      <td width="5%" ><b>Level</b></td>
+		      <td width="5%" ><b>Update</b></td>
+		      <td width="5%"><b>Delete</b></td>
           </tr>
  	
           <s:iterator value="scs" id="s">
@@ -63,7 +66,16 @@ Hello <s:property value="#session.admin.username"/><br/>
 		  <td align="center" ><s:property value="#s.skillCategoryId" /></td>
 		  <td align="center" ><s:property value="#s.name" /></td>
 		  <td align="center" ><s:property value="#s.parentSkillCategory.name" /></td>
-		  <td align="center" ><s:property value="#s.level" /></td>
+		  
+		  
+		  <td align="center" ><s:if test="level == 0">
+                   Job Category
+                </s:if>
+                <s:elseif test="level == 1">
+                    Job
+                </s:elseif>
+              </td>
+                
 		  <td><a href="sc!load?skillCategory.skillCategoryId=<s:property value="#s.skillCategoryId" />"><img src="images/edit.png" title="edit" alt="edit" height="20" width="30" ></a></td>
 		  <td><a href="sc!delete?skillCategory.skillCategoryId=<s:property value="#s.skillCategoryId" />"><img src="images/delete.png" title="delete" alt="delete" height="25" width="20" ></a></td>
         </tr>
